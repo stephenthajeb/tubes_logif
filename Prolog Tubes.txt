@@ -22,11 +22,11 @@ seorang ninja hebat bukan apa-apa tanpa teman. Pergilah dan cari temanmu itu!".
 Naruto memaknai pesan dari gurunya tersebut.
 
 	Mulailah Naruto menuju ke desa-desa sekitar untuk mencari bantuan misi untuk menyelamatkan 
-Hinata dari Clan Akatsuki.Di perjalanan, Naruto bertemu dengan banyakteman-teman sedesanya dulu,
+Hinata dari Clan Akatsuki.Di perjalanan, Naruto bertemu dengan banyak teman-teman sedesanya dulu,
 seperti Sakura, Sasuke, Rock Lee, Shikamaru, Choji, Neji, dll. Kini mereka juga sudah menjadi
 ninja yang hebat seperti Naruto dan masing-masing dari mereka menguasai skill ninja tertentu.
 Naruto ingin mengajak mereka untuk menyelamatkan Hinata yang tertangkap. Namun karena kehebatan 
-Clan Akatsuki,teman-teman Nauto ragu apakah mereka memiliki kemampuan tersebut.Oleh karena itu,
+Clan Akatsuki,teman-teman Nauto ragu apakah mereka memiliki kemampuan tersebut. Oleh karena itu,
 Naruto harus bertanding dengan mereka dan mengalahkan mereka untuk meyakinkan mereka bahwa 
 Naruto memiliki kemampuan yang cukup kuat untuk mengalahkan Clan Akatsuki. Apabila Naruto tidak
 berhasil mengalahkan temannya, maka teman tersebut tidak akan ikut membantu Naruto melawan Clan Akatsuki.
@@ -64,14 +64,14 @@ KARAKTER :
 BUILDING :
 	- Medical Station : Menyembuhkan Naruto dan temannya yang terluka
 	-
-TIPE :
+TYPE :
 	- Wind
 	- Forest
 	- Dark
 SKILL :
 	- CONTOH : NAMA SKILL 			- TIPE		- DAMAGE
 	- Naruto : Rasengan 			- Wind		- 190
-	- Sakura : 100 Metre Puch 		- Wind		- 150
+	- Sakura : Cherry Blossom Impact- Forest	- 150
 	- Sasuke : Chidori 				- Dark		- 190
 	- Lee	 : Leaf Flash Kick 		- Forest	- 150
 	- Neji	 : Eight Trigrams Palms - Wind		- 180
@@ -102,3 +102,10 @@ CHAR ATTRIBUTE :
 	- Tobi	 : 380	- 35
 	- Sasori : 400	- 40
 	- Itachi : 500 	- 50
+TYPE ATTACK :
+	- Wind > Forest : Wind damage + 50%
+					  Forest damage - 50%
+	- Forest > Dark : Forest damage + 50%
+					  Dark damage - 50%
+	- Dark > Wind	: Dark damage + 50%
+					  Wind damage - 50%
