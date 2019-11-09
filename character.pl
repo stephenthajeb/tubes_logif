@@ -1,54 +1,73 @@
-/* FAKTA */
+-dynamic(player/6).
 
 /* HP */
-hp(Naruto, 350)
-hp(Sakura, 300)
-hp(Sasuke, 350)
-hp(Lee, 320)
-hp(Neji, 300)
-hp(Choji, 350)
-hp(Shikamaru, 300)
-hp(Tenten, 350)
-hp(Kiba, 300)
-hp(Shino, 320)
-hp(Gaara, 330)
-hp(Deidara, 400)
-hp(Tobi, 380)
-hp(Sasori, 400)
-hp(Sasori, 500)
+hp(naruto, 350).
+hp(sakura, 300).
+hp(sasuke, 350).
+hp(lee, 320).
+hp(neji, 300).
+hp(choji, 350).
+hp(shikamaru, 300).
+hp(tenten, 350).
+hp(kiba, 300).
+hp(shino, 320).
+hp(gaara, 330).
+hp(deidara, 400).
+hp(tobi, 380).
+hp(sasori, 400).
+hp(itachi, 500).
 
 /* NORMAL DAMAGE */
-dmg(Naruto, 30)
-dmg(Sakura, 25)
-dmg(Sasuke, 35)
-dmg(Lee, 28)
-dmg(Neji, 32)
-dmg(Choji, 25)
-dmg(Shikamaru, 30)
-dmg(Tenten, 32)
-dmg(Kiba, 30)
-dmg(Shino, 30)
-dmg(Gaara, 35)
-dmg(Deidara, 45)
-dmg(Tobi, 35)
-dmg(Sasori, 40)
-dmg(Itachi, 500)
+dmg(naruto, 30).
+dmg(sakura, 25).
+dmg(sasuke, 35).
+dmg(lee, 28).
+dmg(neji, 32).
+dmg(choji, 25).
+dmg(shikamaru, 30).
+dmg(tenten, 32).
+dmg(kiba, 30).
+dmg(shino, 30).
+dmg(gaara, 35).
+dmg(deidara, 45).
+dmg(tobi, 35).
+dmg(sasori, 40).
+dmg(itachi, 500).
 
 /* SKILL DAMAGE*/
-skill(Naruto, 190)
-skill(Sakura, 150)
-skill(Sasuke, 190)
-skill(Lee, 150)
-skill(Neji, 180)
-skill(Choji, 150)
-skill(Shikamaru, 180)
-skill(Tenten, 170)
-skill(Kiba, 170)
-skill(Shino, 160)
-skill(Gaara, 200)
-skill(Deidara, 250)
-skill(Tobi, 200)
-skill(Sasori, 250)
-skill(Itachi, 280)
+skillDmg(naruto, 190).
+skillDmg(sakura, 150).
+skillDmg(sasuke, 190).
+skillDmg(lee, 150).
+skillDmg(neji, 180).
+skillDmg(choji, 150).
+skillDmg(shikamaru, 180).
+skillDmg(tenten, 170).
+skillDmg(kiba, 170).
+skillDmg(shino, 160).
+skillDmg(gaara, 200).
+skillDmg(deidara, 250).
+skillDmg(tobi, 200).
+skillDmg(sasori, 250).
+skillDmg(itachi, 280).
 
-/* SKILL DAMAGE */
+/* INVENTORI */
+init_Inventory([]).
+
+/* Inisialisasi */
+init_Player :-
+    playerLoc(X,Y),
+    hp(naruto, HP),
+    dmg(naruto, Damage),
+    skillDmg(naruto, SkillDamage),
+    init_Inventory(Inventory),
+    asserta(player(X, Y, HP, Damage, SkillDamage, Inventory)).
+
+print_stats :-
+    player(X, Y, HP, Damage, SkillDamage, Inventory),
+    write(X),
+    write(Y),
+    write(HP),
+    write(Damage),
+    write(SkillDamage),
+    write(Inventory).
