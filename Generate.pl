@@ -1,6 +1,5 @@
 /*Generate random position for enemy */
  :-dynamic(enemy_appear/1).
- :-dynamic(enemyLoc/2).
 name(naruto, 1).
 name(sakura, 2).
 name(sasuke, 3).
@@ -32,7 +31,7 @@ generate_Random_Akatsuki_Enemy(Name_Enemy):-
     name(Name_Enemy,Number).
 
 enemy_appear([]).
-enemyLoc(1,1).
+
 check([],Y):-!.
 check(List,Y):- 
     List=[Head|Tail], 
