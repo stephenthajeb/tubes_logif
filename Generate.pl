@@ -43,7 +43,7 @@ generate_Random_Normal_Enemy(Name_Enemy):-
     names(Name_Enemy,Number).
 
 generate_Random_Akatsuki_Enemy(Name_Enemy):-
-    random(11,15,Number),
+    random(11,14,Number),
     names(Name_Enemy,Number).
 
 /* Skema pengecekan apakah terdapat nilai Y pada List, Jika tidak ada akan menghasilkan true*/
@@ -130,6 +130,7 @@ generate_Akatsuki_Enemy:-
     (Y>NewY; Y==NewY),  
     check_Normal_Enemy(List_Of_Enemy,Name_Enemy),
     check(OldX,X),
+    check(OldY,Y),
     NewListOfEnemy=[Name_Enemy|List_Of_Enemy],
     NewEnemyLocY=[Y|OldY],
     NewEnemyLocX=[X|OldX],
@@ -161,6 +162,7 @@ generate_Akatsuki_Enemy:-
     (Y>NewY; Y==NewY), 
     check_Normal_Enemy(List_Of_Enemy,Name_Enemy),
     check(OldX,X),
+    check(OldY,Y),
     NewListOfEnemy=[Name_Enemy|List_Of_Enemy],
     NewEnemyLocY=[Y|OldY],
     NewEnemyLocX=[X|OldX],
@@ -192,6 +194,7 @@ generate_Akatsuki_Enemy:-
     (Y<NewY; Y==NewY),  
     check_Normal_Enemy(List_Of_Enemy,Name_Enemy),
     check(OldX,X),
+    check(OldY,Y),
     NewListOfEnemy=[Name_Enemy|List_Of_Enemy],
     NewEnemyLocY=[Y|OldY],
     NewEnemyLocX=[X|OldX],
@@ -223,6 +226,7 @@ generate_Akatsuki_Enemy:-
     (Y<NewY; Y==NewY),  
     check_Normal_Enemy(List_Of_Enemy,Name_Enemy),
     check(OldX,X),
+    check(OldY,Y),
     NewListOfEnemy=[Name_Enemy|List_Of_Enemy],
     NewEnemyLocY=[Y|OldY],
     NewEnemyLocX=[X|OldX],
