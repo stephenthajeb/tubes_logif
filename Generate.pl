@@ -268,11 +268,12 @@ winCondition:-
     nbElmtList(List_Of_Enemy,Count),
     Count==15,
     !.
+    
 /* untuk mengecek apakah Akatsuki sudah bisa muncul/dialokasikan pada enemy, enemyLocX, dan enemyLocY */
 isAkatsukiAppear:-
     enemy_appear(List_Of_Enemy),
     nbElmtList(List_Of_Enemy,Count),
-    (Count==3; Count==7; Count==10),
+    (Count==3; Count==7; Count==10; Count==14),
     !.
 
 /* rules mutlak untuk efisiensi rules generate Akatsuki awal */
