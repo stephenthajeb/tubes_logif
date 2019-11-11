@@ -248,16 +248,27 @@ generate_Akatsuki_Enemy:-
 /* Kemuculan Akatsuki kedua */
 /* generate_Akatsuki_Enemy:- enemy_appear(List_Of_Enemy_Appear), nbElmtList(List_Of_Enemy_Appear,Count),(Count>7;Count==7), */
 
-select_Player(Select,PlayerInventory,CopyInventory):-
-	X=PlayerInventory,
-	H=CopyInventory,
-	!,
-	repeat,
-	X=[H|T],
-	H=[H|X],
-	check(X,Select),
-	H=[H|T],
-	X=[T|X].
+concat([],[],[]):- !.
+concat([],List2,List2):- !.
+concat(List1,List2,List):-
+    List1=[H1|T1],
+    concat(T1,List2,List3),
+    List=[H1|List3].
+    
+select_Player(Select,[Select],[]):- !.
+select_Player(Select,PlayerInventory,NewInventory):-
+    PlayerInventory=[Head|Tail],
+    Head==Select,
+    !,
+    NewInventory=Tail.
+select_Player(Select,PlayerInventory,NewInventory):-
+    PlayerInventory=[Head|Tail],
+    Head\==Select,
+    !,
+    select_Player(Select,Tail,NewInventory1),
+    NewInventory=[Head|NewInventory1]. 
+
+
 
 
 /* Bila ingin mengisi enemy, enemyLocX, enemyLocY secara penuh untuk alokasi enemy awal bisa langsung menggunakan rules ini */
