@@ -71,30 +71,30 @@ TYPE :
 SKILL :
 	- CONTOH : NAMA SKILL 			- TIPE		- DAMAGE
 	- Naruto : Rasengan 			- Wind		- 190
-	- Sakura : Cherry Blossom Impact	- Forest	- 150
-	- Sasuke : Chidori 			- Dark		- 190
+	- Sakura : Cherry Blossom Impact- Forest	- 150
+	- Sasuke : Chidori 				- Dark		- 190
 	- Lee	 : Leaf Flash Kick 		- Forest	- 150
-	- Neji	 : Eight Trigrams Palms 	- Wind		- 180
+	- Neji	 : Eight Trigrams Palms - Wind		- 180
 	- Choji	 : Baika no Jutsu 		- Forest	- 150
-	- Shikamaru : Shadow Possession 	- Dark		- 180
-	- Tenten : Twin Rising Dragons 		- Wind		- 170
+	- Shikamaru : Shadow Possession - Dark		- 180
+	- Tenten : Twin Rising Dragons 	- Wind		- 170
 	- Kiba	 : Fang Wolf Fang 		- Wind		- 170
 	- Shino	 : Parasitic Bugs 		- Dark		- 160
 	- Gaara	 : Desert Prison 		- Forest	- 200
-	- Deidara: Creative Destruction 	- Dark		- 250
-	- Tobi	 : Kamui 			- Dark		- 200
-	- Sasori : Puppet Technique 		- Dark		- 250
+	- Deidara: Creative Destruction - Dark		- 250
+	- Tobi	 : Kamui 				- Dark		- 200
+	- Sasori : Puppet Technique 	- Dark		- 250
 	- Itachi : Amaterasu 			- Dark		- 280
 CHAR ATTRIBUTE :
 	- CONTOH : 	HP 	- NORMAL ATT
-	- Naruto : 	350 	- 30
+	- Naruto : 	350 - 30
 	- Sakura : 	300	- 25
-	- Sasuke : 	350  - 35
+	- Sasuke : 	350 - 35
 	- Lee 	 : 	320	- 28
 	- Neji	 : 	300	- 32
 	- Choji	 : 	350	- 25
-	- Shikamaru : 	300 - 30
-	- Tenten : 	300 	- 32
+	- Shikamaru:300 - 30
+	- Tenten : 	300 - 32
 	- Kiba	 : 	300	- 30
 	- Shino	 : 	320	- 30
 	- Gaara  : 	330	- 35
@@ -103,9 +103,12 @@ CHAR ATTRIBUTE :
 	- Sasori : 	400	- 40
 	- Itachi : 	500 	- 50
 TYPE ATTACK :
-	- Wind > Forest : 	-Wind damage + 50%
-				-Forest damage - 50%
-	- Forest > Dark : 	-Forest damage + 50%
-				-Dark damage - 50%
-	- Dark > Wind	:	-Dark damage + 50%
-				-Wind damage - 50%
+	- Wind > Forest : 	
+			-Wind damage + 50%
+			-Forest damage - 50%
+	- Forest > Dark :
+			-Forest damage + 50%
+			-Dark damage - 50%
+	- Dark > Wind	:
+			-Dark damage + 50%
+			-Wind damage - 50%

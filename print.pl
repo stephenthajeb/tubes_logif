@@ -56,17 +56,28 @@ print_all :-
     print_Win,
     print_Lose.
 
+/* Interactive Command */
+print_Help
 print_InventoryFull :-
-    write('Maafkan aku tidak bisa ikut denganmu mencari Hinata. Semoga kau bisa menyelamatkannya!'),nl.
-print_InventoryNotFull :-
+    write('Temanmu sudah terlalu banyak. Apakah ingin mengganti teman ?'),nl.
+print_Capture :-
     write('Ayo kita cari Hinata dan bawa ia pulang ke Konoha!'), nl.
+print_NotCapture :-
+    write('Arrgghh... kau berhasil mengalahkanku...'),nl,
+    write('Tapi aku tidak akan menyerah....'),nl.
 print_Run :-
     write('Kagebunshin no Jutsu!'),nl,
-    write('Berhasil kabur!'),nl.
+    write('Berhasil kabur...'),nl.
 print_CantRun :-
     write('Kagebunshin no Jutsu!'),nl,
     write('..........'),nl,
     write('Sial! Aku tidak bisa kabur!'),nl.
+
+/* Interactive Fight */
+print_FoundEnemey :-
+    write('Hati-hati ada musuh didepan!'),nl,
+    write(EnemyName), write(' muncul secara tiba tiba'),nl,
+    write('Pilih bertarung atau lari ?'),nl.
 
 print_FightSakura :-
     write('Haii. Jangan nangis ya kalau kalah...'),nl.

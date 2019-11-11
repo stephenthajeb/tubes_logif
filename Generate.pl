@@ -21,7 +21,6 @@ generate_Random_Location(OldX,OldY):-
     retract(enemyLoc(OldX,OldY)),
     asserta(enemyLoc(X,Y)).
 
-
 generate_Random_Normal_Enemy(Name_Enemy):-
     random(1,12,Number),
     name(Name_Enemy,Number).
@@ -72,14 +71,15 @@ generate_Akatsuki_Enemy:-
     !.
 
 /* check Is Inventory Full?, Bila Full jangan tambahkan Inventory! */
-NbElmtList([],0):- !.
-NbElmtList(List,count):-
+nbElmtList([], 0) :- !.
+
+nbElmtList(List,count) :-
     List=[H|T],
-    NbElmtList(T,count1),
+    nbElmtList(T,count1),
     count is count+count1.
 
 isFullInventory(ListOfInventory):-
-    NbElmtList(ListOfInventory,count),
+    nbElmtList(ListOfInventory,count),
     count==6.
 
 akatsukiProbability(5000).
