@@ -1,5 +1,6 @@
-/*Include*/
+/*Include
 :-include('Generate.pl').
+*/
 
 :- dynamic(playerLoc/2).
 :- dynamic(friendLoc/2).
@@ -15,10 +16,14 @@ activeArea(X,Y) :- X>(0),X<11,Y>(0),Y<11.
 
 /* Inisialisasi awal */
 init :- asserta(playerLoc(1,1)).
-
-# init :- asserta(friendLoc(2,2)).
-# init :- asserta(enemyLoc(1,2)).
+/*init :- asserta(friendLoc(2,2)).
+init :- asserta(enemyLoc(1,2)).*/
 init :- asserta(healLoc(2,1)).
+
+printArah :- 
+    write('  N'),nl,
+    write('W   E'),nl,
+    write('  S'),nl.
 
 printmap(X,Y) :- playerLoc(X,Y),write('P').
 printmap(X,Y) :- border(X,Y),write('X').
@@ -48,3 +53,7 @@ collision(X,Y)  :- playerLoc(X,Y),friendLoc(X,Y),write('Kamu ketemu dengan .....
 msgAfterMove :- playerLoc(X,Y),write('Sekarang anda berada pada ('),print(X),write(','),print(Y),write(')'),nl,collision(X,Y).
 
 map:- forall(between(0,11,Y),(forall(between(0,11,X),printmap(X,Y)),nl)).
+
+
+
+
