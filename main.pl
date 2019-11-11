@@ -23,7 +23,6 @@ startProgram :- print_Title,print_Story,help,
                 read(X),inputCmd(X),
                 X == 1.
 
-
 /*Aksi terhadap input help*/
 inputCmd(X) :- X=1,init,map,!.
 inputCmd(X) :- X=2,west,!.

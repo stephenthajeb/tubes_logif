@@ -56,17 +56,28 @@ print_all :-
     print_Win,
     print_Lose.
 
+/* Interactive Command */
+print_Help
 print_InventoryFull :-
-    write('Maafkan aku tidak bisa ikut denganmu mencari Hinata. Semoga kau bisa menyelamatkannya!'),nl.
-print_InventoryNotFull :-
+    write('Temanmu sudah terlalu banyak. Apakah ingin mengganti teman ?'),nl.
+print_Capture :-
     write('Ayo kita cari Hinata dan bawa ia pulang ke Konoha!'), nl.
+print_NotCapture :-
+    write('Arrgghh... kau berhasil mengalahkanku...'),nl,
+    write('Tapi aku tidak akan menyerah....'),nl.
 print_Run :-
     write('Kagebunshin no Jutsu!'),nl,
-    write('Berhasil kabur!'),nl.
+    write('Berhasil kabur...'),nl.
 print_CantRun :-
     write('Kagebunshin no Jutsu!'),nl,
     write('..........'),nl,
     write('Sial! Aku tidak bisa kabur!'),nl.
+
+/* Interactive Fight */
+print_FoundEnemey :-
+    write('Hati-hati ada musuh didepan!'),nl,
+    write(EnemyName), write(' muncul secara tiba tiba'),nl,
+    write('Pilih bertarung atau lari ?'),nl.
 
 print_FightSakura :-
     write('Haii. Jangan nangis ya kalau kalah...'),nl.
@@ -102,3 +113,18 @@ print_BattleTitle :-
     write('=================================================='),nl,
     write('================== BATTLE BEGIN =================='),nl,
     write('=================================================='),nl.
+
+/* Help */
+
+print_Help :-
+    write('Help :'),nl,
+    write('[1] start.   : Menjalankan game'),nl,
+    write('[2] map.     : Menampilkan peta '),nl,
+    write('[3] w.       : Berjalan ke arah utara/atas'),nl,
+    write('[4] a.       : Berjalan ke arah barat/kiri'),nl,
+    write('[5] s.       : Berjalan ke arah selatan/bawah'),nl,
+    write('[6] d.       : Berjalan ke arah timur/kanan'),nl,
+    write('[7] status.  : Menampilkan status semua allies'),nl,
+    write('[8] help.    : Menampilkan menu help'),nl,
+    write('[9] run.     : Menghindari battle dengan musuh'),nl,
+    write('[10] battle. : Bertarung melawan musuh'),nl.
