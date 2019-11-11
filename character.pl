@@ -155,6 +155,7 @@ player_Attack(2, PlayerType, EnemyType) :-
     NewHP is EnemyHP-(SDamage + (2*SDamage)),
     retract(enemy(EnemyName, EnemyType, EnemyX, EnemyY, EnemyHP, EnemyNDamage, EnemySDamage)),
     asserta(enemy(EnemyName, EnemyType, EnemyX, EnemyY, NewHP, EnemyNDamage, EnemySDamage)).
+    
 /* WEAK TYPE */
 player_Attack(1, PlayerType, EnemyType) :-
     weak(PlayerType, EnemyType),

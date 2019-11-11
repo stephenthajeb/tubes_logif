@@ -1,3 +1,6 @@
+/*Include*/
+:-include('Generate.pl').
+
 :- dynamic(playerLoc/2).
 :- dynamic(friendLoc/2).
 :- dynamic(enemyLoc/2).
@@ -12,9 +15,10 @@ activeArea(X,Y) :- X>(0),X<11,Y>(0),Y<11.
 
 /* Inisialisasi awal */
 init :- asserta(playerLoc(1,1)).
-init :- asserta(friendLoc(2,2)).
-init :- asserta(enemyLoc(10,10)).
-init :- asserta(healLoc(6,10)).
+
+# init :- asserta(friendLoc(2,2)).
+# init :- asserta(enemyLoc(1,2)).
+init :- asserta(healLoc(2,1)).
 
 printmap(X,Y) :- playerLoc(X,Y),write('P').
 printmap(X,Y) :- border(X,Y),write('X').
@@ -35,13 +39,12 @@ north :- playerLoc(X,Y),NewY is Y-1,retract(playerLoc(X,Y)),asserta(playerLoc(X,
 south :- playerLoc(_,10),invalidMove,!.
 south :- playerLoc(X,Y),NewY is Y+1,retract(playerLoc(X,Y)),asserta(playerLoc(X,NewY)),msgAfterMove.
 
-/*Logic ketika player ketemu friend, enemy, atau berada di health center */
-msgAfterMove :- playerLoc(X,Y),write('Sekarang anda berada pada ('),print(X),write(','),print(Y),write(')'),!.
+/* Collision terjadi jika ada 2 huruf di satu koordinat peta*/
+collision(X,Y)  :- playerLoc(X,Y),healLoc(X,Y),write('Anda berada di Health Center,Anda boleh menyembuhkan 1 orang di sini, Menyembuhkan siapa ?'),nl,!.
+collision(X,Y)  :- playerLoc(X,Y),enemyLoc(X,Y),write('Kamu ketemu dengan musuh legendary Clan Akatsuki, lari atau bertanding ?'),nl,!.
+collision(X,Y)  :- playerLoc(X,Y),friendLoc(X,Y),write('Kamu ketemu dengan ..... teman baik lamamu,coba meyakinkan dia untuk mengikuti kamu atau hindarin dia?'),nl,!.
 
-/*
-msgAfterMove :- playerLoc(X,Y),friendLoc(X,Y),write('Kamu ketemu dengan ..... teman baik lamamu,coba meyakinkan dia untuk mengikuti kamu atau hindarin dia?').
-msgAfterMove :- playerLoc(X,Y),enemyLoc(X,Y),write('Kamu ketemu dengan musuh legendary Clan Akatsuki, lari atau bertanding ?'),!.
-msgAfterMove :- playerLoc(X,Y),healthLoc(X,Y),write('Anda berada di Health Center,Anda boleh menyembuhkan 1 orang di sini, Menyembuhkan siapa ?'),!.
-*/
+/*Logic ketika player ketemu friend, enemy, atau berada di health center */
+msgAfterMove :- playerLoc(X,Y),write('Sekarang anda berada pada ('),print(X),write(','),print(Y),write(')'),nl,collision(X,Y).
 
 map:- forall(between(0,11,Y),(forall(between(0,11,X),printmap(X,Y)),nl)).
