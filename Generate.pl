@@ -7,6 +7,10 @@
 :-dynamic(enemyLocX/1).
 /* Sebagai Database lokasi Enemy pada sumbu Y */
 :-dynamic(enemyLocY/1).
+/* untuk jumlah step minimal agar akatsuki bisa muncul */
+:-dynamic(twoAkatsuki/1). 
+/* Menghitung kemunculan Banyaknya Akatsuki */
+:-dynamic(nbAkatsuki/1).
 
 /* Init Database */
 enemy_appear([naruto]).
@@ -28,6 +32,10 @@ names(deidara,11).
 names(tobi,12).
 names(sasori,13).
 names(itachi,14).
+/* Init Probabilitas kemunculan Akatsuki kedua */
+twoAkatsuki(30).
+/* Init jumlah Akatsuki yang sudah muncul */
+nbAkatsuki(0).
 /* Probabilitas kabur saat berhadapan dengan Normal Enemy */
 normalProbability(70).
 /* Probabilitas kabur saat berhadapan dengan Akatsuki */
@@ -141,7 +149,7 @@ generate_Akatsuki_Enemy:-
     retract(enemyLocX(OldX)),
     asserta(enemyLocX(NewEnemyLocX)).
 
-/* Bila posisi player saat mengalahkan musuk ke-3 berada pada kuadran 2 */
+/* Bila posisi                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       player saat mengalahkan musuk ke-3 berada pada kuadran 2 */
 generate_Akatsuki_Enemy:-
     enemy_appear(List_Of_Enemy_Appear),
     nbElmtList(List_Of_Enemy_Appear,Count),
@@ -236,6 +244,21 @@ generate_Akatsuki_Enemy:-
     asserta(enemyLocY(NewEnemyLocY)),
     retract(enemyLocX(OldX)),
     asserta(enemyLocX(NewEnemyLocX)).
+
+/* Kemuculan Akatsuki kedua */
+/* generate_Akatsuki_Enemy:- enemy_appear(List_Of_Enemy_Appear), nbElmtList(List_Of_Enemy_Appear,Count),(Count>7;Count==7), */
+
+select_Player(Select,PlayerInventory,CopyInventory):-
+	X=PlayerInventory,
+	H=CopyInventory,
+	!,
+	repeat,
+	X=[H|T],
+	H=[H|X],
+	check(X,Select),
+	H=[H|T],
+	X=[T|X].
+
 
 /* Bila ingin mengisi enemy, enemyLocX, enemyLocY secara penuh untuk alokasi enemy awal bisa langsung menggunakan rules ini */
 enemyGenerator:-
