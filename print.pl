@@ -113,3 +113,18 @@ print_BattleTitle :-
     write('=================================================='),nl,
     write('================== BATTLE BEGIN =================='),nl,
     write('=================================================='),nl.
+
+/* Help */
+
+print_Help :-
+    write('Help :'),nl,
+    write('[1] start.   : Menjalankan game'),nl,
+    write('[2] map.     : Menampilkan peta '),nl,
+    write('[3] w.       : Berjalan ke arah utara/atas'),nl,
+    write('[4] a.       : Berjalan ke arah barat/kiri'),nl,
+    write('[5] s.       : Berjalan ke arah selatan/bawah'),nl,
+    write('[6] d.       : Berjalan ke arah timur/kanan'),nl,
+    write('[7] status.  : Menampilkan status semua allies'),nl,
+    write('[8] help.    : Menampilkan menu help'),nl,
+    write('[9] run.     : Menghindari battle dengan musuh'),nl,
+    write('[10] battle. : Bertarung melawan musuh'),nl.
