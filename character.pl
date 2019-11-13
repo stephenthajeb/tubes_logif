@@ -142,16 +142,8 @@ check(List,Y):-
     check(Tail,Y), 
     Head\==Y.     
 
-print_PlayerStatus :-
-    player(Name, Type, X, Y, HP, NDamage, SDamage, Inventory),
-    skillName(Name, SName),
-    write('Name : '), write(Name),nl,
-    write('Type : '), write(Type),nl,
-    write('Loc  : '), write('('), write(X), write(','), write(Y), write(')'),nl,
-    write('HP   : '), write(HP),nl,
-    write('Dmg  : '), write(NDamage),nl,
-    write('Skill: '), write(SName), write(' / '), write(SDamage),nl,
-    write('Allies: '),write(Inventory),nl.
+/*Ini aku ganti*/
+playerStatus :- print_PlayerStatus.
 
 start :- 
     init_Player,

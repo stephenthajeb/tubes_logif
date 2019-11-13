@@ -57,6 +57,7 @@ print_all :-
     print_Lose.
 
 /* Interactive Command */
+/*
 print_Help
 print_InventoryFull :-
     write('Temanmu sudah terlalu banyak. Apakah ingin mengganti teman ?'),nl.
@@ -72,12 +73,15 @@ print_CantRun :-
     write('Kagebunshin no Jutsu!'),nl,
     write('..........'),nl,
     write('Sial! Aku tidak bisa kabur!'),nl.
+*/
 
 /* Interactive Fight */
+/*
 print_FoundEnemey :-
     write('Hati-hati ada musuh didepan!'),nl,
     write(EnemyName), write(' muncul secara tiba tiba'),nl,
     write('Pilih bertarung atau lari ?'),nl.
+    */
 
 print_FightSakura :-
     write('Haii. Jangan nangis ya kalau kalah...'),nl.
@@ -115,16 +119,45 @@ print_BattleTitle :-
     write('=================================================='),nl.
 
 /* Help */
-
+/* Ini aku ganti jadi help */ 
 print_Help :-
-    write('Help :'),nl,
-    write('[1] start.   : Menjalankan game'),nl,
-    write('[2] map.     : Menampilkan peta '),nl,
-    write('[3] w.       : Berjalan ke arah utara/atas'),nl,
-    write('[4] a.       : Berjalan ke arah barat/kiri'),nl,
-    write('[5] s.       : Berjalan ke arah selatan/bawah'),nl,
-    write('[6] d.       : Berjalan ke arah timur/kanan'),nl,
-    write('[7] status.  : Menampilkan status semua allies'),nl,
-    write('[8] help.    : Menampilkan menu help'),nl,
-    write('[9] run.     : Menghindari battle dengan musuh'),nl,
-    write('[10] battle. : Bertarung melawan musuh'),nl.
+    write('Command-command yang tersedia'),nl,
+    write('Ketik nomor command dan akhiri dengan tanda titik untuk menggunakannya'),nl,
+    write('[ 1]Mulai Permainan'),nl,
+    write('[ 2]Barat'),nl,
+    write('[ 3]Timur'),nl,
+    write('[ 4]Utara'),nl,
+    write('[ 5]Selatan'),nl,
+    write('[ 6]Tunjukkin arah mata angin dong'),nl,
+    write('[ 7]Attack'),nl,
+    write('[ 8]Kabur'),nl,
+    write('[ 9]Menambah anggota mission'),nl,
+    write('[10]Melepas anggota mission'),nl,
+    write('[11]Status'),nl,
+    write('[12]Perlihatkan peta'),nl,
+    write('[13]Save'),nl,
+    write('[14]Load'),nl,
+    write('[15]Help'),nl,
+    write('[16]Keluar Permainan'),nl.
+
+print_PlayerStatus :-
+    player(Name, Type, X, Y, HP, NDamage, SDamage, Inventory),
+    skillName(Name, SName),
+    write('Name : '), write(Name),nl,
+    write('Type : '), write(Type),nl,
+    write('Loc  : '), write('('), write(X), write(','), write(Y), write(')'),nl,
+    write('HP   : '), write(HP),nl,
+    write('Dmg  : '), write(NDamage),nl,
+    write('Skill: '), write(SName), write(' / '), write(SDamage),nl,
+    write('Allies: '),write(Inventory),nl.
+
+printInvalid :- write('Input tidak valid'),nl.
+
+printInputCommand :- write('Masukkin commmand: ').
+
+printHealthCenter :- write('Anda berada di Health Center,Anda boleh menyembuhkan 1 orang di sini, Menyembuhkan siapa ?'),nl.
+
+printArah :- 
+    write('  N'),nl,
+    write('W   E'),nl,
+    write('  S'),nl.
