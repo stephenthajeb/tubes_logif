@@ -1,3 +1,6 @@
+-dynamic(player/8).
+-dynamic(enemy/7).
+
 /* HP */
 hp(naruto, 350).
 hp(sakura, 300).
@@ -86,7 +89,6 @@ skillName(itachi, 'Amaterasu').
 /* INVENTORI */
 init_Inventory([naruto, sasuke, sakura]).
 
-playerLoc(10,10).
 enemyLoc(1,1).
 
 strong(wind, forest).
@@ -99,13 +101,12 @@ weak(dark, forest).
 
 /* Inisialisasi */
 init_Player :-
-    playerLoc(X,Y),
     hp(naruto, HP),
     dmg(naruto, NDamage),
     skillDmg(naruto, SDamage),
     type(naruto, Type),
     init_Inventory(Inventory),
-    asserta(player(naruto, Type, X, Y, HP, NDamage, SDamage, Inventory)).
+    asserta(player(naruto, Type, 1, 1, HP, NDamage, SDamage, Inventory)).
 
 init_Enemy :-
     enemyLoc(X,Y),
