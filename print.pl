@@ -151,7 +151,7 @@ print_PlayerStatus :-
     write('Skill: '), write(SName), write(' / '), write(SDamage),nl,
     write('Allies: '),write(Inventory),nl.
 
-printInvalid :- write('Input tidak valid'),nl.
+printCommandInvalid :- write('Input tidak valid'),nl.
 
 printInputCommand :- write('Masukkin commmand: ').
 
@@ -161,3 +161,6 @@ printArah :-
     write('  N'),nl,
     write('W   E'),nl,
     write('  S'),nl.
+
+printInvalidMove :- write('Invalid Move !! Kamu tidak boleh melewat border cuy'),nl.
+

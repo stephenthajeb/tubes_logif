@@ -1,6 +1,3 @@
--dynamic(player/8).
--dynamic(enemy/7).
-
 /* HP */
 hp(naruto, 350).
 hp(sakura, 300).
@@ -145,6 +142,8 @@ check(List,Y):-
 /*Ini aku ganti*/
 playerStatus :- print_PlayerStatus.
 
+/* 
 start :- 
     init_Player,
     init_Enemy.
+*/
