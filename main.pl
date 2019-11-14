@@ -11,6 +11,7 @@ start :- asserta(startStatus(0)),print_Title,print_Story,help,
                 X = 1.
 help :- print_Help.
 
+
 /*Aksi terhadap command*/
 inputCmd(X) :- X=1,init,map,retract(startStatus(0)),asserta(startStatus(1)),gameOnGoing.
 inputCmd(X) :- X>0,X<17,X\==6,X\==12,X\==14,X\==15,X\==16,startStatus(0),write('command ini hanya bisa dipakai setelah permainan dimulai'),nl,!.

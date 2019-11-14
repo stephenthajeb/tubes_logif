@@ -79,7 +79,7 @@ print_CantRun :-
 /*
 print_FoundEnemey :-
     write('Hati-hati ada musuh didepan!'),nl,
-    write(EnemyName), write(' muncul secara tiba tiba'),nl,
+    write('X'), write(' muncul secara tiba tiba'),nl,
     write('Pilih bertarung atau lari ?'),nl.
     */
 
