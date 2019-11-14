@@ -15,11 +15,11 @@ start :-
 help :- print_Help.
 exit :- 
     retractall(playerLoc(_,_)),
-    retractall(healLoc(_,_)),
     retractall(player(_,_,_,_,_,_,_,_)).
 
 /*Aksi terhadap command*/
 /*Ganti init dr map jd init yang player*/
+/*
 inputCmd(X) :- X=1,init,map,retract(startStatus(0)),asserta(startStatus(1)),gameOnGoing.
 inputCmd(X) :- X>0,X<17,X\==6,X\==12,X\==14,X\==15,X\==16,startStatus(0),write('command ini hanya bisa dipakai setelah permainan dimulai'),nl,!.
 inputCmd(X) :- X=2,west,!.
@@ -34,11 +34,14 @@ inputCmd(X) :- X=16,
                write('Yahhh, Hinatanya g jadi diselamatin dong'),nl,
                halt,!.
 /*Ini masih aneh*/
-inputCmd(X) :- X\==2,X\==3,X\==4,X\==5,printCommandInvalid,!.
+/*
+inputCmd(X) :- X=2,X=3,X=4,X=5,printCommandInvalid,!.
+*/
 /* inputCmd(X) :- Sisany */
-
+/*
 gameOnGoing :-  repeat,
                     printInputCommand,                
                     read(X),X\==1,inputCmd(X),
                 X=16. 
+*/
                 /*Tambahin syarat jika kalah gama assert startStatus(0)*/

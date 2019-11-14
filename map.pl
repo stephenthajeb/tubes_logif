@@ -8,15 +8,15 @@ activeArea(X,Y) :- X>(0),X<11,Y>(0),Y<11.
 /* Inisialisasi awal */
 
 /*Masih blm ada posisi enemy dan friend*/
-init :- asserta(healLoc(5,1)),asserta(playerLoc(1,1)).
+init :- asserta(playerLoc(1,1)).
+healLoc(5,5).
+enemyLoc(2,4).
 
 printmap(X,Y) :- playerLoc(X,Y),write('P').
 printmap(X,Y) :- border(X,Y),write('X').
 printmap(X,Y) :- healLoc(X,Y),write('H').
-/*
-printmap(X,Y) :- friendLoc(X,Y),write('F').
 printmap(X,Y) :- enemyLoc(X,Y),write('E').
-*/
+
 printmap(X,Y) :- activeArea(X,Y),write('-').
 
 /*Move*/
@@ -37,16 +37,13 @@ d :- east, move_Player.
 
 /* Collision terjadi jika ada 2 huruf di satu koordinat peta*/
 /* Tambahin aksi setelah collision*/
-/*
-collision(X,Y)  :- playerLoc(X,Y),healLoc(X,Y),printHealthCenter,!.
-collision(X,Y)  :- playerLoc(X,Y),enemyLoc(X,Y),write('Kamu ketemu dengan musuh legendary Clan Akatsuki, lari atau bertanding ?'),nl,!.
-collision(X,Y)  :-playerLoc(X,Y),friendLoc(X,Y),write('Kamu ketemu dengan ..... teman baik lamamu,coba meyakinkan dia untuk mengikuti kamu atau hindarin dia?'),nl,!.
-*/
+
+collision(X,Y)  :- playerLoc(X,Y),healLoc(X,Y),print_Heal,!.
+collision(X,Y)  :- playerLoc(X,Y),enemyLoc(X,Y),print_FoundEnemy,nl,!.
+
 /*Logic ketika player ketemu friend, enemy, atau berada di health center */
-/*
-msgAfterMove :- playerLoc(X,Y),write('Sekarang anda berada pada ('),print(X),write(','),print(Y),write(')'),nl,collision(X,Y).
-*/
-msgAfterMove :- playerLoc(X,Y),write('Sekarang anda berada pada ('),print(X),write(','),print(Y),write(')'),nl.
+
+msgAfterMove :- playerLoc(X,Y),write('Sekarang Player berada pada ('),print(X),write(','),print(Y),write(')'),nl,collision(X,Y).
 
 map:- forall(between(0,11,Y),(forall(between(0,11,X),printmap(X,Y)),nl)).
 

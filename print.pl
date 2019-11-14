@@ -57,8 +57,7 @@ print_all :-
     print_Lose.
 
 /* Interactive Command */
-/*
-print_Help
+
 print_InventoryFull :-
     write('Temanmu sudah terlalu banyak. Apakah ingin mengganti teman ?'),nl.
 print_Capture :-
@@ -73,15 +72,15 @@ print_CantRun :-
     write('Kagebunshin no Jutsu!'),nl,
     write('..........'),nl,
     write('Sial! Aku tidak bisa kabur!'),nl.
-*/
 
-/* Interactive Fight */
-/*
-print_FoundEnemey :-
+print_FoundEnemy :-
     write('Hati-hati ada musuh didepan!'),nl,
     write('X'), write(' muncul secara tiba tiba'),nl,
     write('Pilih bertarung atau lari ?'),nl.
-    */
+
+print_Heal :-
+    write('Akhirnya sampai di Medical Center'),nl,
+    write('Mau sembuhkan teman-teman ?'),nl.
 
 print_FightSakura :-
     write('Haii. Jangan nangis ya kalau kalah...'),nl.
@@ -120,6 +119,7 @@ print_BattleTitle :-
 
 /* Help */
 /* Ini aku ganti jadi help */ 
+/*
 print_Help :-
     write('Command-command yang tersedia'),nl,
     write('Ketik nomor command dan akhiri dengan tanda titik untuk menggunakannya'),nl,
@@ -139,6 +139,24 @@ print_Help :-
     write('[14]Load'),nl,
     write('[15]Help'),nl,
     write('[16]Keluar Permainan'),nl.
+*/
+print_Help :-
+    write('----------------HELP----------------'),nl,
+    write('Ketik command yang tersedia dan akhiri dengan tanda titik (.)'),nl,
+    write('w    : Utara'),nl,
+    write('a    : Barat'),nl,
+    write('s    : Selatan'),nl,
+    write('d    : Timur'),nl,
+    write('attack  : Attack'),nl,
+    write('run  : Kabur'),nl,
+    write('add  : Menambah anggota mission'),nl,
+    write('del  : Melepas anggota mission'),nl,
+    write('status : Status'),nl,
+    write('map  : Perlihatkan peta'),nl,
+    write('save : Save'),nl,
+    write('load : Load'),nl,
+    write('help : Help'),nl,
+    write('exit : Keluar Permainan'),nl.
 
 print_PlayerStatus :-
     player(Name, Type, X, Y, HP, NDamage, SDamage, Inventory),
@@ -151,11 +169,19 @@ print_PlayerStatus :-
     write('Skill: '), write(SName), write(' / '), write(SDamage),nl,
     write('Allies: '),write(Inventory),nl.
 
+print_EnemyStatus :-
+    enemy(Name, Type, X, Y, HP, NDamage, SDamage),
+    skillName(Name, SName),
+    write('Name : '), write(Name),nl,
+    write('Type : '), write(Type),nl,
+    write('Loc  : '), write('('), write(X), write(','), write(Y), write(')'),nl,
+    write('HP   : '), write(HP),nl,
+    write('Dmg  : '), write(NDamage),nl,
+    write('Skill: '), write(SName), write(' / '), write(SDamage),nl.
+
 printCommandInvalid :- write('Input tidak valid'),nl.
 
 printInputCommand :- write('Masukkin commmand: ').
-
-printHealthCenter :- write('Anda berada di Health Center,Anda boleh menyembuhkan 1 orang di sini, Menyembuhkan siapa ?'),nl.
 
 printArah :- 
     write('  N'),nl,

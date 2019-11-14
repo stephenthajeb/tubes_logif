@@ -89,8 +89,6 @@ skillName(itachi, 'Amaterasu').
 /* INVENTORI */
 init_Inventory([naruto, sasuke, sakura]).
 
-enemyLoc(1,1).
-
 strong(wind, forest).
 strong(forest, dark).
 strong(dark, wind).

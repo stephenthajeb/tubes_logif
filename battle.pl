@@ -102,49 +102,6 @@ enemy_Attack(2, EnemyType, PlayerType) :-
     retract(player(PlayerName, PlayerType, PlayerX, PlayerY, PlayerHP, PlayerNDamage, PlayerSDamage, PlayerInventory)),
     asserta(player(PlayerName, PlayerType, PlayerX, PlayerY, NewHP, PlayerNDamage, PlayerSDamage, PlayerInventory)).
 
-/* Check Status */
-print_PlayerStatus :-
-    player(Name, Type, X, Y, HP, NDamage, SDamage, Inventory),
-    skillName(Name, SName),
-    write('Name : '), write(Name),nl,
-    write('Type : '), write(Type),nl,
-    write('Loc  : '), write('('), write(X), write(','), write(Y), write(')'),nl,
-    write('HP   : '), write(HP),nl,
-    write('Dmg  : '), write(NDamage),nl,
-    write('Skill: '), write(SName), write(' / '), write(SDamage),nl,
-    write('Allies: '),write(Inventory),nl.
-print_EnemyStatus :-
-    enemy(Name, Type, X, Y, HP, NDamage, SDamage),
-    skillName(Name, SName),
-    write('Name : '), write(Name),nl,
-    write('Type : '), write(Type),nl,
-    write('Loc  : '), write('('), write(X), write(','), write(Y), write(')'),nl,
-    write('HP   : '), write(HP),nl,
-    write('Dmg  : '), write(NDamage),nl,
-    write('Skill: '), write(SName), write(' / '), write(SDamage),nl.
-
-/*
-check_Inventory(PlayerInventory, CopyInventory, Select) :-
-    repeat,
-    PlayerInventory = [H|T],
-    CopyInventory = [H|CopyInventory],
-    check(PlayerInventory,Select),!.
-
-select_player(PlayerInventory, Select) :-
-    player(_,_,_,_,_,_,_,PlayerInventory),
-    CopyInventory=[],
-    check_Inventory(PlayerInventory, CopyInventory, Select),
-    CopyInventory=[H|T],
-    PlayerInventory=[PlayerInventory|T].
-
-check([],Y):-!.
-check(List,Y):- 
-    List=[Head|Tail], 
-    !, 
-    check(Tail,Y), 
-    Head\==Y.     
-*/
-
 /* Battle Mechanism */
 
 attack(Allies(HP=0), Enemy, Kalah).
