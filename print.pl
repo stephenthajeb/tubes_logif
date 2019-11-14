@@ -163,4 +163,3 @@ printArah :-
     write('  S'),nl.
 
 printInvalidMove :- write('Invalid Move !! Kamu tidak boleh melewat border cuy'),nl.
-

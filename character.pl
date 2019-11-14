@@ -116,16 +116,17 @@ init_Enemy :-
     asserta(enemy(itachi, Type, X, Y, HP, NDamage, SDamage)).
 
 check_Inventory(PlayerInventory, CopyInventory, Select) :-
-    repeat,
     PlayerInventory = [H|T],
     write(PlayerInventory),nl,
+    write(H),nl,
     CopyInventory = [H|CopyInventory],
     PlayerInventory = [T],
     write(CopyInventory),nl,
+    write('aaaa'),nl,
     write(PlayerInventory),nl,
     check(PlayerInventory,Select),!.
 
-select_player(PlayerInventory, Select) :-
+select_Player(Select) :-
     player(_,_,_,_,_,_,_,PlayerInventory),
     CopyInventory=[],
     check_Inventory(PlayerInventory, CopyInventory, Select),
@@ -139,11 +140,3 @@ check(List,Y):-
     check(Tail,Y), 
     Head\==Y.     
 
-/*Ini aku ganti*/
-playerStatus :- print_PlayerStatus.
-
-/* 
-start :- 
-    init_Player,
-    init_Enemy.
-*/

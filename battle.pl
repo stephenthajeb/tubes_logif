@@ -1,7 +1,7 @@
 /* Include */
 -include('character.pl').
 
-/* Battle Mechanism */
+/* Attack Mechanism */
 /* attack(AttType, PlayerType, EnemyType)
     AttType == 1 : Normal
     AttType == 2 : Skill */
@@ -126,6 +126,7 @@ print_EnemyStatus :-
     write('Dmg  : '), write(NDamage),nl,
     write('Skill: '), write(SName), write(' / '), write(SDamage),nl.
 
+/*
 check_Inventory(PlayerInventory, CopyInventory, Select) :-
     repeat,
     PlayerInventory = [H|T],
@@ -145,5 +146,37 @@ check(List,Y):-
     !, 
     check(Tail,Y), 
     Head\==Y.     
+*/
 
+/* Battle Mechanism */
 
+attack(Allies(HP=0), Enemy, Kalah).
+attack(Allies, Enemy(HP=0), Menang).
+
+attack(Allies, Enemy, State) :- 
+    player(_, PlayerType, _, _, _, _, _, _),
+    enemy(_, EnemyType, _, _, EnemyHP, _, _),
+    player_Attack(AttType, PlayerType, EnemyType),
+    EnemyHP==0,
+    attack(Allies, Enemy, StateX),
+    State is StateX.
+attack(Allies, Enemy, State) :-
+    player(_, PlayerType, _, _, _, _, _, _),
+    enemy(_, EnemyType, _, _, EnemyHP, _, _),
+    player_Attack(AttType, PlayerType, EnemyType),
+    EnemyHP=\=0,
+    enemy_Attack(AttType, EnemyType, PlayerType),
+    attack(Allies, Enemy, StateX),
+    State is StateX.
+
+battle(Allies(Inventory=[]), Enemy, Kalah).
+
+battle(Allies, Enemy, State) :-
+    select_player,
+    attack(Allies, Enemy, Kalah),
+    battle(Allies, Enemy, State).
+battle(Allies, Enemy, State) :-
+    select_player,
+    attack(Allies, Enemy, Menang),
+    insert(player),
+    State is Menang.
