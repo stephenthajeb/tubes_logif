@@ -1,6 +1,3 @@
-/* Include */
--include('character.pl').
-
 /* Attack Mechanism */
 /* attack(AttType, PlayerType, EnemyType)
     AttType == 1 : Normal

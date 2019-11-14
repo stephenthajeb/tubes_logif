@@ -1,16 +1,22 @@
 :- include('print.pl').
 :- include('map.pl').
-
+:- include('character.pl').
 
 /*Untuk menunjukkan apakah pemain pernah menekan command [1]*/
 :-dynamic(startStatus/1).
 
-start :- asserta(startStatus(0)),print_Title,print_Story,help,
-                repeat,
-                    printInputCommand,
-                    read(X),inputCmd(X),
-                X = 1.
+start :-    
+    print_Title,
+    print_Story,
+    help,
+    init,
+    init_Player,
+    map.
 help :- print_Help.
+exit :- 
+    retractall(playerLoc(_,_)),
+    retractall(healLoc(_,_)),
+    retractall(player(_,_,_,_,_,_,_,_)).
 
 /*Aksi terhadap command*/
 /*Ganti init dr map jd init yang player*/

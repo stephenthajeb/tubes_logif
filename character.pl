@@ -1,5 +1,5 @@
--dynamic(player/8).
--dynamic(enemy/7).
+:-dynamic(player/8).
+:-dynamic(enemy/7).
 
 /* HP */
 hp(naruto, 350).
@@ -101,12 +101,13 @@ weak(dark, forest).
 
 /* Inisialisasi */
 init_Player :-
+    playerLoc(X,Y),
     hp(naruto, HP),
     dmg(naruto, NDamage),
     skillDmg(naruto, SDamage),
     type(naruto, Type),
     init_Inventory(Inventory),
-    asserta(player(naruto, Type, 1, 1, HP, NDamage, SDamage, Inventory)).
+    asserta(player(naruto, Type, X, Y, HP, NDamage, SDamage, Inventory)).
 
 init_Enemy :-
     enemyLoc(X,Y),
@@ -116,28 +117,9 @@ init_Enemy :-
     type(itachi, Type),
     asserta(enemy(itachi, Type, X, Y, HP, NDamage, SDamage)).
 
-check_Inventory(PlayerInventory, CopyInventory, Select) :-
-    PlayerInventory = [H|T],
-    write(PlayerInventory),nl,
-    write(H),nl,
-    CopyInventory = [H|CopyInventory],
-    PlayerInventory = [T],
-    write(CopyInventory),nl,
-    write('aaaa'),nl,
-    write(PlayerInventory),nl,
-    check(PlayerInventory,Select),!.
-
-select_Player(Select) :-
-    player(_,_,_,_,_,_,_,PlayerInventory),
-    CopyInventory=[],
-    check_Inventory(PlayerInventory, CopyInventory, Select),
-    CopyInventory=[H|T],
-    PlayerInventory=[PlayerInventory|T].
-
-check([],Y):-!.
-check(List,Y):- 
-    List=[Head|Tail], 
-    !, 
-    check(Tail,Y), 
-    Head\==Y.     
-
+move_Player :-
+    player(Name, Type, X, Y, HP, NDamage, SDamage, Inventory),
+    playerLoc(NewX, NewY),
+    retract(player(Name, Type, X, Y, HP, NDamage, SDamage, Inventory)),
+    asserta(player(Name, Type, NewX, NewY, HP, NDamage, SDamage, Inventory)),
+    print_PlayerStatus, !.
