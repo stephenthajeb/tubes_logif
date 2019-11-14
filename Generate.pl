@@ -1,3 +1,4 @@
+:-include('map.pl').
 /* Sebagai Database Enemy apa saja yang sudah dilawan */
 :-dynamic(enemy_appear/1).
 /* Sebagai Database Enemy apa saja yang sudah dialokasikan pada peta atau lokasi */
@@ -245,7 +246,71 @@ generate_Akatsuki_Enemy:-
     asserta(enemyLocX(NewEnemyLocX)).
 
 /* Kemuculan Akatsuki kedua */
-/* generate_Akatsuki_Enemy:- enemy_appear(List_Of_Enemy_Appear), nbElmtList(List_Of_Enemy_Appear,Count),(Count>7;Count==7), */
+generate_Akatsuki_Enemy:- 
+    enemy_appear(List_Of_Enemy_Appear), 
+    nbElmtList(List_Of_Enemy_Appear,Count),
+    (Count>7;Count==7),
+    nbAkatsuki(X),
+    X==1, 
+    random(1,10,Y),
+    twoAkatsuki(Y1),
+    retract(twoAkatsuki(Y1)),
+    Y1 is Y1+Y,
+    asserta(twoAkatsuki(Y1)),
+    (Y1>80 ; Y1==80),
+    enemy(List_Of_Enemy),
+    enemyLocY(OldY),
+    enemyLocX(OldX),
+    playerLoc(X1,Y1),
+    check_Akatsuki_Enemy(List_Of_Enemy,Name_Enemy),
+    !,
+    generate_Random_Location(LocX,LocY),
+    check(OldX,LocX),
+    check(OldY,LocY),
+    X\==X1,
+    Y\==Y1,
+    NewListOfEnemy=[Name_Enemy|List_Of_Enemy],
+    NewEnemyLocY=[Y|OldY],
+    NewEnemyLocX=[X|OldX],
+    retract(enemy(List_Of_Enemy)),
+    asserta(enemy(NewListOfEnemy)),
+    retract(enemyLocY(OldY)),
+    asserta(enemyLocY(NewEnemyLocY)),
+    retract(enemyLocX(OldX)),
+    asserta(enemyLocX(NewEnemyLocX)).
+
+/* Kemunculan Akatsuki Ketiga */
+generate_Akatsuki_Enemy:-
+    generate_Akatsuki_Enemy:- 
+    enemy_appear(List_Of_Enemy_Appear), 
+    nbElmtList(List_Of_Enemy_Appear,Count),
+    (Count>10;Count==10),
+    nbAkatsuki(X),
+    X==2, 
+    enemy(List_Of_Enemy),
+    enemyLocY(OldY),
+    enemyLocX(OldX),
+    playerLoc(X1,Y1),
+    check_Akatsuki_Enemy(List_Of_Enemy,Name_Enemy),
+    !,
+    generate_Random_Location(LocX,LocY),
+    check(OldX,LocX),
+    check(OldY,LocY),
+    X\==X1,
+    Y\==Y1,
+    write(" Akatsuki ketiga sudah ditemukan! pada koordinat "),
+    write(X1),
+    NewListOfEnemy=[Name_Enemy|List_Of_Enemy],
+    NewEnemyLocY=[Y|OldY],
+    NewEnemyLocX=[X|OldX],
+    retract(enemy(List_Of_Enemy)),
+    asserta(enemy(NewListOfEnemy)),
+    retract(enemyLocY(OldY)),
+    asserta(enemyLocY(NewEnemyLocY)),
+    retract(enemyLocX(OldX)),
+    asserta(enemyLocX(NewEnemyLocX)).
+
+
 
 concat([],[],[]):- !.
 concat([],List2,List2):- !.
