@@ -128,3 +128,4 @@ print_Help :-
     write('[8] help.    : Menampilkan menu help'),nl,
     write('[9] run.     : Menghindari battle dengan musuh'),nl,
     write('[10] battle. : Bertarung melawan musuh'),nl.
+    
