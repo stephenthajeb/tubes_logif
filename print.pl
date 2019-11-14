@@ -57,7 +57,6 @@ print_all :-
     print_Lose.
 
 /* Interactive Command */
-print_Help
 print_InventoryFull :-
     write('Temanmu sudah terlalu banyak. Apakah ingin mengganti teman ?'),nl.
 print_Capture :-
@@ -76,7 +75,7 @@ print_CantRun :-
 /* Interactive Fight */
 print_FoundEnemey :-
     write('Hati-hati ada musuh didepan!'),nl,
-    write(EnemyName), write(' muncul secara tiba tiba'),nl,
+    write('X'), write(' muncul secara tiba tiba'),nl,
     write('Pilih bertarung atau lari ?'),nl.
 
 print_FightSakura :-
