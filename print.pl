@@ -78,10 +78,6 @@ print_FoundEnemy :-
     write('X'), write(' muncul secara tiba tiba'),nl,
     write('Pilih bertarung atau lari ?'),nl.
 
-print_Heal :-
-    write('Akhirnya sampai di Medical Center'),nl,
-    write('Mau sembuhkan teman-teman ?'),nl.
-
 print_FightSakura :-
     write('Haii. Jangan nangis ya kalau kalah...'),nl.
 print_FightSasuke :-
@@ -180,6 +176,14 @@ print_EnemyStatus :-
     write('Dmg  : '), write(NDamage),nl,
     write('Skill: '), write(SName), write(' / '), write(SDamage),nl.
 
-printCommandInvalid :- write('Input tidak valid'),nl.
+printCommandInvalid :- write('Command tidak valid'),nl.
 
 printInvalidMove :- write('Invalid Move !! Kamu tidak boleh melewat border cuy'),nl.
+
+print_Heal :-
+    healStatus(0),
+    write('Akhirnya sampai di Medical Center'),nl,
+    write('Mau heal teman-teman ? Jika mau ketik "heal."'),nl,!.
+print_Heal :-
+    healStatus(1),
+    write('Fasilitas ini hanya bisa digunakan sekali :('),nl,!.

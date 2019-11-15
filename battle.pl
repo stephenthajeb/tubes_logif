@@ -44,14 +44,15 @@ player_Attack(1) :-
     enemy(EnemyName, EnemyType, EnemyX, EnemyY, EnemyHP, EnemyNDamage, EnemySDamage),
     NewHP is EnemyHP-NDamage,
     retract(enemy(EnemyName, EnemyType, EnemyX, EnemyY, EnemyHP, EnemyNDamage, EnemySDamage)),
-    asserta(enemy(EnemyName, EnemyType, EnemyX, EnemyY, NewHP, EnemyNDamage, EnemySDamage)).
+    asserta(enemy(EnemyName, EnemyType, EnemyX, EnemyY, NewHP, EnemyNDamage, EnemySDamage)),!.
 
 player_Attack(2) :-
     player(_, PlayerType, _, _, _, _, SDamage),
     enemy(EnemyName, EnemyType, EnemyX, EnemyY, EnemyHP, EnemyNDamage, EnemySDamage),
     NewHP is EnemyHP-SDamage,
     retract(enemy(EnemyName, EnemyType, EnemyX, EnemyY, EnemyHP, EnemyNDamage, EnemySDamage)),
-    asserta(enemy(EnemyName, EnemyType, EnemyX, EnemyY, NewHP, EnemyNDamage, EnemySDamage)).
+    asserta(enemy(EnemyName, EnemyType, EnemyX, EnemyY, NewHP, EnemyNDamage, EnemySDamage)),!.
+
 
 
 /* ENEMY */
@@ -95,14 +96,26 @@ enemy_Attack(1) :-
     enemy(_, EnemyType, _, _, _, NDamage, _),
     NewHP is PlayerHP-NDamage,
     retract(player(PlayerName, PlayerType, PlayerX, PlayerY, PlayerHP, PlayerNDamage, PlayerSDamage)),
-    asserta(player(PlayerName, PlayerType, PlayerX, PlayerY, NewHP, PlayerNDamage, PlayerSDamage)).
+    asserta(player(PlayerName, PlayerType, PlayerX, PlayerY, NewHP, PlayerNDamage, PlayerSDamage)),!.
 
 enemy_Attack(2) :-
     player(PlayerName, PlayerType, PlayerX, PlayerY, PlayerHP, PlayerNDamage, PlayerSDamage),
     enemy(_, EnemyType, _, _, _, _, SDamage),
     NewHP is PlayerHP-SDamage,
     retract(player(PlayerName, PlayerType, PlayerX, PlayerY, PlayerHP, PlayerNDamage, PlayerSDamage)),
-    asserta(player(PlayerName, PlayerType, PlayerX, PlayerY, NewHP, PlayerNDamage, PlayerSDamage)).
+    asserta(player(PlayerName, PlayerType, PlayerX, PlayerY, NewHP, PlayerNDamage, PlayerSDamage)),!.
+
+
+/* Heal */
+heal :- playerLoc(X1,Y1),healLoc(X2,Y2),X1\==X2,Y1\==Y2,printCommandInvalid,!.
+heal :- healStatus(0),
+        player(Name, Type, X, Y, HP, NDamage, SDamage),
+        retract(player(Name, Type, X, Y, HP, NDamage, SDamage)),
+        asserta(player(Name, Type, X, Y, 100, NDamage, SDamage)),
+        print_PlayerStatus,
+        retract(healStatus(0)),
+        asserta(healStatus(1)).
+
 
 /* Battle Mechanism */
 /*
