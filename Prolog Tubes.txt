@@ -63,11 +63,13 @@ KARAKTER :
 	- Boss : Itachi
 BUILDING :
 	- Medical Station : Menyembuhkan Naruto dan temannya yang terluka
-	-
 TYPE :
-	- Wind
-	- Forest
-	- Dark
+	-Dark
+	-Fire
+	-Wind
+	-Earth
+	-Physical
+	-Lightning
 SKILL :
 	- CONTOH : NAMA SKILL 			- TIPE		- DAMAGE
 	- Naruto : Rasengan 			- Wind		- 190
@@ -103,12 +105,21 @@ CHAR ATTRIBUTE :
 	- Sasori : 	400	- 40
 	- Itachi : 	500 	- 50
 TYPE ATTACK :
-	- Wind > Forest : 	
-			-Wind damage + 50%
-			-Forest damage - 50%
-	- Forest > Dark :
-			-Forest damage + 50%
-			-Dark damage - 50%
-	- Dark > Wind	:
+	- Dark > Fire	:
 			-Dark damage + 50%
+			-Fire damage - 50%
+	- Fire > Wind : 	
+			-Fire damage + 50%
 			-Wind damage - 50%
+	- Wind > Earth :
+			-Wind damage + 50%
+			-Earth damage - 50%
+	- Earth > Physical	:
+			-Earth damage + 50%
+			-Physical damage - 50%
+	- Physical > Lightning : 	
+			-Physical damage + 50%
+			-Lightning damage - 50%
+	- Lightning > Dark :
+			-Lightning damage + 50%
+			-Dark damage - 50%

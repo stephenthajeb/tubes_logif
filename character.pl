@@ -20,17 +20,17 @@ hp(itachi, 500).
 
 /* TYPE */
 type(naruto, wind).
-type(sakura, water).
+type(sakura, physical).
 type(sasuke, lightning).
 type(lee, earth).
-type(neji, wind).
+type(neji, physical).
 type(choji, earth).
 type(shikamaru, dark).
 type(tenten, wind).
-type(kiba, water).
+type(kiba, wind).
 type(shino, dark).
 type(gaara, earth).
-type(deidara, dark).
+type(deidara, fire).
 type(tobi, dark).
 type(sasori, dark).
 type(itachi, fire).
@@ -89,12 +89,12 @@ skillName(itachi, 'Amaterasu').
 /* INVENTORI */
 inventory([naruto, sasuke, sakura]).
 
-strong(dark,fire).
-strong(fire,earth).
-strong(earth,water).
-strong(water,wind).
-strong(wind,lightning).
-strong(lightning,dark).
+strong(dark, fire).
+strong(fire, wind).
+strong(wind, earth).
+strong(earth, physical).
+strong(physical, lightning).
+strong(lightning, dark).
 
 /*
 weak(wind, dark).

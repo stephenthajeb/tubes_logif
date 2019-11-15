@@ -1,4 +1,3 @@
-:-['Generate.pl'].
 :- dynamic(playerLoc/2).
 :- dynamic(enemyLoc/2).
 :- dynamic(healStatus/1).
