@@ -1,4 +1,4 @@
-
+:-['Generate.pl'].
 :- dynamic(playerLoc/2).
 :- dynamic(enemyLoc/2).
 :- dynamic(healStatus/1).
@@ -12,15 +12,15 @@ activeArea(X,Y) :- X>(0),X<11,Y>(0),Y<11.
 
 /* Inisialisasi awal */
 
-
 /*Masih blm ada posisi enemy dan friend*/
-init :- asserta(playerLoc(1,1)),asserta(healStatus(0)).
-healLoc(2,2).
+
+init :- asserta(playerLoc(1,1)).
+healLoc(5,5).
+enemyLoc(2,4).
 
 printmap(X,Y) :- playerLoc(X,Y),write('P').
 printmap(X,Y) :- border(X,Y),write('X').
 printmap(X,Y) :- healLoc(X,Y),write('H').
-printmap(X,Y) :- enemyLoc(X,Y),write('E').
 printmap(X,Y) :- activeArea(X,Y),write('-').
 
 /*Move*/
@@ -60,11 +60,3 @@ heal :- healStatus(0),
 msgAfterMove :- playerLoc(X,Y),write('Sekarang Player berada pada ('),print(X),write(','),print(Y),write(')'),nl,collision(X,Y).
 
 map:- forall(between(0,11,Y),(forall(between(0,11,X),printmap(X,Y)),nl)).
-
-
-/*
-enemyGenerator
-enemy(nama)
-enemyLocX(X)
-enemyLocY(Y)
-*/
