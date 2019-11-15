@@ -42,6 +42,6 @@ collision(X,Y)  :- !.
 
 /*Logic ketika player ketemu friend, enemy, atau berada di health center */
 
-msgAfterMove :- playerLoc(X,Y),write('Sekarang Player berada pada ('),print(X),write(','),print(Y),write(')'),nl,collision(X,Y,X1,Y1).
+msgAfterMove :- playerLoc(X,Y),write('Sekarang Player berada pada ('),print(X),write(','),print(Y),write(')'),nl,collision(X,Y).
 
 map:- forall(between(0,11,Y),(forall(between(0,11,X),printmap(X,Y)),nl)).
