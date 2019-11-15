@@ -1,5 +1,7 @@
+
 :- dynamic(playerLoc/2).
 :- dynamic(enemyLoc/2).
+:- dynamic(healStatus/1).
 
 /* Map 10x10, indeks dari 0 dan 11 sebagai border, indeks 1 sampai 10 active Area */
 border(0,Y) :- Y>(-1),Y<12.
@@ -12,8 +14,8 @@ activeArea(X,Y) :- X>(0),X<11,Y>(0),Y<11.
 
 
 /*Masih blm ada posisi enemy dan friend*/
-init :- asserta(playerLoc(1,1)).
-healLoc(5,5).
+init :- asserta(playerLoc(1,1)),asserta(healStatus(0)).
+healLoc(2,2).
 
 printmap(X,Y) :- playerLoc(X,Y),write('P').
 printmap(X,Y) :- border(X,Y),write('X').
@@ -39,9 +41,19 @@ d :- east, move_Player.
 
 /* Collision terjadi jika ada 2 huruf di satu koordinat peta*/
 /* Tambahin aksi setelah collision*/
-collision(X,Y)  :- playerLoc(X,Y),healLoc(X,Y),print_Heal,!.
+/*Jika pilih heal, maka retract(healStatus(0)) dan asserta(healStatus())*/
+collision(X,Y)  :- playerLoc(X,Y),healLoc(X,Y),print_Heal,!. 
 collision(X,Y)  :- playerLoc(X,Y),enemyLoc(X,Y),print_FoundEnemy,nl,!.
 collision(X,Y)  :- playerLoc(X,Y), !.
+
+heal :- playerLoc(X1,Y1),healLoc(X2,Y2),X1\==X2,Y1\==Y2,printCommandInvalid,!.
+heal :- healStatus(0),
+        player(Name, Type, X, Y, HP, NDamage, SDamage),
+        retract(player(Name, Type, X, Y, HP, NDamage, SDamage)),
+        asserta(player(Name, Type, X, Y, 100, NDamage, SDamage)),
+        print_PlayerStatus,
+        retract(healStatus(0)),
+        asserta(healStatus(1)).
 
 /*Logic ketika player ketemu friend, enemy, atau berada di health center */
 

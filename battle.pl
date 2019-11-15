@@ -4,6 +4,9 @@
     AttType == 2 : Skill */
 /* PLAYER */
 
+:- dynamic(attackStatus(1)).
+:- dynamic(healStatus/1).
+
 /* Strong TYPE */
 player_Attack(1, PlayerType, EnemyType) :-
     strong(PlayerType,EnemyType),
@@ -107,6 +110,18 @@ enemy_Attack(2, EnemyType, PlayerType) :-
     NewHP is PlayerHP-(SDamage - (SDamage/2)),
     retract(player(PlayerName, PlayerType, PlayerX, PlayerY, PlayerHP, PlayerNDamage, PlayerSDamage)),
     asserta(player(PlayerName, PlayerType, PlayerX, PlayerY, NewHP, PlayerNDamage, PlayerSDamage)),!.
+
+
+/* Heal */
+heal :- playerLoc(X1,Y1),healLoc(X2,Y2),X1\==X2,Y1\==Y2,printCommandInvalid,!.
+heal :- healStatus(0),
+        player(Name, Type, X, Y, HP, NDamage, SDamage),
+        retract(player(Name, Type, X, Y, HP, NDamage, SDamage)),
+        asserta(player(Name, Type, X, Y, 100, NDamage, SDamage)),
+        print_PlayerStatus,
+        retract(healStatus(0)),
+        asserta(healStatus(1)).
+
 
 /* Battle Mechanism */
 /*
