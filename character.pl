@@ -1,4 +1,4 @@
-:-dynamic(player/8).
+:-dynamic(player/7).
 :-dynamic(enemy/7).
 
 /* HP */
@@ -87,7 +87,7 @@ skillName(sasori, 'Puppet Technique').
 skillName(itachi, 'Amaterasu').
 
 /* INVENTORI */
-init_Inventory([naruto, sasuke, sakura]).
+inventory([naruto, sasuke, sakura]).
 
 strong(wind, forest).
 strong(forest, dark).
@@ -104,8 +104,7 @@ init_Player :-
     dmg(naruto, NDamage),
     skillDmg(naruto, SDamage),
     type(naruto, Type),
-    init_Inventory(Inventory),
-    asserta(player(naruto, Type, X, Y, HP, NDamage, SDamage, Inventory)).
+    asserta(player(naruto, Type, X, Y, HP, NDamage, SDamage)).
 
 init_Enemy :-
     enemyLoc(X,Y),
@@ -116,8 +115,8 @@ init_Enemy :-
     asserta(enemy(itachi, Type, X, Y, HP, NDamage, SDamage)).
 
 move_Player :-
-    player(Name, Type, X, Y, HP, NDamage, SDamage, Inventory),
+    player(Name, Type, X, Y, HP, NDamage, SDamage),
     playerLoc(NewX, NewY),
-    retract(player(Name, Type, X, Y, HP, NDamage, SDamage, Inventory)),
-    asserta(player(Name, Type, NewX, NewY, HP, NDamage, SDamage, Inventory)),
-    print_PlayerStatus, !.
+    retract(player(Name, Type, X, Y, HP, NDamage, SDamage)),
+    asserta(player(Name, Type, NewX, NewY, HP, NDamage, SDamage)),
+    print_PlayerStatus.

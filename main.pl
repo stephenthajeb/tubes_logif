@@ -1,6 +1,7 @@
 :- include('print.pl').
 :- include('map.pl').
 :- include('character.pl').
+:- include('battle.pl').
 
 /*Untuk menunjukkan apakah pemain pernah menekan command [1]*/
 :-dynamic(startStatus/1).
@@ -11,6 +12,7 @@ start :-
     help,
     init,
     init_Player,
+    init_Enemy,
     map.
 help :- print_Help.
 exit :- 

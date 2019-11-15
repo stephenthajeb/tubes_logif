@@ -1,4 +1,3 @@
-:-include('map.pl').
 /* Sebagai Database Enemy apa saja yang sudah dilawan */
 :-dynamic(enemy_appear/1).
 /* Sebagai Database Enemy apa saja yang sudah dialokasikan pada peta atau lokasi */

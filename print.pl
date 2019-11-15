@@ -159,7 +159,8 @@ print_Help :-
     write('exit : Keluar Permainan'),nl.
 
 print_PlayerStatus :-
-    player(Name, Type, X, Y, HP, NDamage, SDamage, Inventory),
+    inventory(Inventory),
+    player(Name, Type, X, Y, HP, NDamage, SDamage),
     skillName(Name, SName),
     write('Name : '), write(Name),nl,
     write('Type : '), write(Type),nl,
