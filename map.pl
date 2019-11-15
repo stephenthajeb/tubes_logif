@@ -41,10 +41,9 @@ d :- east, move_Player.
 
 /* Collision terjadi jika ada 2 huruf di satu koordinat peta*/
 /* Tambahin aksi setelah collision*/
-/*Jika pilih heal, maka retract(healStatus(0)) dan asserta(healStatus())*/
-collision(X,Y)  :- playerLoc(X,Y),healLoc(X,Y),print_Heal,!. 
-collision(X,Y)  :- playerLoc(X,Y),enemyLoc(X,Y),print_FoundEnemy,nl,!.
-collision(X,Y)  :- playerLoc(X,Y), !.
+collision(X,Y)  :- playerLoc(X,Y),healLoc(X,Y),print_Heal,!.
+collision(X,Y)  :- playerLoc(X,Y),enemyLocX(X1),enemyLocY(Y1),checkKoordinat(X,Y,X1,Y1),print_FoundEnemy,nl,!.
+collision(X,Y)  :- !.
 
 heal :- playerLoc(X1,Y1),healLoc(X2,Y2),X1\==X2,Y1\==Y2,printCommandInvalid,!.
 heal :- healStatus(0),

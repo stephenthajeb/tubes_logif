@@ -25,7 +25,7 @@ type(sasuke, lightning).
 type(lee, earth).
 type(neji, wind).
 type(choji, earth).
-type(shikamaru, fire).
+type(shikamaru, dark).
 type(tenten, wind).
 type(kiba, water).
 type(shino, dark).
@@ -33,7 +33,7 @@ type(gaara, earth).
 type(deidara, dark).
 type(tobi, dark).
 type(sasori, dark).
-type(itachi, dark).
+type(itachi, fire).
 
 /* NORMAL DAMAGE */
 dmg(naruto, 30).
@@ -50,7 +50,7 @@ dmg(gaara, 35).
 dmg(deidara, 45).
 dmg(tobi, 35).
 dmg(sasori, 40).
-dmg(itachi, 500).
+dmg(itachi, 50).
 
 /* SKILL DAMAGE */
 skillDmg(naruto, 190).
