@@ -1,3 +1,6 @@
+:- dynamic(playerLoc/2).
+:- dynamic(enemyLoc/2).
+
 /* Map 10x10, indeks dari 0 dan 11 sebagai border, indeks 1 sampai 10 active Area */
 border(0,Y) :- Y>(-1),Y<12.
 border(11,Y) :- Y>(-1),Y<12.
@@ -7,10 +10,10 @@ activeArea(X,Y) :- X>(0),X<11,Y>(0),Y<11.
 
 /* Inisialisasi awal */
 
+
 /*Masih blm ada posisi enemy dan friend*/
 init :- asserta(playerLoc(1,1)).
 healLoc(5,5).
-enemyLoc(2,4).
 
 printmap(X,Y) :- playerLoc(X,Y),write('P').
 printmap(X,Y) :- border(X,Y),write('X').
@@ -47,5 +50,9 @@ msgAfterMove :- playerLoc(X,Y),write('Sekarang Player berada pada ('),print(X),w
 map:- forall(between(0,11,Y),(forall(between(0,11,X),printmap(X,Y)),nl)).
 
 
-
-
+/*
+enemyGenerator
+enemy(nama)
+enemyLocX(X)
+enemyLocY(Y)
+*/
