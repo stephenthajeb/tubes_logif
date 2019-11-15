@@ -65,6 +65,32 @@ check(List,Y):-
     check(Tail,Y), 
     Head\==Y.     
 
+checkList([],Y):- !,fail.
+checkList(List,Y):-
+    List=[Head|Tail], 
+    Head==Y,
+    !.
+checkList(List,Y):-
+    List=[Head|Tail],
+    Head\==Y,
+    checkList(Tail,Y).
+
+checkKoordinat(X,Y,[],[]):- 
+    !,
+    fail.
+
+checkKoordinat(X,Y,ListX,ListY):-
+    ListX=[HeadX|TailX],
+    ListY=[HeadY|TailY],
+    X==HeadX,
+    Y==HeadY,
+    !.
+
+checkKoordinat(X,Y,ListX,ListY):-
+    ListX=[HeadX|TailX],
+    ListY=[HeadY|TailY],
+    checkKoordinat(X,Y,TailX,TailY).
+    
 /* Check apakah Nama Normal Enemy sudah ada pada enemy_appear*/
 check_Normal_Enemy(List,Name_Enemy):-
     repeat,
@@ -309,7 +335,6 @@ generate_Akatsuki_Enemy:-
 
 /* Kemunculan Akatsuki Ketiga */
 generate_Akatsuki_Enemy:-
-    generate_Akatsuki_Enemy:- 
     enemy_appear(List_Of_Enemy_Appear), 
     nbElmtList(List_Of_Enemy_Appear,Count),
     (Count>10;Count==10),
