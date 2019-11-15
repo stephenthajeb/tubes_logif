@@ -4,7 +4,7 @@
     AttType == 2 : Skill */
 /* PLAYER */
 
-:- dynamic(attackStatus(1)).
+:- dynamic(attackStatus/1).
 :- dynamic(healStatus/1).
 
 /* Strong TYPE */
