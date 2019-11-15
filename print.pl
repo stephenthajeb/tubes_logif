@@ -182,11 +182,4 @@ print_EnemyStatus :-
 
 printCommandInvalid :- write('Input tidak valid'),nl.
 
-printInputCommand :- write('Masukkin commmand: ').
-
-printArah :- 
-    write('  N'),nl,
-    write('W   E'),nl,
-    write('  S'),nl.
-
 printInvalidMove :- write('Invalid Move !! Kamu tidak boleh melewat border cuy'),nl.

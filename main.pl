@@ -2,6 +2,7 @@
 :- include('map.pl').
 :- include('character.pl').
 :- include('battle.pl').
+:- include('Generate.pl').
 
 /*Untuk menunjukkan apakah pemain pernah menekan command [1]*/
 :-dynamic(startStatus/1).
@@ -17,7 +18,8 @@ start :-
 help :- print_Help.
 exit :- 
     retractall(playerLoc(_,_)),
-    retractall(player(_,_,_,_,_,_,_,_)).
+    retractall(player(_,_,_,_,_,_,_)),
+    retractall(enemy(_,_,_,_,_,_,_)).
 
 /*Aksi terhadap command*/
 /*Ganti init dr map jd init yang player*/
@@ -46,4 +48,16 @@ gameOnGoing :-  repeat,
                     read(X),X\==1,inputCmd(X),
                 X=16. 
 */
-                /*Tambahin syarat jika kalah gama assert startStatus(0)*/
+                /*Tambahin syarat jika kalah gama assert startStatus(0)
+3,3
+10,7
+3,9
+7,2
+5,2
+6,4
+8,2
+4,9
+1,6
+
+
+*/
