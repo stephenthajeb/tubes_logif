@@ -1,6 +1,4 @@
-:- dynamic(playerLoc/2).
-:- dynamic(enemyLoc/2).
-
+:-['Generate.pl'].
 /* Map 10x10, indeks dari 0 dan 11 sebagai border, indeks 1 sampai 10 active Area */
 border(0,Y) :- Y>(-1),Y<12.
 border(11,Y) :- Y>(-1),Y<12.
@@ -10,15 +8,14 @@ activeArea(X,Y) :- X>(0),X<11,Y>(0),Y<11.
 
 /* Inisialisasi awal */
 
-
 /*Masih blm ada posisi enemy dan friend*/
 init :- asserta(playerLoc(1,1)).
 healLoc(5,5).
+enemyLoc(2,4).
 
 printmap(X,Y) :- playerLoc(X,Y),write('P').
 printmap(X,Y) :- border(X,Y),write('X').
 printmap(X,Y) :- healLoc(X,Y),write('H').
-printmap(X,Y) :- enemyLoc(X,Y),write('E').
 printmap(X,Y) :- activeArea(X,Y),write('-').
 
 /*Move*/
@@ -40,19 +37,11 @@ d :- east, move_Player.
 /* Collision terjadi jika ada 2 huruf di satu koordinat peta*/
 /* Tambahin aksi setelah collision*/
 collision(X,Y)  :- playerLoc(X,Y),healLoc(X,Y),print_Heal,!.
-collision(X,Y)  :- playerLoc(X,Y),enemyLoc(X,Y),print_FoundEnemy,nl,!.
-collision(X,Y)  :- playerLoc(X,Y), !.
+collision(X,Y)  :- playerLoc(X,Y),enemyLocX(X1),enemyLocY(Y1),checkKoordinat(X,Y,X1,Y1),print_FoundEnemy,nl,!.
+collision(X,Y)  :- !.
 
 /*Logic ketika player ketemu friend, enemy, atau berada di health center */
 
-msgAfterMove :- playerLoc(X,Y),write('Sekarang Player berada pada ('),print(X),write(','),print(Y),write(')'),nl,collision(X,Y).
+msgAfterMove :- playerLoc(X,Y),write('Sekarang Player berada pada ('),print(X),write(','),print(Y),write(')'),nl,collision(X,Y,X1,Y1).
 
 map:- forall(between(0,11,Y),(forall(between(0,11,X),printmap(X,Y)),nl)).
-
-
-/*
-enemyGenerator
-enemy(nama)
-enemyLocX(X)
-enemyLocY(Y)
-*/
