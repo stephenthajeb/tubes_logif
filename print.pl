@@ -197,3 +197,5 @@ printKO :- player(PlayerName, PlayerType, PlayerX, PlayerY, PlayerHP, PlayerNDam
            write(' is defeated '),nl,
            write('Aku terlalu lemah untuk menyelamatkan Hinata'),nl,
            write('Silahkan assign new player dari inventory'),nl.
+
+        

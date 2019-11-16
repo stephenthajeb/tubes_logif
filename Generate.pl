@@ -503,15 +503,6 @@ run:-
     normalProbability(X),
     !,
     (Probability<X;Probability==X).
-<<<<<<< HEAD
-/*
-runAwayAkatsukiProbability:-
-    random(0,101,Probability),
-    akatsukiProbability(X),
-    !,
-    (Probability<X;Probability==X).
-*/
-=======
 
 inputCollision(Input):-
     Input=='run',
@@ -527,4 +518,3 @@ inputCollision(Input):-
     akatsukiProbability(X),
     !,
     (Probability<X;Probability==X).*/
->>>>>>> 9a9aef2c7980b942fec0aae125a5ca7a37568193

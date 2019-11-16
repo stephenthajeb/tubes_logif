@@ -56,7 +56,6 @@ collision(X,Y)  :-
     assign_Enemy(X,Y,Name),
     print_FoundEnemy,nl,
     read(Input),call(Input),
-    inputCollision(Input),
     !.
 collision(X,Y)  :- !.
 
