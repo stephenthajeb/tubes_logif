@@ -139,9 +139,10 @@ assign_Player(Name) :-
     skillDmg(Name,NewSDamage),
     player(NamaOld, Type, X, Y, HP, NDamage, SDamage),
     retract(player(NamaOld, Type, X, Y, HP, NDamage, SDamage)),
-    asserta(player(Name, NewType, NewX, NewY, NewHP, NewNDamage, NewSDamage)).
+    asserta(player(Name, NewType, X, Y, NewHP, NewNDamage, NewSDamage)).
 
 capture:-
+    inventory(ListInventory),
     isFullInventory(ListInventory),
     print_InventoryFull,!.
 

@@ -61,7 +61,7 @@ collision(X,Y)  :-
     assign_Enemy(X,Y,Name),
     print_FoundEnemy,nl,
     !.
-collision(X,Y)  :- !.
+collision(_,_)  :- !.
 
 
 /*Logic ketika player ketemu friend, enemy, atau berada di health center */

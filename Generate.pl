@@ -7,7 +7,7 @@
 /* Sebagai Database lokasi Enemy pada sumbu Y */
 :-dynamic(enemyLocY/1).
 /* untuk jumlah step minimal agar akatsuki bisa muncul */
-:-dynamic(twoAkatsuki/1). write('aaa'),
+:-dynamic(twoAkatsuki/1).
 /* Menghitung kemunculan Banyaknya Akatsuki */
 :-dynamic(nbAkatsuki/1).
 /* Menghitung berapa banyak Akatsuki yang sudah dikalahkan */
@@ -58,16 +58,16 @@ generate_Random_Akatsuki_Enemy(Name_Enemy):-
     names(Name_Enemy,Number).
 
 /* Skema pengecekan apakah terdapat nilai Y pada List, Jika tidak ada akan menghasilkan true*/
-check([],Y):-!.
+check([],_):-!.
 check(List,Y):- 
     List=[Head|Tail], 
     !, 
     check(Tail,Y), 
     Head\==Y.     
 
-checkList([],Y):- !,fail.
+checkList([],_):- !,fail.
 checkList(List,Y):-
-    List=[Head|Tail], 
+    List=[Head|_], 
     Head==Y,
     !.
 checkList(List,Y):-
@@ -75,23 +75,23 @@ checkList(List,Y):-
     Head\==Y,
     checkList(Tail,Y).
 
-checkKoordinat(X,Y,Name,[],[],[]):- 
+checkKoordinat(_,_,_,[],[],[]):- 
     !,
     fail.
 
 checkKoordinat(X,Y,Name,ListX,ListY,ListEnemy):-
-    ListX=[HeadX|TailX],
-    ListY=[HeadY|TailY],
-    ListEnemy=[HeadEnemy|TailEnemy],
+    ListX=[HeadX|_],
+    ListY=[HeadY|_],
+    ListEnemy=[HeadEnemy|_],
     X==HeadX,
     Y==HeadY,
     Name = HeadEnemy,
     !.
 
 checkKoordinat(X,Y,Name,ListX,ListY,ListEnemy):-
-    ListX=[HeadX|TailX],
-    ListY=[HeadY|TailY],
-    ListEnemy=[HeadEnemy|TailEnemy],
+    ListX=[_|TailX],
+    ListY=[_|TailY],
+    ListEnemy=[_|TailEnemy],
     checkKoordinat(X,Y,Name,TailX,TailY,TailEnemy).
 
 checkHP([],[],_,_):-
@@ -100,18 +100,18 @@ checkHP([],[],_,_):-
 checkHP([Name|_],[NewHP|_],Name,NewHP):-
     !.
 checkHP(ListName,ListHP,Name,NewHP):-
-    ListName=[HeadName|TailName],
-    ListHP=[HeadHP|TailHP],
+    ListName=[_|TailName],
+    ListHP=[_|TailHP],
     checkHP(TailName,TailHP,Name,NewHP).
 
-takeEnemy(X,Y,Enemy,[],[],[]):- !, fail.
+takeEnemy(_,_,_,[],[],[]):- !, fail.
     
-takeEnemy(X,Y,H,[X|TailX],[Y|TailY],[H|T]):- !.
+takeEnemy(X,Y,H,[X|_],[Y|_],[H|_]):- !.
 
-takeEnemy(X,Y,Enemy,[HeadX|TailX],[HeadY|TailY],[H|T]):- takeEnemy(X,Y,Enemy,TailX,TailY,T).
+takeEnemy(X,Y,Enemy,[_|TailX],[_|TailY],[_|T]):- takeEnemy(X,Y,Enemy,TailX,TailY,T).
 
 isEnemyAppear:- 
-    playerLoc(X,Y),  
+    playerLoc(_,_),  
     enemyLocX(X1), 
     enemyLocY(Y1), 
     enemyName(List_Of_Enemy), 
@@ -453,7 +453,7 @@ enemyGenerator:-
 /* untuk menghitung berapa banyak elemen pada List */
 nbElmtList([],0):- !.
 nbElmtList(List,Count):-
-    List=[H|T],
+    List=[_|T],
     nbElmtList(T,Count1),
     Count is Count1+1.
 

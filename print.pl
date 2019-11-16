@@ -165,7 +165,7 @@ print_Heal :-
 
 printSkillUsed :- write('Skill hanya bisa digunakan sekali cuy dalam battle ini'),nl.
 
-printKO :- player(PlayerName, PlayerType, PlayerX, PlayerY, PlayerHP, PlayerNDamage, PlayerSDamage),
+printKO :- player(PlayerName, _,_,_,_,_,_),
            write(PlayerName),
            write(' is defeated '),nl,
            write('Aku terlalu lemah untuk menyelamatkan Hinata'),nl,
