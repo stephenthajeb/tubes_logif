@@ -35,7 +35,7 @@ type(gaara, earth).
 type(deidara, fire).
 type(tobi, dark).
 type(sasori, dark).
-type(itachi, fire).
+type(itachi,dark).
 
 /* NORMAL DAMAGE */
 dmg(naruto, 30).

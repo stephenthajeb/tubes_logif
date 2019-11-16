@@ -63,8 +63,8 @@ print_InventoryFull :-
 print_Capture :-
     write('Ayo kita cari Hinata dan bawa ia pulang ke Konoha!'), nl.
 print_NotCapture :-
-    write('Arrgghh... kau berhasil mengalahkanku...'),nl,
-    write('Tapi aku tidak akan menyerah....'),nl.
+    write('Mission ini sangat berbahaya,'),nl,
+    write('Aku tidak mau membahayakan kamu dengan melibatkanmu'),nl.
 print_Run :-
     write('Kagebunshin no Jutsu!'),nl,
     write('Berhasil kabur...'),nl.

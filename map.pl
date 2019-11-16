@@ -9,11 +9,14 @@ border(X,0) :- X>(-1),X<12.
 border(X,11) :- X>(-1),X<12.
 activeArea(X,Y) :- X>(0),X<11,Y>(0),Y<11.
 
-/* Inisialisasi */
-init :- 
-    asserta(playerLoc(1,1)),
-    asserta(healStatus(0)).
-healLoc(5,5).
+/* Inisialisasi awal */
+
+/*Masih blm ada posisi enemy dan friend*/
+
+init :- asserta(playerLoc(1,1)),
+        asserta(healStatus(0)).
+
+healLoc(2,2).
 enemyLoc(2,4).
 
 /* Print Legend Map */
@@ -56,8 +59,9 @@ collision(X,Y)  :- !.
 heal :- playerLoc(X1,Y1),healLoc(X2,Y2),X1\==X2,Y1\==Y2,printCommandInvalid,!.
 heal :- healStatus(0),
         player(Name, Type, X, Y, HP, NDamage, SDamage),
+        hp(Name,HPAwal),
         retract(player(Name, Type, X, Y, HP, NDamage, SDamage)),
-        asserta(player(Name, Type, X, Y, 100, NDamage, SDamage)),
+        asserta(player(Name, Type, X, Y, HPAwal, NDamage, SDamage)),
         print_PlayerStatus,
         retract(healStatus(0)),
         asserta(healStatus(1)).
