@@ -3,6 +3,7 @@
 :-dynamic(inventory/1).
 :-dynamic(currHP/1).
 
+currHP([350,300,350]).
 /* HP */
 hp(naruto, 350).
 hp(sakura, 300).
@@ -89,7 +90,7 @@ skillName(sasori, 'Puppet Technique').
 skillName(itachi, 'Amaterasu').
 
 /* INVENTORI */
-inventory([naruto]).
+inventory([naruto,sakura,sasuke]).
 
 /* TYPE EFFECT */
 strong(dark, fire).
