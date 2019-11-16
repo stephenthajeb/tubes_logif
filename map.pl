@@ -1,6 +1,3 @@
-/*:-['Generate.pl'].*/
-
-
 :- dynamic(playerLoc/2).
 :- dynamic(enemyLoc/2).
 :- dynamic(healStatus/1).
@@ -22,13 +19,13 @@ init :- asserta(playerLoc(1,1)),
 healLoc(2,2).
 enemyLoc(2,4).
 
+/* Print Legend Map */
 printmap(X,Y) :- playerLoc(X,Y),write('P').
 printmap(X,Y) :- border(X,Y),write('X').
 printmap(X,Y) :- healLoc(X,Y),write('H').
 printmap(X,Y) :- activeArea(X,Y),write('-').
 
 /*Move*/
-
 east  :- playerLoc(10,_),printInvalidMove,!.
 east  :- playerLoc(X,Y),NewX is X+1,retract(playerLoc(X,Y)),asserta(playerLoc(NewX,Y)),msgAfterMove,!.
 west  :- playerLoc(1,_),printInvalidMove,!.
@@ -60,7 +57,7 @@ heal :- healStatus(0),
         asserta(healStatus(1)).
 
 /*Logic ketika player ketemu friend, enemy, atau berada di health center */
-
 msgAfterMove :- playerLoc(X,Y),write('Sekarang Player berada pada ('),print(X),write(','),print(Y),write(')'),nl,collision(X,Y).
 
+/* Rules Print Map */
 map:- forall(between(0,11,Y),(forall(between(0,11,X),printmap(X,Y)),nl)).
