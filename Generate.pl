@@ -498,14 +498,23 @@ abs(X, NewX) :-
 abs(X, X) :- X > 0.
 
 /* Probabilitas run ketika enemy muncul, jika true maka player bisa kabur */
-runAwayNormalEnemyProbability:-
+run:-
     random(0,101,Probability),
     normalProbability(X),
     !,
     (Probability<X;Probability==X).
 
-runAwayAkatsukiProbability:-
+inputCollision(Input):-
+    Input=='run',
+    !,
+    run,
+    print_Run,nl.
+    
+inputCollision(Input):-
+    Input=='attack'.
+
+/*runAwayAkatsukiProbability:-
     random(0,101,Probability),
     akatsukiProbability(X),
     !,
-    (Probability<X;Probability==X).
+    (Probability<X;Probability==X).*/
