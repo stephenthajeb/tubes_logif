@@ -94,6 +94,20 @@ checkKoordinat(X,Y,Name,ListX,ListY,ListEnemy):-
     ListEnemy=[_|TailEnemy],
     checkKoordinat(X,Y,Name,TailX,TailY,TailEnemy).
 
+checkKoordinatOnly(_,_,[],[]):- 
+    !,
+    fail.
+checkKoordinatOnly(X,Y,ListX,ListY):-
+    ListX=[HeadX|TailX],
+    ListY=[HeadY|TailY],
+    X==HeadX,
+    Y==HeadY,
+    !.
+checkKoordinatOnly(_,_,ListX,ListY):-
+    ListX=[HeadX|TailX],
+    ListY=[HeadY|TailY],
+    checkKoordinatOnly(_,_,TailX,TailY).
+    
 checkHP([],[],_,_):-
     !,
     fail.
@@ -216,7 +230,7 @@ generate_Akatsuki_Enemy:-
     repeat,
     random(1,NewX+1,X),
     random(NewY,11,Y), 
-    \+(checkKoordinat(X,Y,OldX,OldY)),
+    \+(checkKoordinatOnly(X,Y,OldX,OldY)),
     !,
     check_Akatsuki_Enemy(List_Of_Enemy,Name_Enemy),
     NewListOfEnemy=[Name_Enemy|List_Of_Enemy],
@@ -253,7 +267,7 @@ generate_Akatsuki_Enemy:-
     repeat,
     random(NewX,11,X),
     random(NewY,11,Y), 
-    \+(checkKoordinat(X,Y,OldX,OldY)),
+    \+(checkKoordinatOnly(X,Y,OldX,OldY)),
     !,
     check_Akatsuki_Enemy(List_Of_Enemy,Name_Enemy),
     NewListOfEnemy=[Name_Enemy|List_Of_Enemy],
@@ -290,7 +304,7 @@ generate_Akatsuki_Enemy:-
     repeat,
     random(NewX,11,X),
     random(1,NewY+1,Y),
-    \+(checkKoordinat(X,Y,OldX,OldY)),
+    \+(checkKoordinatOnly(X,Y,OldX,OldY)),
     !,  
     check_Akatsuki_Enemy(List_Of_Enemy,Name_Enemy),
     NewListOfEnemy=[Name_Enemy|List_Of_Enemy],
@@ -327,7 +341,7 @@ generate_Akatsuki_Enemy:-
     repeat,
     random(1,NewX+1,X),
     random(1,NewY+1,Y),
-    \+(checkKoordinat(X,Y,OldX,OldY)),
+    \+(checkKoordinatOnly(X,Y,OldX,OldY)),
     !,
     check_Akatsuki_Enemy(List_Of_Enemy,Name_Enemy),
     NewListOfEnemy=[Name_Enemy|List_Of_Enemy],
@@ -366,7 +380,7 @@ generate_Akatsuki_Enemy:-
     !,
     repeat,
     generate_Random_Location(LocX,LocY),
-    \+(checkKoordinat(LocX,LocY,OldX,OldY)),
+    \+(checkKoordinatOnly(LocX,LocY,OldX,OldY)),
     LocX\==PX,
     LocY\==PY,
     !,
@@ -400,7 +414,7 @@ generate_Akatsuki_Enemy:-
     !,
     repeat,
     generate_Random_Location(LocX,LocY),
-    \+(checkKoordinat(LocX,LocY,OldX,OldY)),
+    \+(checkKoordinatOnly(LocX,LocY,OldX,OldY)),
     LocX\==X1,
     LocY\==Y1,
     !,
@@ -420,6 +434,8 @@ generate_Akatsuki_Enemy:-
     retract(nbAkatsuki(Number_Akatsuki)),
     Number_Akatsuki1 is Number_Akatsuki+1,
     asserta(nbAkatsuki(Number_Akatsuki)).
+
+generate_Akatsuki_Enemy.
 
 concat([],[],[]):- !.
 concat([],List2,List2):- !.
