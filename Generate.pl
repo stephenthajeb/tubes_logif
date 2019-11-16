@@ -1,3 +1,4 @@
+:-['Map.pl'].
 /* Sebagai Database Enemy apa saja yang sudah dilawan */
 :-dynamic(enemy_appear/1).
 /* Sebagai Database Enemy apa saja yang sudah dialokasikan pada peta atau lokasi */
@@ -108,7 +109,23 @@ checkHP(Name,HP):-
     ListHP=[HeadHP|TailHP],
     checkHP(TailName,TailHP).
 
+takeEnemy(X,Y,Enemy,[],[],[]):- !, fail.
     
+takeEnemy(X,Y,H,[X|TailX],[Y|TailY],[H|T]):- !.
+
+takeEnemy(X,Y,Enemy,[HeadX|TailX],[HeadY|TailY],[H|T]):- takeEnemy(X,Y,Enemy,TailX,TailY,T).
+
+isEnemyAppear:- 
+    playerLoc(X,Y),  
+    enemyLocX(X1), 
+    enemyLocY(Y1), 
+    enemyName(List_Of_Enemy), 
+    enemy_appear(List_Of_Enemy_Appear),
+    !, 
+    checkKoordinat(1,1,X1,Y1), 
+    takeEnemy(1,1,Enemy,X1,Y1,List_Of_Enemy),
+    check(List_Of_Enemy_Appear,Enemy).
+
 /* Check apakah Nama Normal Enemy sudah ada pada enemy_appear*/
 check_Normal_Enemy(List,Name_Enemy):-
     repeat,
@@ -125,6 +142,25 @@ check_Akatsuki_Enemy(List,Name_Enemy):-
 
 /* Menghasilkan tambahan Nama Enemy serta lokasinya tetapi hanya sebanyak satu buah */
 /*Jika ternyata didapat X sama*/
+generate_Normal_Enemy:-
+    enemyName(List_Of_Enemy),
+    enemyLocY(OldY),
+    enemyLocX(OldX),
+    generate_Random_Location(X,Y),
+    check_Normal_Enemy(List_Of_Enemy,Name_Enemy),
+    check(OldY,Y),
+    check(OldX,X),
+    NewListOfEnemy=[Name_Enemy|List_Of_Enemy],
+    NewEnemyLocY=[Y|OldY],
+    NewEnemyLocX=[X|OldX],
+    retract(enemyName(List_Of_Enemy)),
+    asserta(enemyName(NewListOfEnemy)),
+    retract(enemyLocY(OldY)),
+    asserta(enemyLocY(NewEnemyLocY)),
+    retract(enemyLocX(OldX)),
+    asserta(enemyLocX(NewEnemyLocX)),
+    !.
+
 generate_Normal_Enemy:-
     enemyName(List_Of_Enemy),
     enemyLocY(OldY),
@@ -169,25 +205,25 @@ generate_Akatsuki_Enemy:-
     enemy_appear(List_Of_Enemy_Appear),
     nbElmtList(List_Of_Enemy_Appear,Count),
     nbAkatsuki(Number_Akatsuki),
-    Count==3,
+    Count==4,
     Number_Akatsuki==0,
     enemyName(List_Of_Enemy),
     enemyLocY(OldY),
     enemyLocX(OldX),
     playerLoc(X1,Y1),
-    X1 is X1 - 5,
-    Y1 is Y1 - 5,
-    abs(X1,NewX),
-    abs(Y1,NewY),
-    (X>NewX; X==NewX),
-    (Y>NewY; Y==NewY), 
+    X2 is X1 - 5,
+    Y2 is Y1 - 5,
+    abs(X2,NewX),
+    abs(Y2,NewY),
+    (X1>5;X1==5),
+    (Y1<5;Y1==5),
     !,
-    generate_Random_Location(X,Y),
-    (X>NewX; X==NewX),
-    (Y>NewY; Y==NewY),  
-    check_Normal_Enemy(List_Of_Enemy,Name_Enemy),
-    check(OldX,X),
-    check(OldY,Y),
+    repeat,
+    random(1,NewX+1,X),
+    random(NewY,11,Y), 
+    \+(checkKoordinat(X,Y,OldX,OldY)),
+    !,
+    check_Akatsuki_Enemy(List_Of_Enemy,Name_Enemy),
     NewListOfEnemy=[Name_Enemy|List_Of_Enemy],
     NewEnemyLocY=[Y|OldY],
     NewEnemyLocX=[X|OldX],
@@ -198,33 +234,33 @@ generate_Akatsuki_Enemy:-
     retract(enemyLocX(OldX)),
     asserta(enemyLocX(NewEnemyLocX)),
     retract(nbAkatsuki(Number_Akatsuki)),
-    Number_Akatsuki is Number_Akatsuki+1,
-    asserta(nbAkatsuki(Number_Akatsuki)).
+    Number_Akatsuki1 is Number_Akatsuki+1,
+    asserta(nbAkatsuki(Number_Akatsuki1)).
 
-/* Bila posisi                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       player saat mengalahkan musuk ke-3 berada pada kuadran 2 */
+/* Bila posisi player saat mengalahkan musuk ke-3 berada pada kuadran 2 */    
 generate_Akatsuki_Enemy:-
     enemy_appear(List_Of_Enemy_Appear),
     nbElmtList(List_Of_Enemy_Appear,Count),
     nbAkatsuki(Number_Akatsuki),
-    Count==3,
+    Count==4,
     Number_Akatsuki==0,
     enemyName(List_Of_Enemy),
     enemyLocY(OldY),
     enemyLocX(OldX),
     playerLoc(X1,Y1),
-    X1 is X1 - 5,
-    Y1 is Y1 - 5,
-    abs(X1,NewX),
-    abs(Y1,NewY),
-    (X<NewX; X==NewX),
-    (Y>NewY; Y==NewY),
+    X2 is X1 - 5,
+    Y2 is Y1 - 5,
+    abs(X2,NewX),
+    abs(Y2,NewY),
+    (X1<5;X1==5),
+    (Y1<5;Y1==5),
     !,
-    generate_Random_Location(X,Y),
-    (X<NewX; X==NewX),
-    (Y>NewY; Y==NewY), 
-    check_Normal_Enemy(List_Of_Enemy,Name_Enemy),
-    check(OldX,X),
-    check(OldY,Y),
+    repeat,
+    random(NewX,11,X),
+    random(NewY,11,Y), 
+    \+(checkKoordinat(X,Y,OldX,OldY)),
+    !,
+    check_Akatsuki_Enemy(List_Of_Enemy,Name_Enemy),
     NewListOfEnemy=[Name_Enemy|List_Of_Enemy],
     NewEnemyLocY=[Y|OldY],
     NewEnemyLocX=[X|OldX],
@@ -235,33 +271,33 @@ generate_Akatsuki_Enemy:-
     retract(enemyLocX(OldX)),
     asserta(enemyLocX(NewEnemyLocX)),
     retract(nbAkatsuki(Number_Akatsuki)),
-    Number_Akatsuki is Number_Akatsuki+1,
-    asserta(nbAkatsuki(Number_Akatsuki)).
+    Number_Akatsuki1 is Number_Akatsuki+1,
+    asserta(nbAkatsuki(Number_Akatsuki1)).
 
 /* Bila posisi player saat mengalahkan musuk ke-3 berada pada kuadran 3 */
 generate_Akatsuki_Enemy:-
     enemy_appear(List_Of_Enemy_Appear),
     nbElmtList(List_Of_Enemy_Appear,Count),
     nbAkatsuki(Number_Akatsuki),
-    Count==3,
+    Count==4,
     Number_Akatsuki==0,
     enemyName(List_Of_Enemy),
     enemyLocY(OldY),
     enemyLocX(OldX),
     playerLoc(X1,Y1),
-    X1 is X1 - 5,
-    Y1 is Y1 - 5,
-    abs(X1,NewX),
-    abs(Y1,NewY),
-    (X>NewX; X==NewX),
-    (Y<NewY; Y==NewY),  
+    X2 is X1 - 5,
+    Y2 is Y1 - 5,
+    abs(X2,NewX),
+    abs(Y2,NewY),
+    (X1<5;X1==5),
+    (Y1>5;Y1==5),
     !,
-    generate_Random_Location(X,Y),
-    (X>NewX; X==NewX),
-    (Y<NewY; Y==NewY),  
-    check_Normal_Enemy(List_Of_Enemy,Name_Enemy),
-    check(OldX,X),
-    check(OldY,Y),
+    repeat,
+    random(NewX,11,X),
+    random(1,NewY+1,Y),
+    \+(checkKoordinat(X,Y,OldX,OldY)),
+    !,  
+    check_Akatsuki_Enemy(List_Of_Enemy,Name_Enemy),
     NewListOfEnemy=[Name_Enemy|List_Of_Enemy],
     NewEnemyLocY=[Y|OldY],
     NewEnemyLocX=[X|OldX],
@@ -272,33 +308,33 @@ generate_Akatsuki_Enemy:-
     retract(enemyLocX(OldX)),
     asserta(enemyLocX(NewEnemyLocX)),
     retract(nbAkatsuki(Number_Akatsuki)),
-    Number_Akatsuki is Number_Akatsuki+1,
-    asserta(nbAkatsuki(Number_Akatsuki)).
+    Number_Akatsuki1 is Number_Akatsuki+1,
+    asserta(nbAkatsuki(Number_Akatsuki1)).
 
 /* Bila posisi player saat mengalahkan musuk ke-3 berada pada kuadran 4 */
 generate_Akatsuki_Enemy:-
     enemy_appear(List_Of_Enemy_Appear),
     nbElmtList(List_Of_Enemy_Appear,Count),
     nbAkatsuki(Number_Akatsuki),
-    Count==3,
+    Count==4,
     Number_Akatsuki==0,
     enemyName(List_Of_Enemy),
     enemyLocY(OldY),
     enemyLocX(OldX),
     playerLoc(X1,Y1),
-    X1 is X1 - 5,
-    Y1 is Y1 - 5,
-    abs(X1,NewX),
-    abs(Y1,NewY),
-    (X<NewX; X==NewX),
-    (Y<NewY; Y==NewY),
+    X2 is X1 - 5,
+    Y2 is Y1 - 5,
+    abs(X2,NewX),
+    abs(Y2,NewY),
+    (X1>5;X1==5),
+    (Y1>5;Y1==5),
     !,
-    generate_Random_Location(X,Y),
-    (X<NewX; X==NewX),
-    (Y<NewY; Y==NewY),  
-    check_Normal_Enemy(List_Of_Enemy,Name_Enemy),
-    check(OldX,X),
-    check(OldY,Y),
+    repeat,
+    random(1,NewX+1,X),
+    random(1,NewY+1,Y),
+    \+(checkKoordinat(X,Y,OldX,OldY)),
+    !,
+    check_Akatsuki_Enemy(List_Of_Enemy,Name_Enemy),
     NewListOfEnemy=[Name_Enemy|List_Of_Enemy],
     NewEnemyLocY=[Y|OldY],
     NewEnemyLocX=[X|OldX],
@@ -309,14 +345,14 @@ generate_Akatsuki_Enemy:-
     retract(enemyLocX(OldX)),
     asserta(enemyLocX(NewEnemyLocX)),
     retract(nbAkatsuki(Number_Akatsuki)),
-    Number_Akatsuki is Number_Akatsuki+1,
-    asserta(nbAkatsuki(Number_Akatsuki)).
+    Number_Akatsuki1 is Number_Akatsuki+1,
+    asserta(nbAkatsuki(Number_Akatsuki1)).
 
 /* Kemuculan Akatsuki kedua */
-generate_Akatsuki_Enemy:- 
+generate_Akatsuki_Enemy:-
     enemy_appear(List_Of_Enemy_Appear), 
     nbElmtList(List_Of_Enemy_Appear,Count),
-    (Count>7;Count==7),
+    (Count>8;Count==8),
     nbAkatsuki(X),
     X==1, 
     akatsuki_Appear(Akatsuki_Appear),
@@ -324,23 +360,24 @@ generate_Akatsuki_Enemy:-
     random(1,10,Y),
     twoAkatsuki(Y1),
     retract(twoAkatsuki(Y1)),
-    Y1 is Y1+Y,
-    asserta(twoAkatsuki(Y1)),
-    (Y1>80 ; Y1==80),
+    Y2 is Y1+Y,
+    asserta(twoAkatsuki(Y2)),
+    (Y2>80 ; Y2==80),
     enemyName(List_Of_Enemy),
     enemyLocY(OldY),
     enemyLocX(OldX),
-    playerLoc(X1,Y1),
+    playerLoc(PX,PY),
     check_Akatsuki_Enemy(List_Of_Enemy,Name_Enemy),
     !,
+    repeat,
     generate_Random_Location(LocX,LocY),
-    check(OldX,LocX),
-    check(OldY,LocY),
-    X\==X1,
-    Y\==Y1,
+    \+(checkKoordinat(LocX,LocY,OldX,OldY)),
+    LocX\==PX,
+    LocY\==PY,
+    !,
     NewListOfEnemy=[Name_Enemy|List_Of_Enemy],
-    NewEnemyLocY=[Y|OldY],
-    NewEnemyLocX=[X|OldX],
+    NewEnemyLocY=[LocY|OldY],
+    NewEnemyLocX=[LocX|OldX],
     retract(enemyName(List_Of_Enemy)),
     asserta(enemyName(NewListOfEnemy)),
     retract(enemyLocY(OldY)),
@@ -348,14 +385,14 @@ generate_Akatsuki_Enemy:-
     retract(enemyLocX(OldX)),
     asserta(enemyLocX(NewEnemyLocX)),
     retract(nbAkatsuki(Number_Akatsuki)),
-    Number_Akatsuki is Number_Akatsuki+1,
-    asserta(nbAkatsuki(Number_Akatsuki)).
+    Number_Akatsuki1 is Number_Akatsuki+1,
+    asserta(nbAkatsuki(Number_Akatsuki1)).
 
 /* Kemunculan Akatsuki Ketiga */
 generate_Akatsuki_Enemy:-
     enemy_appear(List_Of_Enemy_Appear), 
     nbElmtList(List_Of_Enemy_Appear,Count),
-    (Count>10;Count==10),
+    (Count>11;Count==11),
     nbAkatsuki(X),
     X==2,
     akatsuki_Appear(Akatsuki_Appear),
@@ -366,16 +403,19 @@ generate_Akatsuki_Enemy:-
     playerLoc(X1,Y1),
     check_Akatsuki_Enemy(List_Of_Enemy,Name_Enemy),
     !,
+    repeat,
     generate_Random_Location(LocX,LocY),
-    check(OldX,LocX),
-    check(OldY,LocY),
-    X\==X1,
-    Y\==Y1,
-    write(" Akatsuki ketiga sudah ditemukan! pada koordinat "),
-    write(X1),
+    \+(checkKoordinat(LocX,LocY,OldX,OldY)),
+    LocX\==X1,
+    LocY\==Y1,
+    !,
+    write(' Akatsuki ketiga sudah ditemukan! pada koordinat '),
+    write('('),
+    print(LocX),
+    write(',Y)'),
     NewListOfEnemy=[Name_Enemy|List_Of_Enemy],
-    NewEnemyLocY=[Y|OldY],
-    NewEnemyLocX=[X|OldX],
+    NewEnemyLocY=[LocY|OldY],
+    NewEnemyLocX=[LocX|OldX],
     retract(enemyName(List_Of_Enemy)),
     asserta(enemyName(NewListOfEnemy)),
     retract(enemyLocY(OldY)),
@@ -383,7 +423,7 @@ generate_Akatsuki_Enemy:-
     retract(enemyLocX(OldX)),
     asserta(enemyLocX(NewEnemyLocX)),
     retract(nbAkatsuki(Number_Akatsuki)),
-    Number_Akatsuki is Number_Akatsuki+1,
+    Number_Akatsuki1 is Number_Akatsuki+1,
     asserta(nbAkatsuki(Number_Akatsuki)).
 
 concat([],[],[]):- !.
@@ -412,7 +452,7 @@ enemyGenerator:-
     generate_Normal_Enemy,
     enemyName(List_Of_Enemy),
     nbElmtList(List_Of_Enemy,Count),
-    Count==10,
+    Count==11,
     !.
 
 /* untuk menghitung berapa banyak elemen pada List */
@@ -446,7 +486,7 @@ winCondition:-
 isAkatsukiAppear:-
     enemy_appear(List_Of_Enemy),
     nbElmtList(List_Of_Enemy,Count),
-    (Count==3; Count==7; Count==10; Count==14),
+    (Count==4; Count==8; Count==11; Count==14),
     !.
 
 /* rules mutlak untuk efisiensi rules generate Akatsuki awal */
@@ -463,6 +503,7 @@ run:-
     normalProbability(X),
     !,
     (Probability<X;Probability==X).
+<<<<<<< HEAD
 /*
 runAwayAkatsukiProbability:-
     random(0,101,Probability),
@@ -470,3 +511,20 @@ runAwayAkatsukiProbability:-
     !,
     (Probability<X;Probability==X).
 */
+=======
+
+inputCollision(Input):-
+    Input=='run',
+    !,
+    run,
+    print_Run,nl.
+    
+inputCollision(Input):-
+    Input=='attack'.
+
+/*runAwayAkatsukiProbability:-
+    random(0,101,Probability),
+    akatsukiProbability(X),
+    !,
+    (Probability<X;Probability==X).*/
+>>>>>>> 9a9aef2c7980b942fec0aae125a5ca7a37568193
