@@ -13,7 +13,6 @@ start :-
     help,
     init,
     init_Player,
-    init_Enemy,
     enemyGenerator,
     map.
 help :- print_Help.
@@ -25,8 +24,6 @@ exit :-
     retractall(enemyName(_)),
     retractall(enemyLocX(_)),
     retractall(enemyLocY(_)).
-
-run :- runAwayNormalEnemyProbability.
 
 /*Aksi terhadap command*/
 /*Ganti init dr map jd init yang player*/

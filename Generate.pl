@@ -8,7 +8,7 @@
 /* Sebagai Database lokasi Enemy pada sumbu Y */
 :-dynamic(enemyLocY/1).
 /* untuk jumlah step minimal agar akatsuki bisa muncul */
-:-dynamic(twoAkatsuki/1). 
+:-dynamic(twoAkatsuki/1). write('aaa'),
 /* Menghitung kemunculan Banyaknya Akatsuki */
 :-dynamic(nbAkatsuki/1).
 /* Menghitung berapa banyak Akatsuki yang sudah dikalahkan */

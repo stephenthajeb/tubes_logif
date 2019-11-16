@@ -21,7 +21,7 @@ hp(sasori, 400).
 hp(itachi, 500).
 
 /* TYPE */
-type(naruto, wind).
+type(naruto,wind).
 type(sakura, physical).
 type(sasuke, lightning).
 type(lee, earth).
@@ -121,7 +121,6 @@ assign_Enemy(X,Y,Name) :-
     dmg(Name, NDamage),
     skillDmg(Name, SDamage),
     type(Name, Type),
-    retract(enemy(_,_,_,_,_,_,_)),
     asserta(enemy(Name, Type, X, Y, HP, NDamage, SDamage)).
 
 select(Name) :-

@@ -1,0 +1,27 @@
+collision
+    if (run) 
+        if (success)
+            choose w a s d
+        else 
+            jump to line 8
+    else 
+        battle
+            choose player
+                repeat
+                    choose player attack type
+                    player attack
+                    random enemy attack type
+                    enemy attack
+                until any of HP is < 1
+
+                if (enemy Hp is <1)
+                    if (inventory full)
+                        choose what to throw
+                    choose whether to add to inventory
+                if (player Hp is <1) 
+                    if (iventory empty)
+                        game over
+                    else 
+                        assign new player
+
+                    

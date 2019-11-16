@@ -1,4 +1,3 @@
-:-['Generate.pl'].
 :- dynamic(playerLoc/2).
 :- dynamic(enemyLoc/2).
 
@@ -49,14 +48,18 @@ collision(X,Y)  :-
     print_Heal,!.
 collision(X,Y)  :- 
     playerLoc(X,Y),
+    write('a'),
     enemyLocX(X1),
+    write('b'),
     enemyLocY(Y1),
+    write('c'),
     enemyName(ListEnemy),
+    write('d'),
     checkKoordinat(X,Y,Name,X1,Y1,ListEnemy),
+    write('e'),
     assign_Enemy(X,Y,Name),
-    print_FoundEnemy,nl,
-    read(Input),call(Input),
-    !.
+    write('f'),
+    print_FoundEnemy,nl,!.
 collision(X,Y)  :- !.
 
 
