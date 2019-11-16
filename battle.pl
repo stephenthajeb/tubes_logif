@@ -3,7 +3,6 @@
     AttType == 1 : Normal
     AttType == 2 : Skill */
 /* PLAYER */
-
 /* Strong TYPE */
 player_Attack(1) :-
     strong(PlayerType,EnemyType),
@@ -52,8 +51,6 @@ player_Attack(2) :-
     NewHP is EnemyHP-SDamage,
     retract(enemy(EnemyName, EnemyType, EnemyX, EnemyY, EnemyHP, EnemyNDamage, EnemySDamage)),
     asserta(enemy(EnemyName, EnemyType, EnemyX, EnemyY, NewHP, EnemyNDamage, EnemySDamage)),!.
-
-
 
 /* ENEMY */
 /* STRONG TYPE */
@@ -104,7 +101,6 @@ enemy_Attack(2) :-
     NewHP is PlayerHP-SDamage,
     retract(player(PlayerName, PlayerType, PlayerX, PlayerY, PlayerHP, PlayerNDamage, PlayerSDamage)),
     asserta(player(PlayerName, PlayerType, PlayerX, PlayerY, NewHP, PlayerNDamage, PlayerSDamage)),!.
-
 
 /* Heal */
 heal :- playerLoc(X1,Y1),healLoc(X2,Y2),X1\==X2,Y1\==Y2,printCommandInvalid,!.

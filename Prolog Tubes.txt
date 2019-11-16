@@ -73,20 +73,20 @@ TYPE :
 SKILL :
 	- CONTOH : NAMA SKILL 			- TIPE		- DAMAGE
 	- Naruto : Rasengan 			- Wind		- 190
-	- Sakura : Cherry Blossom Impact	- Forest	- 150
-	- Sasuke : Chidori 			- Dark		- 190
-	- Lee	 : Leaf Flash Kick 		- Forest	- 150
-	- Neji	 : Eight Trigrams Palms 	- Wind		- 180
-	- Choji	 : Baika no Jutsu 		- Forest	- 150
-	- Shikamaru : Shadow Possession 	- Dark		- 180
-	- Tenten : Twin Rising Dragons 		- Wind		- 170
+	- Sakura : Cherry Blossom Impact- Physical	- 150
+	- Sasuke : Chidori 				- Lightning	- 190
+	- Lee	 : Leaf Flash Kick 		- Earth		- 150
+	- Neji	 : Eight Trigrams Palms - Physical	- 180
+	- Choji	 : Baika no Jutsu 		- Earth		- 150
+	- Shikamaru : Shadow Possession - Dark		- 180
+	- Tenten : Twin Rising Dragons 	- Wind		- 170
 	- Kiba	 : Fang Wolf Fang 		- Wind		- 170
 	- Shino	 : Parasitic Bugs 		- Dark		- 160
-	- Gaara	 : Desert Prison 		- Forest	- 200
-	- Deidara: Creative Destruction 	- Dark		- 250
-	- Tobi	 : Kamui 			- Dark		- 200
-	- Sasori : Puppet Technique 		- Dark		- 250
-	- Itachi : Amaterasu 			- Dark		- 280
+	- Gaara	 : Desert Prison 		- Earth		- 200
+	- Deidara: Creative Destruction - Fire		- 250
+	- Tobi	 : Kamui 				- Dark		- 200
+	- Sasori : Puppet Technique 	- Dark		- 250
+	- Itachi : Amaterasu 			- Fire		- 280
 CHAR ATTRIBUTE :
 	- CONTOH : 	HP 	- NORMAL ATT
 	- Naruto : 	350 	- 30

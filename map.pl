@@ -9,21 +9,18 @@ border(X,0) :- X>(-1),X<12.
 border(X,11) :- X>(-1),X<12.
 activeArea(X,Y) :- X>(0),X<11,Y>(0),Y<11.
 
-/* Inisialisasi awal */
-
-/*Masih blm ada posisi enemy dan friend*/
-
+/* Inisialisasi */
 init :- asserta(playerLoc(1,1)).
 healLoc(5,5).
 enemyLoc(2,4).
 
+/* Print Legend Map */
 printmap(X,Y) :- playerLoc(X,Y),write('P').
 printmap(X,Y) :- border(X,Y),write('X').
 printmap(X,Y) :- healLoc(X,Y),write('H').
 printmap(X,Y) :- activeArea(X,Y),write('-').
 
 /*Move*/
-
 east  :- playerLoc(10,_),printInvalidMove,!.
 east  :- playerLoc(X,Y),NewX is X+1,retract(playerLoc(X,Y)),asserta(playerLoc(NewX,Y)),msgAfterMove,!.
 west  :- playerLoc(1,_),printInvalidMove,!.
@@ -54,7 +51,7 @@ heal :- healStatus(0),
         asserta(healStatus(1)).
 
 /*Logic ketika player ketemu friend, enemy, atau berada di health center */
-
 msgAfterMove :- playerLoc(X,Y),write('Sekarang Player berada pada ('),print(X),write(','),print(Y),write(')'),nl,collision(X,Y).
 
+/* Rules Print Map */
 map:- forall(between(0,11,Y),(forall(between(0,11,X),printmap(X,Y)),nl)).

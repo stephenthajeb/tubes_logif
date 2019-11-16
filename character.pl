@@ -89,6 +89,7 @@ skillName(itachi, 'Amaterasu').
 /* INVENTORI */
 inventory([naruto, sasuke, sakura]).
 
+/* TYPE EFFECT */
 strong(dark, fire).
 strong(fire, wind).
 strong(wind, earth).
@@ -96,13 +97,7 @@ strong(earth, physical).
 strong(physical, lightning).
 strong(lightning, dark).
 
-/*
-weak(wind, dark).
-weak(forest, wind).
-weak(dark, forest).
-*/
-
-/* Inisialisasi */
+/* INISIALISASI */
 init_Player :-
     playerLoc(X,Y),
     hp(naruto, HP),
@@ -119,9 +114,25 @@ init_Enemy :-
     type(itachi, Type),
     asserta(enemy(itachi, Type, X, Y, HP, NDamage, SDamage)).
 
+assign_Enemy :-
+    enemy(name),
+    enemyLocX(X1),
+    enemyLocY(Y1),
+    X1 = [Hx|Tx],
+    Y1 = [Hy|Ty],
+    name = [Hn|Tn],
+    hp(Hn, HP),
+    dmg(Hn, NDamage),
+    skillDmg(Hn, SDamage),
+    type(Hn, Type),
+    asserta(enemy(Hn, Type, Hx, Hy, HP, NDamage, SDamage)).
+
+
+/* MOVE PLAYER */
 move_Player :-
     player(Name, Type, X, Y, HP, NDamage, SDamage),
     playerLoc(NewX, NewY),
     retract(player(Name, Type, X, Y, HP, NDamage, SDamage)),
     asserta(player(Name, Type, NewX, NewY, HP, NDamage, SDamage)),
     print_PlayerStatus.
+
