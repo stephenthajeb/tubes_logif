@@ -6,6 +6,7 @@
 
 :- dynamic(attackStatus/1).
 :- dynamic(healStatus/1).
+:- dynamic(skillStatus/1).
 
 /* Strong TYPE */
 player_Attack(1) :-
@@ -46,8 +47,23 @@ player_Attack(1) :-
     player(_, PlayerType, _, _, _, NDamage, _),
     enemy(EnemyName, EnemyType, EnemyX, EnemyY, EnemyHP, EnemyNDamage, EnemySDamage),
     NewHP is EnemyHP-NDamage,
+    NewHP < 1,
+    /*Cek inventory*/
+    print_Capture.
+
+player_Attack(1) :-
+    player(_, PlayerType, _, _, _, NDamage, _),
+    enemy(EnemyName, EnemyType, EnemyX, EnemyY, EnemyHP, EnemyNDamage, EnemySDamage),
+    NewHP is EnemyHP-NDamage,
     retract(enemy(EnemyName, EnemyType, EnemyX, EnemyY, EnemyHP, EnemyNDamage, EnemySDamage)),
     asserta(enemy(EnemyName, EnemyType, EnemyX, EnemyY, NewHP, EnemyNDamage, EnemySDamage)),!.
+
+player_Attack(2) :-
+    player(_, PlayerType, _, _, _, _, SDamage),
+    enemy(EnemyName, EnemyType, EnemyX, EnemyY, EnemyHP, EnemyNDamage, EnemySDamage),
+    NewHP is EnemyHP-SDamage,
+    NewHP < 1,
+    print_Capture.
 
 player_Attack(2) :-
     player(_, PlayerType, _, _, _, _, SDamage),
@@ -57,16 +73,33 @@ player_Attack(2) :-
     asserta(enemy(EnemyName, EnemyType, EnemyX, EnemyY, NewHP, EnemyNDamage, EnemySDamage)),!.
 
 
-
 /* ENEMY */
 /* STRONG TYPE */
 enemy_Attack(1) :-
-    strong(EnemyType, PlayerType),
+    strong(EnemyType,PlayerType),
     player(PlayerName, PlayerType, PlayerX, PlayerY, PlayerHP, PlayerNDamage, PlayerSDamage),
     enemy(_, EnemyType, _, _, _, NDamage, _),
     NewHP is PlayerHP-(NDamage + (NDamage/2)),
+    NewHP < 1,
+    printKO,
+    retract(player(PlayerName, PlayerType, PlayerX, PlayerY, PlayerHP, PlayerNDamage, PlayerSDamage)),!.
+
+enemy_Attack(1) :-
+    player(PlayerName, PlayerType, PlayerX, PlayerY, PlayerHP, PlayerNDamage, PlayerSDamage),
+    enemy(_, EnemyType, _, _, _, NDamage, _),
+    strong(EnemyType, PlayerType),
+    NewHP is PlayerHP-(NDamage + (NDamage/2)),
     retract(player(PlayerName, PlayerType, PlayerX, PlayerY, PlayerHP, PlayerNDamage, PlayerSDamage)),
-    asserta(player(PlayerName, PlayerType, PlayerX, PlayerY, NewHP, PlayerNDamage, PlayerSDamage)).
+    asserta(player(PlayerName, PlayerType, PlayerX, PlayerY, NewHP, PlayerNDamage, PlayerSDamage)),!.
+
+enemy_Attack(2) :-
+    strong(EnemyType,PlayerType),
+    player(PlayerName, PlayerType, PlayerX, PlayerY, PlayerHP, PlayerNDamage, PlayerSDamage),
+    enemy(_, EnemyType, _, _, _,_, SDamage),
+    NewHP is PlayerHP-(NDamage + (NDamage/2)),
+    NewHP < 1,
+    printKO,
+    retract(player(PlayerName, PlayerType, PlayerX, PlayerY, PlayerHP, PlayerNDamage, PlayerSDamage)),!.
 
 enemy_Attack(2) :-
     strong(EnemyType, PlayerType),
@@ -74,7 +107,7 @@ enemy_Attack(2) :-
     enemy(_, EnemyType, _, _, _, _, SDamage),
     NewHP is PlayerHP-(SDamage + (SDamage/2)),
     retract(player(PlayerName, PlayerType, PlayerX, PlayerY, PlayerHP, PlayerNDamage, PlayerSDamage)),
-    asserta(player(PlayerName, PlayerType, PlayerX, PlayerY, NewHP, PlayerNDamage, PlayerSDamage)).
+    asserta(player(PlayerName, PlayerType, PlayerX, PlayerY, NewHP, PlayerNDamage, PlayerSDamage)),!.
 
 /* WEAK TYPE */
 enemy_Attack(1) :-
@@ -82,8 +115,26 @@ enemy_Attack(1) :-
     player(PlayerName, PlayerType, PlayerX, PlayerY, PlayerHP, PlayerNDamage, PlayerSDamage),
     enemy(_, EnemyType, _, _, _, NDamage, _),
     NewHP is PlayerHP-(NDamage - (NDamage/2)),
+    NewHP < 1,
+    printKO,
+    retract(player(PlayerName, PlayerType, PlayerX, PlayerY, PlayerHP, PlayerNDamage, PlayerSDamage)),!.
+
+enemy_Attack(1) :-
+    strong(PlayerType,EnemyType),
+    player(PlayerName, PlayerType, PlayerX, PlayerY, PlayerHP, PlayerNDamage, PlayerSDamage),
+    enemy(_, EnemyType, _, _, _, NDamage, _),
+    NewHP is PlayerHP-(NDamage - (NDamage/2)),
     retract(player(PlayerName, PlayerType, PlayerX, PlayerY, PlayerHP, PlayerNDamage, PlayerSDamage)),
     asserta(player(PlayerName, PlayerType, PlayerX, PlayerY, NewHP, PlayerNDamage, PlayerSDamage)),!.
+
+enemy_Attack(2) :-
+    strong(PlayerType,EnemyType),
+    player(PlayerName, PlayerType, PlayerX, PlayerY, PlayerHP, PlayerNDamage, PlayerSDamage),
+    enemy(_, EnemyType, _, _, _,_, SDamage),
+    NewHP is PlayerHP-(NDamage - (NDamage/2)),
+    NewHP < 1,
+    printKO,
+    retract(player(PlayerName, PlayerType, PlayerX, PlayerY, PlayerHP, PlayerNDamage, PlayerSDamage)),!.
 
 enemy_Attack(2) :-
     strong(PlayerType,EnemyType),
@@ -98,8 +149,24 @@ enemy_Attack(1) :-
     player(PlayerName, PlayerType, PlayerX, PlayerY, PlayerHP, PlayerNDamage, PlayerSDamage),
     enemy(_, EnemyType, _, _, _, NDamage, _),
     NewHP is PlayerHP-NDamage,
+    NewHP < 1,
+    printKO,
+    retract(player(PlayerName, PlayerType, PlayerX, PlayerY, PlayerHP, PlayerNDamage, PlayerSDamage)),!.
+
+enemy_Attack(1) :-
+    player(PlayerName, PlayerType, PlayerX, PlayerY, PlayerHP, PlayerNDamage, PlayerSDamage),
+    enemy(_, EnemyType, _, _, _, NDamage, _),
+    NewHP is PlayerHP-NDamage,
     retract(player(PlayerName, PlayerType, PlayerX, PlayerY, PlayerHP, PlayerNDamage, PlayerSDamage)),
     asserta(player(PlayerName, PlayerType, PlayerX, PlayerY, NewHP, PlayerNDamage, PlayerSDamage)),!.
+
+enemy_Attack(2) :-
+    player(PlayerName, PlayerType, PlayerX, PlayerY, PlayerHP, PlayerNDamage, PlayerSDamage),
+    enemy(_, EnemyType, _, _, _,_, SDamage),
+    NewHP is PlayerHP-SDamage,
+    NewHP < 1,
+    printKO,
+    retract(player(PlayerName, PlayerType, PlayerX, PlayerY, PlayerHP, PlayerNDamage, PlayerSDamage)),!.
 
 enemy_Attack(2) :-
     player(PlayerName, PlayerType, PlayerX, PlayerY, PlayerHP, PlayerNDamage, PlayerSDamage),
@@ -118,6 +185,11 @@ heal :- healStatus(0),
         print_PlayerStatus,
         retract(healStatus(0)),
         asserta(healStatus(1)).
+
+printKO :- player(PlayerName, PlayerType, PlayerX, PlayerY, PlayerHP, PlayerNDamage, PlayerSDamage),
+           write(PlayerName),
+           write(' is defeated '),nl,
+           write('Aku terlalu lemah untuk menyelamatkan Hinata'),nl.
 
 
 /* Battle Mechanism */

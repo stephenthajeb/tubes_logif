@@ -16,9 +16,10 @@ start :-
     init_Enemy,
     map.
 help :- print_Help.
+
 exit :- 
     retractall(playerLoc(_,_)),
-    retractall(player(_,_,_,_,_,_,_)),
+    retractall(player(_,_,_,_,_,_,_,_)),
     retractall(enemy(_,_,_,_,_,_,_)).
 
 /*Aksi terhadap command*/

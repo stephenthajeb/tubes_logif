@@ -1,3 +1,4 @@
+:-['Generate.pl'].
 :-dynamic(player/7).
 :-dynamic(enemy/7).
 
@@ -19,7 +20,7 @@ hp(sasori, 400).
 hp(itachi, 500).
 
 /* TYPE */
-type(naruto, wind).
+type(naruto,wind).
 type(sakura, water).
 type(sasuke, lightning).
 type(lee, earth).
@@ -33,7 +34,7 @@ type(gaara, earth).
 type(deidara, dark).
 type(tobi, dark).
 type(sasori, dark).
-type(itachi, fire).
+type(itachi,dark).
 
 /* NORMAL DAMAGE */
 dmg(naruto, 30).
