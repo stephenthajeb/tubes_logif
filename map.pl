@@ -16,6 +16,7 @@ enemyLoc(2,4).
 /* Inisialisasi awal */
 init :- asserta(playerLoc(1,1)),
         asserta(healStatus(0)),
+        asserta(currHP([350])),
         asserta(skillStatusE(0)),
         asserta(skillStatusP(0)).
 
@@ -58,8 +59,8 @@ collision(X,Y)  :-
     checkKoordinat(X,Y,Name,X1,Y1,ListEnemy),
     write('e'),
     assign_Enemy(X,Y,Name),
-    write('f'),
-    print_FoundEnemy,nl,!.
+    print_FoundEnemy,nl,
+    !.
 collision(X,Y)  :- !.
 
 
@@ -67,4 +68,6 @@ collision(X,Y)  :- !.
 msgAfterMove :- playerLoc(X,Y),write('Sekarang Player berada pada ('),print(X),write(','),print(Y),write(')'),nl,collision(X,Y).
 
 /* Rules Print Map */
-map:- forall(between(0,11,Y),(forall(between(0,11,X),printmap(X,Y)),nl)).
+map:- 
+    write('----------------MAP-----------------'),nl,
+    forall(between(0,11,Y),(forall(between(0,11,X),printmap(X,Y)),nl)),nl.

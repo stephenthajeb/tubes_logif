@@ -287,12 +287,24 @@ enemy_Attack(2) :-
 heal :- playerLoc(X1,Y1),healLoc(X2,Y2),X1\==X2,Y1\==Y2,printCommandInvalid,!.
 heal :- healStatus(0),
         player(Name, Type, X, Y, HP, NDamage, SDamage),
+        hp(Name,NewHP),
         retract(player(Name, Type, X, Y, HP, NDamage, SDamage)),
-        asserta(player(Name, Type, X, Y, 100, NDamage, SDamage)),
-        print_PlayerStatus,
+        asserta(player(Name, Type, X, Y, NewHP, NDamage, SDamage)),
+        status,
+        inventory(ListFriends),
+        healAll(ListFriends,ListHP),
+        retract(currHP(_)),
+        asserta(currHP(ListHP)),
         retract(healStatus(0)),
         asserta(healStatus(1)).
 
+healAll([],[]):-!.
+healAll(ListFriends,NewListHP):-
+    ListFriends=[HeadF|TailF],
+    hp(HeadF,NewHP),
+    HeadNew is NewHP,
+    healAll(TailF,NewListHP1),
+    NewListHP=[HeadNew|NewListHP1].
 
 /* Battle Mechanism */
 /*
