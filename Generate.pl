@@ -515,8 +515,34 @@ runAwayNormalEnemyProbability:-
     !,
     (Probability<X;Probability==X).
 
+cekJenis(akatsuki):-
+    enemy(Name, _, _, _, _, _, _),
+    names(Name,X),
+    X>10,
+    !.
+
+cekJenis(normal):- !.
+
 runAwayAkatsukiProbability:-
     random(0,101,Probability),
     akatsukiProbability(X),
     !,
-    (Probability<X;Probability==X).
+    (Probability<X;Probability==X). 
+
+run:-
+    cekJenis(X),
+    X==akatsuki,
+    runAwayAkatsukiProbability,
+    print_Run,
+    !.
+
+run:-
+    cekJenis(X),
+    X==normal,
+    runAwayNormalEnemyProbability,
+    print_Run,
+    !.
+
+run:- 
+    print_CantRun,
+    attack.
