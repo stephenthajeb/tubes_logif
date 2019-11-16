@@ -502,16 +502,9 @@ run:-
     random(0,101,Probability),
     normalProbability(X),
     !,
-    (Probability<X;Probability==X).
-
-inputCollision(Input):-
-    Input=='run',
-    !,
-    run,
+    (Probability<X;Probability==X),
     print_Run,nl.
-    
-inputCollision(Input):-
-    Input=='attack'.
+
 
 /*runAwayAkatsukiProbability:-
     random(0,101,Probability),
