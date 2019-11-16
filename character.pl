@@ -149,7 +149,7 @@ capture_Enemy(Name):-
     NewHP = [HP|NewHP],
     retract(inventory(ListInventory)),
     retract(currHP(ListHP)),
-    asserta(inventory(NewInventory)).
+    asserta(inventory(NewInventory)),
     asserta(currHP(NewHP)).
 
 /* MOVE PLAYER */

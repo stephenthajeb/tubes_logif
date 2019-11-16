@@ -26,6 +26,8 @@ exit :-
     retractall(enemyLocX(_)),
     retractall(enemyLocY(_)).
 
+run :- runAwayNormalEnemyProbability.
+
 /*Aksi terhadap command*/
 /*Ganti init dr map jd init yang player*/
 /*
