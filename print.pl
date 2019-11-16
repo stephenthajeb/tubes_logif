@@ -170,5 +170,10 @@ printKO :- player(PlayerName, _,_,_,_,_,_),
            write(' is defeated '),nl,
            write('Aku terlalu lemah untuk menyelamatkan Hinata'),nl,
            write('Silahkan assign new player dari inventory'),nl.
+print_Inventory([]):- !.
+print_Inventory([H|T]):-
+    write('- '),
+    print(H),nl,
+    print_Inventory(T).
 
         
