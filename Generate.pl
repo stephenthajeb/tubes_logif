@@ -426,6 +426,8 @@ generate_Akatsuki_Enemy:-
     Number_Akatsuki1 is Number_Akatsuki+1,
     asserta(nbAkatsuki(Number_Akatsuki)).
 
+generate_Akatsuki_Enemy.
+
 concat([],[],[]):- !.
 concat([],List2,List2):- !.
 concat(List1,List2,List):-
