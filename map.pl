@@ -49,17 +49,13 @@ collision(X,Y)  :-
     print_Heal,!.
 collision(X,Y)  :- 
     playerLoc(X,Y),
-    write('a'),
     enemyLocX(X1),
-    write('b'),
     enemyLocY(Y1),
-    write('c'),
     enemyName(ListEnemy),
-    write('d'),
     checkKoordinat(X,Y,Name,X1,Y1,ListEnemy),
-    write('e'),
     assign_Enemy(X,Y,Name),
     print_FoundEnemy,nl,
+    read(Input),call(Input),
     !.
 collision(_,_)  :- !.
 
