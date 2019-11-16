@@ -74,8 +74,9 @@ print_CantRun :-
     write('Sial! Aku tidak bisa kabur!'),nl.
 
 print_FoundEnemy :-
-    write('Hati-hati ada musuh didepan!'),nl,
-    write('X'), write(' muncul secara tiba tiba'),nl,
+    write('Hati-hati ada musuh didepan!'),nl, nl,
+    enemy(Name,_,_,_,_,_,_),
+    write(Name), write(' muncul secara tiba tiba'),nl,nl,
     write('Pilih bertarung atau lari ?'),nl.
 
 print_FightSakura :-
@@ -186,4 +187,5 @@ print_Heal :-
     write('Mau heal teman-teman ? Jika mau ketik "heal."'),nl,!.
 print_Heal :-
     healStatus(1),
+    write('keluar'),
     write('Fasilitas ini hanya bisa digunakan sekali :('),nl,!.

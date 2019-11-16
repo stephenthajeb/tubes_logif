@@ -1,5 +1,7 @@
 :-dynamic(player/7).
 :-dynamic(enemy/7).
+:-dynamic(inventory/1).
+:-dynamic(currHP/1).
 
 /* HP */
 hp(naruto, 350).
@@ -114,19 +116,41 @@ init_Enemy :-
     type(itachi, Type),
     asserta(enemy(itachi, Type, X, Y, HP, NDamage, SDamage)).
 
-assign_Enemy :-
-    enemy(name),
-    enemyLocX(X1),
-    enemyLocY(Y1),
-    X1 = [Hx|Tx],
-    Y1 = [Hy|Ty],
-    name = [Hn|Tn],
-    hp(Hn, HP),
-    dmg(Hn, NDamage),
-    skillDmg(Hn, SDamage),
-    type(Hn, Type),
-    asserta(enemy(Hn, Type, Hx, Hy, HP, NDamage, SDamage)).
+assign_Enemy(X,Y,Name) :-
+    hp(Name, HP),
+    dmg(Name, NDamage),
+    skillDmg(Name, SDamage),
+    type(Name, Type),
+    retract(enemy(_,_,_,_,_,_,_)),
+    asserta(enemy(Name, Type, X, Y, HP, NDamage, SDamage)).
 
+select(Name) :-
+    inventory(Friends),
+    select_Player(Name,Friends,NewFriends),
+    retract(inventory(Friends)),
+    asserta(inventory(NewFriends)),
+    assign_Player(Name).
+
+assign_Player(Name) :-
+    checkHP(Name,HP),
+    type(Name,NewType),
+    dmg(Name,NewNDamage),
+    skillDmg(Name,NewSDamage),
+    player(_, Type, X, Y, HP, NDamage, SDamage),
+    retract(player(_, Type, X, Y, HP, NDamage, SDamage)),
+    asserta(player(Name, NewType, X, Y, NewHP, NewNDamage, NewSDamage)).
+
+capture_Enemy(Name):-
+    currHP(ListHP),
+    enemy(Name,_,_,_,_,_,_),
+    hp(Name,HP),
+    inventory(ListInventory),
+    NewInventory = [Name|ListInventory],
+    NewHP = [HP|NewHP],
+    retract(inventory(ListInventory)),
+    retract(currHP(ListHP)),
+    asserta(inventory(NewInventory)).
+    asserta(currHP(NewHP)).
 
 /* MOVE PLAYER */
 move_Player :-

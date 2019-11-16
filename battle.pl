@@ -22,17 +22,17 @@ player_Attack(2) :-
 
 /* WEAK TYPE */
 player_Attack(1) :-
-    strong(EnemyType,PlayerType),
     player(_, PlayerType, _, _, _, NDamage, _),
     enemy(EnemyName, EnemyType, EnemyX, EnemyY, EnemyHP, EnemyNDamage, EnemySDamage),
+    strong(EnemyType,PlayerType),
     NewHP is EnemyHP-(NDamage - (NDamage/2)),
     retract(enemy(EnemyName, EnemyType, EnemyX, EnemyY, EnemyHP, EnemyNDamage, EnemySDamage)),
     asserta(enemy(EnemyName, EnemyType, EnemyX, EnemyY, NewHP, EnemyNDamage, EnemySDamage)),!.
 
 player_Attack(2) :-
-    strong(EnemyType,PlayerType),
     player(_, PlayerType, _, _, _, _, SDamage),
     enemy(EnemyName, EnemyType, EnemyX, EnemyY, EnemyHP, EnemyNDamage, EnemySDamage),
+    strong(EnemyType,PlayerType),
     NewHP is EnemyHP-(SDamage - (SDamage/2)),
     retract(enemy(EnemyName, EnemyType, EnemyX, EnemyY, EnemyHP, EnemyNDamage, EnemySDamage)),
     asserta(enemy(EnemyName, EnemyType, EnemyX, EnemyY, NewHP, EnemyNDamage, EnemySDamage)),!.
@@ -55,34 +55,34 @@ player_Attack(2) :-
 /* ENEMY */
 /* STRONG TYPE */
 enemy_Attack(1) :-
-    strong(EnemyType, PlayerType),
     player(PlayerName, PlayerType, PlayerX, PlayerY, PlayerHP, PlayerNDamage, PlayerSDamage),
     enemy(_, EnemyType, _, _, _, NDamage, _),
+    strong(EnemyType, PlayerType),
     NewHP is PlayerHP-(NDamage + (NDamage/2)),
     retract(player(PlayerName, PlayerType, PlayerX, PlayerY, PlayerHP, PlayerNDamage, PlayerSDamage)),
-    asserta(player(PlayerName, PlayerType, PlayerX, PlayerY, NewHP, PlayerNDamage, PlayerSDamage)).
+    asserta(player(PlayerName, PlayerType, PlayerX, PlayerY, NewHP, PlayerNDamage, PlayerSDamage)), !.
 
 enemy_Attack(2) :-
-    strong(EnemyType, PlayerType),
     player(PlayerName, PlayerType, PlayerX, PlayerY, PlayerHP, PlayerNDamage, PlayerSDamage),
     enemy(_, EnemyType, _, _, _, _, SDamage),
+    strong(EnemyType, PlayerType),
     NewHP is PlayerHP-(SDamage + (SDamage/2)),
     retract(player(PlayerName, PlayerType, PlayerX, PlayerY, PlayerHP, PlayerNDamage, PlayerSDamage)),
-    asserta(player(PlayerName, PlayerType, PlayerX, PlayerY, NewHP, PlayerNDamage, PlayerSDamage)).
+    asserta(player(PlayerName, PlayerType, PlayerX, PlayerY, NewHP, PlayerNDamage, PlayerSDamage)), !.
 
 /* WEAK TYPE */
 enemy_Attack(1) :-
-    strong(PlayerType,EnemyType),
     player(PlayerName, PlayerType, PlayerX, PlayerY, PlayerHP, PlayerNDamage, PlayerSDamage),
     enemy(_, EnemyType, _, _, _, NDamage, _),
+    strong(PlayerType,EnemyType),
     NewHP is PlayerHP-(NDamage - (NDamage/2)),
     retract(player(PlayerName, PlayerType, PlayerX, PlayerY, PlayerHP, PlayerNDamage, PlayerSDamage)),
     asserta(player(PlayerName, PlayerType, PlayerX, PlayerY, NewHP, PlayerNDamage, PlayerSDamage)),!.
 
 enemy_Attack(2) :-
-    strong(PlayerType,EnemyType),
     player(PlayerName, PlayerType, PlayerX, PlayerY, PlayerHP, PlayerNDamage, PlayerSDamage),
     enemy(_, EnemyType, _, _, _, _, SDamage),
+    strong(PlayerType,EnemyType),
     NewHP is PlayerHP-(SDamage - (SDamage/2)),
     retract(player(PlayerName, PlayerType, PlayerX, PlayerY, PlayerHP, PlayerNDamage, PlayerSDamage)),
     asserta(player(PlayerName, PlayerType, PlayerX, PlayerY, NewHP, PlayerNDamage, PlayerSDamage)),!.

@@ -10,7 +10,9 @@ border(X,11) :- X>(-1),X<12.
 activeArea(X,Y) :- X>(0),X<11,Y>(0),Y<11.
 
 /* Inisialisasi */
-init :- asserta(playerLoc(1,1)).
+init :- 
+    asserta(playerLoc(1,1)),
+    asserta(healStatus(0)).
 healLoc(5,5).
 enemyLoc(2,4).
 
@@ -37,8 +39,18 @@ d :- east, move_Player.
 
 /* Collision terjadi jika ada 2 huruf di satu koordinat peta*/
 /* Tambahin aksi setelah collision*/
-collision(X,Y)  :- playerLoc(X,Y),healLoc(X,Y),print_Heal,!.
-collision(X,Y)  :- playerLoc(X,Y),enemyLocX(X1),enemyLocY(Y1),checkKoordinat(X,Y,X1,Y1),print_FoundEnemy,nl,!.
+collision(X,Y)  :- 
+    playerLoc(X,Y),
+    healLoc(X,Y),
+    print_Heal,!.
+collision(X,Y)  :- 
+    playerLoc(X,Y),
+    enemyLocX(X1),
+    enemyLocY(Y1),
+    enemyName(ListEnemy),
+    checkKoordinat(X,Y,Name,X1,Y1,ListEnemy),
+    assign_Enemy(X,Y,Name),
+    print_FoundEnemy,nl,!.
 collision(X,Y)  :- !.
 
 heal :- playerLoc(X1,Y1),healLoc(X2,Y2),X1\==X2,Y1\==Y2,printCommandInvalid,!.
