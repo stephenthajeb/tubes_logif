@@ -10,17 +10,17 @@
 
 /* Strong TYPE */
 player_Attack(1) :-
-    strong(PlayerType,EnemyType),
     player(_, PlayerType, _, _, _, NDamage, _),
     enemy(EnemyName, EnemyType, EnemyX, EnemyY, EnemyHP, EnemyNDamage, EnemySDamage),
+    strong(PlayerType,EnemyType),
     NewHP is EnemyHP-(NDamage + (NDamage/2)),
     retract(enemy(EnemyName, EnemyType, EnemyX, EnemyY, EnemyHP, EnemyNDamage, EnemySDamage)),
     asserta(enemy(EnemyName, EnemyType, EnemyX, EnemyY, NewHP, EnemyNDamage, EnemySDamage)),!.
 
 player_Attack(2) :-
-    strong(PlayerType,EnemyType),
     player(_, PlayerType, _, _, _, _, SDamage),
     enemy(EnemyName, EnemyType, EnemyX, EnemyY, EnemyHP, EnemyNDamage, EnemySDamage),
+    strong(PlayerType,EnemyType),
     NewHP is EnemyHP-(SDamage + (SDamage/2)),
     retract(enemy(EnemyName, EnemyType, EnemyX, EnemyY, EnemyHP, EnemyNDamage, EnemySDamage)),
     asserta(enemy(EnemyName, EnemyType, EnemyX, EnemyY, NewHP, EnemyNDamage, EnemySDamage)),!.
@@ -44,29 +44,33 @@ player_Attack(2) :-
 
 /* NORMAL TYPE */
 player_Attack(1) :-
-    player(_, PlayerType, _, _, _, NDamage, _),
+    player(_, _, _, _, _, NDamage, _),
     enemy(EnemyName, EnemyType, EnemyX, EnemyY, EnemyHP, EnemyNDamage, EnemySDamage),
     NewHP is EnemyHP-NDamage,
     NewHP < 1,
     /*Cek inventory*/
-    print_Capture.
+    print_Capture,
+    retract(enemy(EnemyName, EnemyType, EnemyX, EnemyY, EnemyHP, EnemyNDamage, EnemySDamage)),
+    asserta(enemy(EnemyName, EnemyType, EnemyX, EnemyY, NewHP, EnemyNDamage, EnemySDamage)),!.
 
 player_Attack(1) :-
-    player(_, PlayerType, _, _, _, NDamage, _),
+    player(_, _, _, _, _, NDamage, _),
     enemy(EnemyName, EnemyType, EnemyX, EnemyY, EnemyHP, EnemyNDamage, EnemySDamage),
     NewHP is EnemyHP-NDamage,
     retract(enemy(EnemyName, EnemyType, EnemyX, EnemyY, EnemyHP, EnemyNDamage, EnemySDamage)),
     asserta(enemy(EnemyName, EnemyType, EnemyX, EnemyY, NewHP, EnemyNDamage, EnemySDamage)),!.
 
 player_Attack(2) :-
-    player(_, PlayerType, _, _, _, _, SDamage),
+    player(_, _, _, _, _, _, SDamage),
     enemy(EnemyName, EnemyType, EnemyX, EnemyY, EnemyHP, EnemyNDamage, EnemySDamage),
     NewHP is EnemyHP-SDamage,
     NewHP < 1,
-    print_Capture.
+    print_Capture,
+    retract(enemy(EnemyName, EnemyType, EnemyX, EnemyY, EnemyHP, EnemyNDamage, EnemySDamage)),
+    asserta(enemy(EnemyName, EnemyType, EnemyX, EnemyY, NewHP, EnemyNDamage, EnemySDamage)),!.
 
 player_Attack(2) :-
-    player(_, PlayerType, _, _, _, _, SDamage),
+    player(_, _, _, _, _, _, SDamage),
     enemy(EnemyName, EnemyType, EnemyX, EnemyY, EnemyHP, EnemyNDamage, EnemySDamage),
     NewHP is EnemyHP-SDamage,
     retract(enemy(EnemyName, EnemyType, EnemyX, EnemyY, EnemyHP, EnemyNDamage, EnemySDamage)),
@@ -75,9 +79,9 @@ player_Attack(2) :-
 /* ENEMY */
 /* STRONG TYPE */
 enemy_Attack(1) :-
-    strong(EnemyType,PlayerType),
     player(PlayerName, PlayerType, PlayerX, PlayerY, PlayerHP, PlayerNDamage, PlayerSDamage),
     enemy(_, EnemyType, _, _, _, NDamage, _),
+    strong(EnemyType,PlayerType),
     NewHP is PlayerHP-(NDamage + (NDamage/2)),
     NewHP < 1,
     printKO,
@@ -92,10 +96,10 @@ enemy_Attack(1) :-
     asserta(player(PlayerName, PlayerType, PlayerX, PlayerY, NewHP, PlayerNDamage, PlayerSDamage)),!.
 
 enemy_Attack(2) :-
-    strong(EnemyType,PlayerType),
     player(PlayerName, PlayerType, PlayerX, PlayerY, PlayerHP, PlayerNDamage, PlayerSDamage),
     enemy(_, EnemyType, _, _, _,_, SDamage),
-    NewHP is PlayerHP-(NDamage + (NDamage/2)),
+    strong(EnemyType,PlayerType),
+    NewHP is PlayerHP-(SDamage + (SDamage/2)),
     NewHP < 1,
     printKO,
     retract(player(PlayerName, PlayerType, PlayerX, PlayerY, PlayerHP, PlayerNDamage, PlayerSDamage)),!.
@@ -119,9 +123,9 @@ enemy_Attack(1) :-
     retract(player(PlayerName, PlayerType, PlayerX, PlayerY, PlayerHP, PlayerNDamage, PlayerSDamage)),!.
 
 enemy_Attack(1) :-
-    strong(PlayerType,EnemyType),
     player(PlayerName, PlayerType, PlayerX, PlayerY, PlayerHP, PlayerNDamage, PlayerSDamage),
     enemy(_, EnemyType, _, _, _, NDamage, _),
+    strong(PlayerType,EnemyType),
     NewHP is PlayerHP-(NDamage - (NDamage/2)),
     retract(player(PlayerName, PlayerType, PlayerX, PlayerY, PlayerHP, PlayerNDamage, PlayerSDamage)),
     asserta(player(PlayerName, PlayerType, PlayerX, PlayerY, NewHP, PlayerNDamage, PlayerSDamage)),!.
@@ -129,13 +133,13 @@ enemy_Attack(1) :-
 enemy_Attack(2) :-
     player(PlayerName, PlayerType, PlayerX, PlayerY, PlayerHP, PlayerNDamage, PlayerSDamage),
     enemy(_, EnemyType, _, _, _,_, SDamage),
+    strong(PlayerType,EnemyType),
     NewHP is PlayerHP-(NDamage - (NDamage/2)),
     NewHP < 1,
     printKO,
     retract(player(PlayerName, PlayerType, PlayerX, PlayerY, PlayerHP, PlayerNDamage, PlayerSDamage)),!.
 
 enemy_Attack(2) :-
-    strong(PlayerType,EnemyType),
     player(PlayerName, PlayerType, PlayerX, PlayerY, PlayerHP, PlayerNDamage, PlayerSDamage),
     enemy(_, EnemyType, _, _, _, _, SDamage),
     strong(PlayerType,EnemyType),
@@ -178,9 +182,14 @@ enemy_Attack(2) :-
 heal :- playerLoc(X1,Y1),healLoc(X2,Y2),X1\==X2,Y1\==Y2,printCommandInvalid,!.
 heal :- healStatus(0),
         player(Name, Type, X, Y, HP, NDamage, SDamage),
+        hp(Name,NewHP),
         retract(player(Name, Type, X, Y, HP, NDamage, SDamage)),
-        asserta(player(Name, Type, X, Y, 100, NDamage, SDamage)),
-        print_PlayerStatus,
+        asserta(player(Name, Type, X, Y, NewHP, NDamage, SDamage)),
+        status,
+        inventory(ListFriends),
+        healAll(ListFriends,ListHP),
+        retract(currHP(_)),
+        asserta(currHP(ListHP)),
         retract(healStatus(0)),
         asserta(healStatus(1)).
 
@@ -189,6 +198,13 @@ printKO :- player(PlayerName, PlayerType, PlayerX, PlayerY, PlayerHP, PlayerNDam
            write(' is defeated '),nl,
            write('Aku terlalu lemah untuk menyelamatkan Hinata'),nl.
 
+healAll([],[]):-!.
+healAll(ListFriends,NewListHP):-
+    ListFriends=[HeadF|TailF],
+    hp(HeadF,NewHP),
+    HeadNew is NewHP,
+    healAll(TailF,NewListHP1),
+    NewListHP=[HeadNew|NewListHP1].
 
 /* Battle Mechanism */
 /*

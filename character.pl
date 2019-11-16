@@ -89,7 +89,7 @@ skillName(sasori, 'Puppet Technique').
 skillName(itachi, 'Amaterasu').
 
 /* INVENTORI */
-inventory([naruto, sasuke, sakura]).
+inventory([naruto]).
 
 /* TYPE EFFECT */
 strong(dark, fire).
@@ -127,30 +127,43 @@ assign_Enemy(X,Y,Name) :-
 select(Name) :-
     inventory(Friends),
     select_Player(Name,Friends,NewFriends),
+    assign_Player(Name),
     retract(inventory(Friends)),
-    asserta(inventory(NewFriends)),
-    assign_Player(Name).
+    asserta(inventory(NewFriends)).
 
 assign_Player(Name) :-
-    checkHP(Name,HP),
+    inventory(ListName),
+    currHP(ListHP),
+    checkHP(ListName,ListHP,Name,NewHP),
     type(Name,NewType),
     dmg(Name,NewNDamage),
     skillDmg(Name,NewSDamage),
-    player(_, Type, X, Y, HP, NDamage, SDamage),
-    retract(player(_, Type, X, Y, HP, NDamage, SDamage)),
-    asserta(player(Name, NewType, X, Y, NewHP, NewNDamage, NewSDamage)).
+    player(NamaOld, Type, X, Y, HP, NDamage, SDamage),
+    retract(player(NamaOld, Type, X, Y, HP, NDamage, SDamage)),
+    asserta(player(Name, NewType, NewX, NewY, NewHP, NewNDamage, NewSDamage)).
 
-capture_Enemy(Name):-
+capture:-
+    isFullInventory(ListInventory),
+    print_InventoryFull,!.
+
+capture:-
     currHP(ListHP),
+    inventory(ListInventory),
     enemy(Name,_,_,_,_,_,_),
     hp(Name,HP),
-    inventory(ListInventory),
     NewInventory = [Name|ListInventory],
-    NewHP = [HP|NewHP],
+    NewHP = [HP|ListHP],
     retract(inventory(ListInventory)),
     retract(currHP(ListHP)),
-    asserta(inventory(NewInventory)).
-    asserta(currHP(NewHP)).
+    asserta(inventory(NewInventory)),
+    asserta(currHP(NewHP)),
+    print_Capture.
+
+swap(Name):-
+    currHP(ListHP),
+    inventory(ListInventory),
+    enemy(Name,_,_,_,_,_,_),
+    hp(Name,HP). 
 
 /* MOVE PLAYER */
 move_Player :-
@@ -158,5 +171,5 @@ move_Player :-
     playerLoc(NewX, NewY),
     retract(player(Name, Type, X, Y, HP, NDamage, SDamage)),
     asserta(player(Name, Type, NewX, NewY, HP, NDamage, SDamage)),
-    print_PlayerStatus.
+    status.
 

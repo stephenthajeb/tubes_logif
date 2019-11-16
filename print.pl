@@ -25,7 +25,7 @@ print_Story :-
     write('Mengapa teman-teman Naruto malah mengajak ia bertarung ?'),nl,
     write('Berhasilkah Naruto menaklukan Akatsuki dan membawa Hinata pulang ?'),nl,
     nl,
-    write('Let the game begin !'),nl.
+    write('Let the game begin !'),nl, nl.
     
 print_Win :-
     write('Y   Y    OOOOO    U      U       W         W  II  NN    N'),nl,
@@ -50,12 +50,6 @@ print_Lose :-
     write('Sayang sekali misimu telah gagal, namun tekad dalam dirimu akan tetap'),nl,
     write('ada dan terus ada sampai Hinata kembali pulang.'),nl.
 
-print_all :-
-    print_Title,
-    print_Story,
-    print_Win,
-    print_Lose.
-
 /* Interactive Command */
 
 print_InventoryFull :-
@@ -79,33 +73,33 @@ print_FoundEnemy :-
     write(Name), write(' muncul secara tiba tiba'),nl,nl,
     write('Pilih bertarung atau lari ?'),nl.
 
-print_FightSakura :-
+print_Fight(sakura) :-
     write('Haii. Jangan nangis ya kalau kalah...'),nl.
-print_FightSasuke :-
+print_Fight(sasuke) :-
     write('Hahahaha, teman lama. Sudah sekuat apa kau sekarang?'),nl.
-print_FightLee :-
+print_Fight(lee) :-
     write('Akan aku buktikan hasil latihanku dengan Guru Guy!'),nl.
-print_FightNeji :-
+print_Fight(neji) :-
     write('Hinata.... Lawan aku dulu sebelum kau selamatkan Hinata'),nl.
-print_FightChoji :-
+print_Fight(choji) :-
     write('Nyam nyam nyam... Lewati aku kalau bisa'),nl.
-print_FightShikamaru :-
+print_Fight(shikamaru) :-
     write('Coba hindari bayanganku kalau bisa!'),nl.
-print_FightTenten :-
+print_Fight(tenten) :-
     write('Guru Guy tidak pernah salah melatih muridnya!'),nl.
-print_FightKiba :-
+print_Fight(kiba) :-
     write('Akamaruu! Seraaaaang!'),nl.
-print_FightShino :-
+print_Fight(shino) :-
     write('Gooooo Parasitee....!'),nl.
-print_FightGaara :-
+print_Fight(gaara) :-
     write('Masih berani bertarung diatas pasir, huh?!'),nl.
-print_FightDeidara :-
+print_Fight(deidara) :-
     write('Ledakan adalah nama tengahku. HAHAHAHAHA'),nl.
-print_FightTobi :-
+print_Fight(tobi) :-
     write('Hancurkan topengku kalah kau bisa!'),nl.
-print_FightSasori :-
+print_Fight(sasori) :-
     write('Jangan pernah remehkan bonekaku. Hahahahaha....'),nl.
-print_FightItachi :-
+print_Fight(itachi) :-
     write('Well well well. Semua pasukanku sudah berhasil kau taklukkan.'),nl,
     write('Tetapi Hinata tetap akan jadi milik Akatsuki!'),nl.
 
@@ -115,28 +109,7 @@ print_BattleTitle :-
     write('=================================================='),nl.
 
 /* Help */
-/* Ini aku ganti jadi help */ 
-/*
-print_Help :-
-    write('Command-command yang tersedia'),nl,
-    write('Ketik nomor command dan akhiri dengan tanda titik untuk menggunakannya'),nl,
-    write('[ 1]Mulai Permainan'),nl,
-    write('[ 2]Barat'),nl,
-    write('[ 3]Timur'),nl,
-    write('[ 4]Utara'),nl,
-    write('[ 5]Selatan'),nl,
-    write('[ 6]Tunjukkin arah mata angin dong'),nl,
-    write('[ 7]Attack'),nl,
-    write('[ 8]Kabur'),nl,
-    write('[ 9]Menambah anggota mission'),nl,
-    write('[10]Melepas anggota mission'),nl,
-    write('[11]Status'),nl,
-    write('[12]Perlihatkan peta'),nl,
-    write('[13]Save'),nl,
-    write('[14]Load'),nl,
-    write('[15]Help'),nl,
-    write('[16]Keluar Permainan'),nl.
-*/
+
 print_Help :-
     write('----------------HELP----------------'),nl,
     write('Ketik command yang tersedia dan akhiri dengan tanda titik (.)'),nl,
@@ -146,16 +119,16 @@ print_Help :-
     write('d    : Timur'),nl,
     write('attack  : Attack'),nl,
     write('run  : Kabur'),nl,
-    write('add  : Menambah teman'),nl,
+    write('capture  : Menambah teman'),nl,
     write('del  : Melepas teman'),nl,
     write('status : Status'),nl,
     write('map  : Perlihatkan peta'),nl,
     write('save : Save'),nl,
     write('load : Load'),nl,
     write('help : Help'),nl,
-    write('exit : Keluar Permainan'),nl.
+    write('exit : Keluar Permainan'),nl, nl.
 
-print_PlayerStatus :-
+status :-
     inventory(Inventory),
     player(Name, Type, X, Y, HP, NDamage, SDamage),
     skillName(Name, SName),
@@ -167,7 +140,7 @@ print_PlayerStatus :-
     write('Skill: '), write(SName), write(' / '), write(SDamage),nl,
     write('Allies: '),write(Inventory),nl.
 
-print_EnemyStatus :-
+enemystatus :-
     enemy(Name, Type, X, Y, HP, NDamage, SDamage),
     skillName(Name, SName),
     write('Name : '), write(Name),nl,

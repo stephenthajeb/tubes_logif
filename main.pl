@@ -16,15 +16,30 @@ start :-
     init_Enemy,
     enemyGenerator,
     map.
-help :- print_Help.
+    /*
+    repeat,
+        write('Your command: '),
+        read(Input),nl,
+        call(Input),nl,
+    (Input==exit; endGame).*/
 
+endGame :- 
+    inventory([]),
+    print_Lose,!.
+
+endGame :-
+    winCondition,
+    print_Win,!.
+
+help :- print_Help.
 exit :- 
     retractall(playerLoc(_,_)),
     retractall(player(_,_,_,_,_,_,_)),
     retractall(enemy(_,_,_,_,_,_,_)),
     retractall(enemyName(_)),
     retractall(enemyLocX(_)),
-    retractall(enemyLocY(_)).
+    retractall(enemyLocY(_)),
+    print_Lose.
 
 /*Aksi terhadap command*/
 /*Ganti init dr map jd init yang player*/

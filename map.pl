@@ -14,7 +14,8 @@ activeArea(X,Y) :- X>(0),X<11,Y>(0),Y<11.
 /*Masih blm ada posisi enemy dan friend*/
 
 init :- asserta(playerLoc(1,1)),
-        asserta(healStatus(0)).
+        asserta(healStatus(0)),
+        asserta(currHP([350])).
 
 healLoc(2,2).
 enemyLoc(2,4).
@@ -54,20 +55,12 @@ collision(X,Y)  :-
     checkKoordinat(X,Y,Name,X1,Y1,ListEnemy),
     assign_Enemy(X,Y,Name),
     print_FoundEnemy,nl,!.
-collision(X,Y)  :- !.
-
-heal :- playerLoc(X1,Y1),healLoc(X2,Y2),X1\==X2,Y1\==Y2,printCommandInvalid,!.
-heal :- healStatus(0),
-        player(Name, Type, X, Y, HP, NDamage, SDamage),
-        hp(Name,HPAwal),
-        retract(player(Name, Type, X, Y, HP, NDamage, SDamage)),
-        asserta(player(Name, Type, X, Y, HPAwal, NDamage, SDamage)),
-        print_PlayerStatus,
-        retract(healStatus(0)),
-        asserta(healStatus(1)).
+collision(_,_)  :- !.
 
 /*Logic ketika player ketemu friend, enemy, atau berada di health center */
 msgAfterMove :- playerLoc(X,Y),write('Sekarang Player berada pada ('),print(X),write(','),print(Y),write(')'),nl,collision(X,Y).
 
 /* Rules Print Map */
-map:- forall(between(0,11,Y),(forall(between(0,11,X),printmap(X,Y)),nl)).
+map:- 
+    write('----------------MAP-----------------'),nl,
+    forall(between(0,11,Y),(forall(between(0,11,X),printmap(X,Y)),nl)),nl.

@@ -1,4 +1,3 @@
-:-['Map.pl'].
 /* Sebagai Database Enemy apa saja yang sudah dilawan */
 :-dynamic(enemy_appear/1).
 /* Sebagai Database Enemy apa saja yang sudah dialokasikan pada peta atau lokasi */
@@ -95,19 +94,15 @@ checkKoordinat(X,Y,Name,ListX,ListY,ListEnemy):-
     ListEnemy=[HeadEnemy|TailEnemy],
     checkKoordinat(X,Y,Name,TailX,TailY,TailEnemy).
 
-checkHP([],[]):-
+checkHP([],[],_,_):-
     !,
     fail.
-checkHP(Name,HP):-
-    ListName=[HeadName|TailName],
-    ListHP=[HeadHP|TailHP],
-    Name==HeadHP,
-    HP=HeadHP,
+checkHP([Name|_],[NewHP|_],Name,NewHP):-
     !.
-checkHP(Name,HP):-
+checkHP(ListName,ListHP,Name,NewHP):-
     ListName=[HeadName|TailName],
     ListHP=[HeadHP|TailHP],
-    checkHP(TailName,TailHP).
+    checkHP(TailName,TailHP,Name,NewHP).
 
 takeEnemy(X,Y,Enemy,[],[],[]):- !, fail.
     
