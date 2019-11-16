@@ -162,3 +162,13 @@ print_Heal :-
     healStatus(1),
     write('keluar'),
     write('Fasilitas ini hanya bisa digunakan sekali :('),nl,!.
+
+printSkillUsed :- write('Skill hanya bisa digunakan sekali cuy dalam battle ini'),nl.
+
+printKO :- player(PlayerName, PlayerType, PlayerX, PlayerY, PlayerHP, PlayerNDamage, PlayerSDamage),
+           write(PlayerName),
+           write(' is defeated '),nl,
+           write('Aku terlalu lemah untuk menyelamatkan Hinata'),nl,
+           write('Silahkan assign new player dari inventory'),nl.
+
+        

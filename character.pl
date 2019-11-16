@@ -156,14 +156,7 @@ capture:-
     retract(inventory(ListInventory)),
     retract(currHP(ListHP)),
     asserta(inventory(NewInventory)),
-    asserta(currHP(NewHP)),
-    print_Capture.
-
-swap(Name):-
-    currHP(ListHP),
-    inventory(ListInventory),
-    enemy(Name,_,_,_,_,_,_),
-    hp(Name,HP). 
+    asserta(currHP(NewHP)).
 
 /* MOVE PLAYER */
 move_Player :-

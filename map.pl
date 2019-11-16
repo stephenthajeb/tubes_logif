@@ -1,6 +1,5 @@
 :- dynamic(playerLoc/2).
 :- dynamic(enemyLoc/2).
-:- dynamic(healStatus/1).
 
 /* Map 10x10, indeks dari 0 dan 11 sebagai border, indeks 1 sampai 10 active Area */
 border(0,Y) :- Y>(-1),Y<12.
@@ -9,16 +8,17 @@ border(X,0) :- X>(-1),X<12.
 border(X,11) :- X>(-1),X<12.
 activeArea(X,Y) :- X>(0),X<11,Y>(0),Y<11.
 
-/* Inisialisasi awal */
-
-/*Masih blm ada posisi enemy dan friend*/
-
-init :- asserta(playerLoc(1,1)),
-        asserta(healStatus(0)),
-        asserta(currHP([350])).
-
+/*Fakta*/
 healLoc(2,2).
 enemyLoc(2,4).
+
+
+/* Inisialisasi awal */
+init :- asserta(playerLoc(1,1)),
+        asserta(healStatus(0)),
+        asserta(currHP([350])),
+        asserta(skillStatusE(0)),
+        asserta(skillStatusP(0)).
 
 /* Print Legend Map */
 printmap(X,Y) :- playerLoc(X,Y),write('P').
@@ -54,8 +54,10 @@ collision(X,Y)  :-
     enemyName(ListEnemy),
     checkKoordinat(X,Y,Name,X1,Y1,ListEnemy),
     assign_Enemy(X,Y,Name),
-    print_FoundEnemy,nl,!.
-collision(_,_)  :- !.
+    print_FoundEnemy,nl,
+    !.
+collision(X,Y)  :- !.
+
 
 /*Logic ketika player ketemu friend, enemy, atau berada di health center */
 msgAfterMove :- playerLoc(X,Y),write('Sekarang Player berada pada ('),print(X),write(','),print(Y),write(')'),nl,collision(X,Y).
