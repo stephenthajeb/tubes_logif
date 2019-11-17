@@ -27,7 +27,7 @@ normal_Attack :-
     enemy(EnemyName, EnemyType, EnemyX, EnemyY, EnemyHP, EnemyNDamage, EnemySDamage),
     strong(PlayerType,EnemyType),
     NewHP1 is EnemyHP-NDamage,
-    NewHP1 < 1,
+    (NewHP1 < 0.00; NewHP1==0.00),
     NewHP is 0,
     retractall(skillStatusP(_)),
     asserta(skillStatusP(0)),
@@ -48,7 +48,7 @@ normal_Attack :-
     enemy(EnemyName, EnemyType, EnemyX, EnemyY, EnemyHP, EnemyNDamage, EnemySDamage),
     strong(EnemyType,PlayerType),
     NewHP1 is EnemyHP-(NDamage - (NDamage/2)),
-    NewHP1 < 1,
+    (NewHP1 < 0.00; NewHP1==0.00),
     NewHP is 0,
     retractall(skillStatusP(_)),
     asserta(skillStatusP(0)),
@@ -91,7 +91,7 @@ special_Attack :-
     enemy(EnemyName, EnemyType, EnemyX, EnemyY, EnemyHP, EnemyNDamage, EnemySDamage),
     strong(PlayerType,EnemyType),
     NewHP1 is EnemyHP-(SDamage + (SDamage/2)),
-    NewHP1 < 1,
+    (NewHP1 < 0.00; NewHP1==0.00),
     NewHP is 0,
     retract(skillStatusP(_)),
     asserta(skillStatusP(0)),
@@ -115,7 +115,7 @@ special_Attack :-
     enemy(EnemyName, EnemyType, EnemyX, EnemyY, EnemyHP, EnemyNDamage, EnemySDamage),
     strong(EnemyType,PlayerType),
     NewHP1 is EnemyHP-(SDamage - (SDamage/2)),
-    NewHP1 < 1,
+    (NewHP1 < 0.00; NewHP1==0.00),
     NewHP is 0,
     retract(skillStatusP(_)),
     asserta(skillStatusP(0)),
@@ -163,7 +163,7 @@ enemy_Attack(1) :-
     enemy(_, EnemyType, _, _, _, NDamage, _),
     strong(EnemyType,PlayerType),
     NewHP1 is PlayerHP-(NDamage + (NDamage/2)),
-    NewHP1 < 1,
+    (NewHP1 < 0.00; NewHP1==0.00),
     NewHP is 0,
     printKO,
     retract(player(PlayerName, PlayerType, PlayerX, PlayerY, PlayerHP, PlayerNDamage, PlayerSDamage)),
@@ -182,7 +182,7 @@ enemy_Attack(1) :-
     enemy(_, EnemyType, _, _, _, NDamage, _),
     strong(PlayerType,EnemyType),
     NewHP1 is PlayerHP-(NDamage - (NDamage/2)),
-    NewHP1 < 1,
+    (NewHP1 < 0.00; NewHP1==0.00),
     NewHP is 0,
     printKO,
     retract(player(PlayerName, PlayerType, PlayerX, PlayerY, PlayerHP, PlayerNDamage, PlayerSDamage)),
@@ -221,7 +221,7 @@ enemy_Attack(2) :-
     enemy(_, EnemyType, _, _, _,_, SDamage),
     strong(EnemyType,PlayerType),
     NewHP1 is PlayerHP-(SDamage + (SDamage/2)),
-    NewHP1 < 1,
+    (NewHP1 < 0.00; NewHP1==0.00),
     NewHP is 0,
     printKO,
     retract(skillStatusE(0)),
@@ -246,7 +246,7 @@ enemy_Attack(2) :-
     enemy(_, EnemyType, _, _, _,_, SDamage),
     strong(PlayerType,EnemyType),
     NewHP1 is PlayerHP-(SDamage - (SDamage/2)),
-    NewHP1 < 1,
+    (NewHP1 < 0.00; NewHP1==0.00),
     NewHP is 0,
     printKO,
     retract(skillStatusE(0)),
@@ -320,14 +320,20 @@ attackCondition(_):-
     random(1,3,X),
     call(enemy_Attack(X)).
 
-attack_(0, _, kalah):- !.
-attack_(_, 0, menang):- !.
+attack_(PHP, _, kalah):- PHP<1,!.
+attack_(PHP, EHP, menang):- EHP<1,
+                            currHP(ListHP),
+                            insert(ListHP,PHP,NewHP),
+                            retractall(currHP(_)),
+                            asserta(currHP(NewHP)),
+                            !.
 attack_(_, _, State) :- 
     write('Silahkan Masukkan normal_Attack atau special_Attack untuk menyerang lawan! '),nl,
-    write('input: '),
+    write('input: '),nl,
     read(Input),
     call(Input),
     enemy(_, _, _, _, EHP, _, _),
+    write('--------------------- BATTLE STATUS ---------------------'),nl,
     enemystatus,nl,
     attackCondition(EHP),
     player(_, _, _, _, PHP, _, _),
@@ -339,12 +345,14 @@ attackBattle:-
     player(Name, _, _, _, PlayerHP, _, _),
     attack_(PlayerHP, EnemyHP, Status),
     Status==menang,
+    inventory(ListOfInventory),
+    insert(ListOfInventory,Name,NewInventory),
+    retractall(inventory(_)),
+    asserta(inventory(NewInventory)),
+    capture,
     retractall(enemy(_, _, _, _, _, _, _)),
-    inventory(Z),
-    retract(inventory(Z)),
-    Inventory=[Name|Z],
-    asserta(inventory(Inventory)),
     !.
+
 attackBattle:-
     enemy(_, _, _, _, EnemyHP, _, _),
     player(_, _, _, _, PlayerHP, _, _),
@@ -354,6 +362,7 @@ attackBattle:-
     battle(ListOfInventory).
 
 battle([]):- !.
+
 battle(_) :-
     write('Silahkan pilih Allies ! '),nl,
     inventory(ListOfInventory),
@@ -364,5 +373,6 @@ battle(_) :-
     attackBattle.
 
 attack:-
+    print_BattleTitle,
     inventory(ListInventory),nl,
     battle(ListInventory).
