@@ -156,6 +156,7 @@ yes:-
         read(Masukan),
         print_InvalidYes,(Masukan,ListInventory1),
     checkList(ListInventory1,Masukan),
+    call(Masukan),
     !,nl,
     currHP(ListHP1),
     checkHP(ListInventory1,ListHP1,Masukan,HP),
@@ -196,8 +197,8 @@ capture:-
     hp(Name, HP),
     NewInventory = [Name|ListInventory],
     NewHP = [HP|ListHP],
-    retract(inventory(ListInventory)),
-    retract(currHP(ListHP)),
+    retractall(inventory(ListInventory)),
+    retractall(currHP(ListHP)),
     asserta(inventory(NewInventory)),
     asserta(currHP(NewHP)).
 
