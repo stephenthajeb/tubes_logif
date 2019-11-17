@@ -22,6 +22,6 @@ load_status(Filetxt):-
 		asserta(In),
 	at_end_of_stream(Stream),
 	close(Stream),
-	nl, write('Your File is loaded!'), nl, !.
+	nl, write('Game berhasil diload!'), nl, !.
 load_all_status(_):-
-	nl, write('Your input is wrong!'), nl, fail.
+	nl, write('Tidak ada game dengan nama itu!'), nl, fail.
