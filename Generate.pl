@@ -223,12 +223,13 @@ generate_Akatsuki_Enemy:-
     X2 is X1 - 5,
     Y2 is Y1 - 5,
     abs(X2,NewX),
+    NewX1 is NewX+1,
     abs(Y2,NewY),
     (X1>5;X1==5),
     (Y1<5;Y1==5),
     !,
     repeat,
-    random(1,NewX+1,X),
+    random(1,NewX1,X),
     random(NewY,11,Y), 
     \+(checkKoordinatOnly(X,Y,OldX,OldY)),
     !,
@@ -298,12 +299,13 @@ generate_Akatsuki_Enemy:-
     Y2 is Y1 - 5,
     abs(X2,NewX),
     abs(Y2,NewY),
+    NewY1 is NewY+1,
     (X1<5;X1==5),
     (Y1>5;Y1==5),
     !,
     repeat,
     random(NewX,11,X),
-    random(1,NewY+1,Y),
+    random(1,NewY1,Y),
     \+(checkKoordinatOnly(X,Y,OldX,OldY)),
     !,  
     check_Akatsuki_Enemy(List_Of_Enemy,Name_Enemy),
@@ -334,13 +336,15 @@ generate_Akatsuki_Enemy:-
     X2 is X1 - 5,
     Y2 is Y1 - 5,
     abs(X2,NewX),
+    NewX1 is NewX + 1,
     abs(Y2,NewY),
+    NewY1 is NewY + 1,
     (X1>5;X1==5),
     (Y1>5;Y1==5),
     !,
     repeat,
-    random(1,NewX+1,X),
-    random(1,NewY+1,Y),
+    random(1,NewX1,X),
+    random(1,NewY1,Y),
     \+(checkKoordinatOnly(X,Y,OldX,OldY)),
     !,
     check_Akatsuki_Enemy(List_Of_Enemy,Name_Enemy),
@@ -435,6 +439,32 @@ generate_Akatsuki_Enemy:-
     Number_Akatsuki1 is Number_Akatsuki+1,
     asserta(nbAkatsuki(Number_Akatsuki1)).
 
+generate_Akatsuki_Enemy:-
+    isHitachiAppear,
+    enemyName(List_Of_Enemy),
+    nbElmtList(List_Of_Enemy,Count),
+    Count==14,
+    enemyLocY(OldY),
+    enemyLocX(OldX),
+    generate_Random_Location(LocX,LocY),
+    \+(checkKoordinatOnly(LocX,LocY,OldX,OldY)),
+    !,
+    write('Semilir angin memenuhi penjuru hingga tersapu oleh api ameterasu! Hitachi sudah mulai menampakkan diri!'),nl,
+    write('Itachi sudah ditemukan pada koordinat ('),print(LocX),write(','),print(LocY),write(') !'),nl,
+    NewListOfEnemy=[itachi|List_Of_Enemy],
+    NewEnemyLocY=[LocY|OldY],
+    NewEnemyLocX=[LocX|OldX],
+    retract(enemyName(List_Of_Enemy)),
+    asserta(enemyName(NewListOfEnemy)),
+    retract(enemyLocY(OldY)),
+    asserta(enemyLocY(NewEnemyLocY)),
+    retract(enemyLocX(OldX)),
+    asserta(enemyLocX(NewEnemyLocX)),
+    retract(nbAkatsuki(Number_Akatsuki)),
+    Number_Akatsuki1 is Number_Akatsuki+1,
+    asserta(nbAkatsuki(Number_Akatsuki1)).
+
+
 generate_Akatsuki_Enemy.
 
 concat([],[],[]):- !.
@@ -526,6 +556,7 @@ cekJenis(akatsuki):-
 cekJenis(normal):- !.
 cekAkatsuki:-
     cekJenis(akatsuki),!,
+    akatsuki_Appear(X),
     retractall(akatsuki_Appear(X)),
     X1 is X+1,
     asserta(akatsuki_Appear(X1)).
