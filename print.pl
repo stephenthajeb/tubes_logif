@@ -174,7 +174,6 @@ print_Heal :-
     write('Mau heal teman-teman ? Jika mau ketik "heal."'),nl,!.
 print_Heal :-
     healStatus(1),
-    write('keluar'),
     write('Fasilitas ini hanya bisa digunakan sekali :('),nl,!.
 
 printSkillUsed :- write('Skill hanya bisa digunakan sekali cuy dalam battle ini'),nl.
@@ -226,7 +225,7 @@ print_InvalidAttack(Input):-
 print_InvalidAttack(_).
 
 print_InvalidCommand(Input):-
-    \+(Input==w),\+(Input==a),\+(Input==s),\+(Input==d),\+(Input==status),\+(Input==map),\+(Input==help),\+(Input==exit),
+    \+(Input==w),\+(Input==a),\+(Input==s),\+(Input==d),\+(Input==status),\+(Input==map),\+(Input==help),\+(Input==exit), \+(Input==heal),
     print_Invalid,
     !.
 print_InvalidCommand(_).
