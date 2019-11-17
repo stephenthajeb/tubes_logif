@@ -53,7 +53,7 @@ print_Lose :-
 /* Interactive Command */
 
 print_InventoryFull :-
-    write('Temanmu sudah terlalu banyak. Apakah ingin mengganti teman ?'),nl.
+    write('Temanmu sudah terlalu banyak. Apakah ingin mengganti teman ? (yes/no)'),nl.
 print_Capture :-
     write('Ayo kita cari Hinata dan bawa ia pulang ke Konoha!'), nl.
 print_NotCapture :-
@@ -70,7 +70,8 @@ print_CantRun :-
 print_FoundEnemy :-
     write('Hati-hati ada musuh didepan!'),nl, nl,
     enemy(Name,_,_,_,_,_,_),
-    write(Name), write(' muncul secara tiba tiba'),nl,nl,
+    write(Name), write(' muncul secara tiba tiba'),nl,
+    print(Name),write(' : '),call(print_Fight(Name)),nl,
     write('Pilih bertarung atau lari ?'),nl.
 
 print_Fight(sakura) :-
@@ -170,10 +171,10 @@ printKO :- player(PlayerName, _,_,_,_,_,_),
            write(' is defeated '),nl,
            write('Aku terlalu lemah untuk menyelamatkan Hinata'),nl,
            write('Silahkan assign new player dari inventory'),nl.
+
 print_Inventory([]):- !.
 print_Inventory([H|T]):-
     write('- '),
     print(H),nl,
     print_Inventory(T).
-
         
