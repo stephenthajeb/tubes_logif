@@ -1,5 +1,3 @@
-:- include('character.pl').
-
 load :-
 	nl, write('Masukkan game yang ingin diload!'), nl,
 	write('>> '), read(File),
