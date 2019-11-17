@@ -57,7 +57,11 @@ collision(X,Y)  :-
     print_FoundEnemy,nl,
     enemystatus,nl,
     write('Pilih bertarung atau lari ? (run / attack)'),nl,
-    read(Input),call(Input),
+    repeat,
+        read(Input),
+        print_Invalid_Collision(Input),
+    (Input==run;Input==attack),
+    call(Input),
     !.
 collision(_,_).
 
