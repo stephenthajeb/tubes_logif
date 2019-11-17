@@ -53,11 +53,13 @@ collision(X,Y)  :-
     enemyLocY(Y1),
     enemyName(ListEnemy),
     checkKoordinat(X,Y,Name,X1,Y1,ListEnemy),
+    enemy_appear(ListOfEnemyAppear),
+    check(ListOfEnemyAppear,Name),
     assign_Enemy(X,Y,Name),
     print_FoundEnemy,nl,
     read(Input),call(Input),
     !.
-collision(_,_)  :- !.
+collision(_,_).
 
 
 /*Logic ketika player ketemu friend, enemy, atau berada di health center */
