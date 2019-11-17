@@ -3,7 +3,7 @@
 :-dynamic(inventory/1).
 :-dynamic(currHP/1).
 
-currHP([350,300,350]).
+currHP([350,300,350,320,300,350]). 
 /* HP */
 hp(naruto, 350).
 hp(sakura, 300).
@@ -90,7 +90,7 @@ skillName(sasori, 'Puppet Technique').
 skillName(itachi, 'Amaterasu').
 
 /* INVENTORI */
-inventory([naruto,sakura,sasuke]).
+inventory([naruto,sakura,sasuke,lee,neji,choji]).
 
 /* TYPE EFFECT */
 strong(dark, fire).
@@ -132,9 +132,14 @@ select(Name) :-
     asserta(inventory(NewFriends)).
 
 assign_Player(Name) :-
+    retract(skillStatusP(_)),
+    asserta(skillStatusP(0)),
     inventory(ListName),
     currHP(ListHP),
     checkHP(ListName,ListHP,Name,NewHP),
+    select_Player(NewHP,ListHP,NewListHP),
+    retract(currHP(ListHP)),
+    asserta(currHP(NewListHP)),
     type(Name,NewType),
     dmg(Name,NewNDamage),
     skillDmg(Name,NewSDamage),
@@ -142,16 +147,43 @@ assign_Player(Name) :-
     retract(player(NamaOld, Type, X, Y, HP, NDamage, SDamage)),
     asserta(player(Name, NewType, X, Y, NewHP, NewNDamage, NewSDamage)).
 
+yes:-
+    write('Siapa yang ingin kamu ganti?'),nl,
+    read(Masukan),nl,
+    inventory(ListInventory1),
+    currHP(ListHP1),
+    checkHP(ListInventory1,ListHP1,Masukan,HP),
+    call(select_Player(Masukan,ListInventory1,ListInventory)),
+    call(select_Player(HP,ListHP1,ListHP)),
+    print(Masukan),
+    write(' : Terimakasih teman sudah memberikan petualangan ini! '),nl,
+    enemy(Nama,_,_,_,_,_,_),
+    select(Nama),
+    hp(Nama, HP1),
+    NewInventory = [Nama|ListInventory],
+    NewHP = [HP1|ListHP],
+    retractall(inventory(_)),
+    retractall(currHP(_)),
+    asserta(inventory(NewInventory)),
+    asserta(currHP(NewHP)).
+
+no:-
+    player(Nama, _, _, _, _, _, _),
+    print_NotCapture,
+    print(Nama),
+    write(' : Ayo kawan cepat bergegas! Masih banyak musuh yang menanti! '),nl.
+
 capture:-
     inventory(ListInventory),
     isFullInventory(ListInventory),
-    print_InventoryFull,!.
+    print_InventoryFull,!,
+    read(Input),call(Input).
 
 capture:-
     currHP(ListHP),
     inventory(ListInventory),
     enemy(Name,_,_,_,_,_,_),
-    hp(Name,HP),
+    hp(Name, HP),
     NewInventory = [Name|ListInventory],
     NewHP = [HP|ListHP],
     retract(inventory(ListInventory)),
