@@ -1,5 +1,3 @@
-:- include('character.pl').
-
 save:-
 	nl, write('Ingin simpan dengan nama?'), nl,
 	write('>> '), read(File),

@@ -126,13 +126,6 @@ assign_Enemy(X,Y,Name) :-
     type(Name, Type),
     asserta(enemy(Name, Type, X, Y, HP, NDamage, SDamage)).
 
-select(Name) :-
-    inventory(Friends),
-    select_Player(Name,Friends,NewFriends),
-    assign_Player(Name),
-    retract(inventory(Friends)),
-    asserta(inventory(NewFriends)).
-
 assign_Player(Name) :-
     retractall(skillStatusP(_)),
     asserta(skillStatusP(0)),
@@ -146,8 +139,15 @@ assign_Player(Name) :-
     dmg(Name,NewNDamage),
     skillDmg(Name,NewSDamage),
     player(NamaOld, Type, X, Y, HP, NDamage, SDamage),
-    retract(player(NamaOld, Type, X, Y, HP, NDamage, SDamage)),
+    retractall(player(NamaOld, Type, X, Y, HP, NDamage, SDamage)),
     asserta(player(Name, NewType, X, Y, NewHP, NewNDamage, NewSDamage)).
+
+select(Name) :-
+    inventory(Friends),
+    select_Player(Name,Friends,NewFriends),
+    assign_Player(Name),
+    retract(inventory(Friends)),
+    asserta(inventory(NewFriends)).
 
 yes:-
     write('Siapa yang ingin kamu ganti?'),nl,
