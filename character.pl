@@ -154,7 +154,7 @@ yes:-
     inventory(ListInventory1),
     repeat,
         read(Masukan),
-        print_InvalidYes,(Masukan,ListInventory1),
+        print_InvalidYes(Masukan,ListInventory1),
     checkList(ListInventory1,Masukan),
     call(Masukan),
     !,nl,
