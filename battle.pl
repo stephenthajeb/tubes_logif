@@ -11,15 +11,7 @@
 :- dynamic(captureStatus/1).
 :- dynamic(moveStatus/1).
 
-/*
-run :- runProbability(),!.
-run :- retract,assert(moveStatus(0))
 
-
-repeat
-    
-until
-*/
 /*Normal Attack*/
 /* STRONG TYPE */
 normal_Attack :-
@@ -350,7 +342,12 @@ attackBattle:-
     retractall(inventory(_)),
     asserta(inventory(NewInventory)),
     capture,
+    enemy(EnemyName, _, _, _, _, _, _),
+    cekAkatsuki,
     retractall(enemy(_, _, _, _, _, _, _)),
+    enemy_appear(List),
+    retractall(enemy_appear(List)),
+    asserta(enemy_appear([EnemyName|List])),
     !.
 
 attackBattle:-
