@@ -151,8 +151,12 @@ assign_Player(Name) :-
 
 yes:-
     write('Siapa yang ingin kamu ganti?'),nl,
-    read(Masukan),nl,
     inventory(ListInventory1),
+    repeat,
+        read(Masukan),
+        print_InvalidYes,(Masukan,ListInventory1),
+    checkList(ListInventory1,Masukan),
+    !,nl,
     currHP(ListHP1),
     checkHP(ListInventory1,ListHP1,Masukan,HP),
     call(select_Player(Masukan,ListInventory1,ListInventory)),
@@ -179,7 +183,11 @@ capture:-
     inventory(ListInventory),
     isFullInventory(ListInventory),
     print_InventoryFull,!,
-    read(Input),call(Input).
+    repeat,
+        read(Input),
+        print_InvalidCapture(Input),
+    (Input==yes;Input==no),
+    !,call(Input).
 
 capture:-
     currHP(ListHP),
