@@ -187,4 +187,44 @@ print_Inventory([H|T]):-
     write('- '),
     print(H),nl,
     print_Inventory(T).
+print_Invalid:-
+    write(' Masukan tidak Valid, Silahkan masukkan kembali '),nl.
+
+print_Invalid_Collision(Input):-
+    \+(Input==run),\+(Input==attack),
+    print_Invalid,!.
+
+print_Invalid_Collision(_).
+
+print_InvalidYes(Input,ListInventory):-
+    check(ListInventory,Input),
+    print_Invalid,
+    !.
+
+print_InvalidYes(_,_).
+
+print_InvalidCapture(Input):-
+    \+(Input==yes),\+(Input==no),
+    print_Invalid,
+    !.
+
+print_InvalidCapture(_).
+
+print_InvalidCapture1(Input):-
+    \+(Input==capture),\+(Input==no),
+    print_Invalid,
+    !.
+print_InvalidCapture1(_).
+
+print_InvalidAttack(Input):-
+    \+(Input==normal_Attack),\+(Input==special_Attack),
+    print_Invalid,
+    !.
+print_InvalidAttack(_).
+
+print_InvalidCommand(Input):-
+    \+(Input==w),\+(Input==a),\+(Input==s),\+(Input==d),\+(Input==status),\+(Input==map),\+(Input==help),\+(Input==exit),
+    print_Invalid,
+    !.
+print_InvalidCommand(_).
         
