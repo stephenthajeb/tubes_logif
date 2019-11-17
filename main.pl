@@ -14,13 +14,13 @@ start :-
     init,
     init_Player,
     enemyGenerator,
-    map.
-    /*
+    map,
     repeat,
+        generate_Akatsuki_Enemy,
         write('Your command: '),
         read(Input),nl,
         call(Input),nl,
-    (Input==exit; endGame).*/
+    (Input==exit; endGame).
 
 endGame :- 
     inventory([]),
