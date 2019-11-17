@@ -22,7 +22,7 @@ start :-
         write('Your command: '),
         read(Input),
         print_InvalidCommand(Input),
-        (Input==w;Input==a;Input==s;Input==d;Input==status;Input==map;Input==help;Input==exit;Input==save;Input==load),
+        (Input==w;Input==a;Input==s;Input==d;Input==status;Input==map;Input==help;Input==exit;Input==save;Input==load;Input==heal),
         nl,
         call(Input),nl,
     (Input==exit; endGame).
