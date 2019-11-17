@@ -11,11 +11,11 @@ save:-
 save_status(Stream) :-
 	save_player(Stream).
 save_status(Stream) :-
-	save_enemy(Stream).
-save_status(Stream) :-
 	save_inventory(Stream).
 save_status(Stream) :-
 	save_currHP(Stream).
+save_status(Stream) :-
+	save_enemy(Stream).
 save_status(_) :- !.
 
 save_player(Stream) :-
