@@ -325,7 +325,7 @@ attack_(_, _, State) :-
     repeat,
         read(Input),
         print_InvalidAttack(Input),
-    (Input==normal;Input==skill),
+    (Input==normal;(Input==skill,skillStatusP(0))),
     call(Input),
     !,
     enemy(_, _, _, _, EHP, _, _),
