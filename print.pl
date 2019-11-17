@@ -57,22 +57,22 @@ print_InventoryFull :-
 print_Capture :-
     write('Ayo kita cari Hinata dan bawa ia pulang ke Konoha!'), nl.
 print_NotCapture :-
-    write('Mission ini sangat berbahaya,'),nl,
-    write('Aku tidak mau membahayakan kamu dengan melibatkanmu'),nl.
+    write('Misi ini sangat berbahaya,'),nl,
+    write('Aku tidak mau membahayakanmu...'),nl.
 print_Run :-
-    write('Kagebunshin no Jutsu!'),nl,
+    nl,
+    write('Kagebunshin no Jutsu!'),nl,nl,
     write('Berhasil kabur...'),nl.
 print_CantRun :-
-    write('Kagebunshin no Jutsu!'),nl,
-    write('..........'),nl,
+    nl,
+    write('Kagebunshin no Jutsu!'),nl,nl,
+    write('. . . . . . .'),nl,nl,
     write('Sial! Aku tidak bisa kabur!'),nl.
 
 print_FoundEnemy :-
     write('Hati-hati ada musuh didepan!'),nl, nl,
     enemy(Name,_,_,_,_,_,_),
-    write(Name), write(' muncul secara tiba tiba'),nl,
-    print(Name),write(' : '),call(print_Fight(Name)),nl,
-    write('Pilih bertarung atau lari ?'),nl.
+    write(Name), write(' muncul secara tiba tiba'),nl.
 
 print_Fight(sakura) :-
     write('Haii. Jangan nangis ya kalau kalah...'),nl.
@@ -97,7 +97,7 @@ print_Fight(gaara) :-
 print_Fight(deidara) :-
     write('Ledakan adalah nama tengahku. HAHAHAHAHA'),nl.
 print_Fight(tobi) :-
-    write('Hancurkan topengku kalah kau bisa!'),nl.
+    write('Hancurkan topengku kalau kau bisa!'),nl.
 print_Fight(sasori) :-
     write('Jangan pernah remehkan bonekaku. Hahahahaha....'),nl.
 print_Fight(itachi) :-
@@ -114,20 +114,20 @@ print_BattleTitle :-
 print_Help :-
     write('----------------HELP----------------'),nl,
     write('Ketik command yang tersedia dan akhiri dengan tanda titik (.)'),nl,
-    write('w    : Utara'),nl,
-    write('a    : Barat'),nl,
-    write('s    : Selatan'),nl,
-    write('d    : Timur'),nl,
-    write('attack  : Attack'),nl,
-    write('run  : Kabur'),nl,
+    write('w        : Utara'),nl,
+    write('a        : Barat'),nl,
+    write('s        : Selatan'),nl,
+    write('d        : Timur'),nl,
+    write('battle   : Masuk '),nl,
+    write('run      : Kabur'),nl,
+    write('normal   : Menyerang musuh dengan normal attack'),nl,
+    write('skill    : Menyerang musuh dengan skill attack'),nl,
     write('capture  : Menambah teman'),nl,
-    write('del  : Melepas teman'),nl,
-    write('status : Status'),nl,
-    write('map  : Perlihatkan peta'),nl,
-    write('save : Save'),nl,
-    write('load : Load'),nl,
-    write('help : Help'),nl,
-    write('exit : Keluar Permainan'),nl, nl.
+    write('swap     : Mengganti teman'),nl,
+    write('status   : Status'),nl,
+    write('map      : Perlihatkan peta'),nl,
+    write('help     : Help'),nl,
+    write('exit     : Keluar Permainan'),nl, nl.
 
 status :-
     inventory(Inventory),
@@ -141,12 +141,22 @@ status :-
     write('Skill: '), write(SName), write(' / '), write(SDamage),nl,
     write('Allies: '),write(Inventory),nl.
 
-enemystatus :-
-    enemy(Name, Type, X, Y, HP, NDamage, SDamage),
+playerstatus :-
+    player(Name, Type, _, _, HP, NDamage, SDamage),
     skillName(Name, SName),
+    write('===== PLAYER ====='),nl,
     write('Name : '), write(Name),nl,
     write('Type : '), write(Type),nl,
-    write('Loc  : '), write('('), write(X), write(','), write(Y), write(')'),nl,
+    write('HP   : '), write(HP),nl,
+    write('Dmg  : '), write(NDamage),nl,
+    write('Skill: '), write(SName), write(' / '), write(SDamage),nl.
+
+enemystatus :-
+    enemy(Name, Type, _, _, HP, NDamage, SDamage),
+    skillName(Name, SName),
+    write('===== ENEMY ====='),nl,
+    write('Name : '), write(Name),nl,
+    write('Type : '), write(Type),nl,
     write('HP   : '), write(HP),nl,
     write('Dmg  : '), write(NDamage),nl,
     write('Skill: '), write(SName), write(' / '), write(SDamage),nl.

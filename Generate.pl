@@ -542,6 +542,7 @@ run:-
     X==akatsuki,
     runAwayAkatsukiProbability,
     print_Run,
+    retractall(enemy(_,_,_,_,_,_,_)),
     !.
 
 run:-
@@ -549,6 +550,7 @@ run:-
     X==normal,
     runAwayNormalEnemyProbability,
     print_Run,
+    retractall(enemy(_,_,_,_,_,_,_)),
     !.
 
 run:- 

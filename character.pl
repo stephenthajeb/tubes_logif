@@ -198,6 +198,5 @@ move_Player :-
     player(Name, Type, X, Y, HP, NDamage, SDamage),
     playerLoc(NewX, NewY),
     retract(player(Name, Type, X, Y, HP, NDamage, SDamage)),
-    asserta(player(Name, Type, NewX, NewY, HP, NDamage, SDamage)),
-    status.
+    asserta(player(Name, Type, NewX, NewY, HP, NDamage, SDamage)).
 

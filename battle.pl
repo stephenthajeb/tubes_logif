@@ -14,7 +14,7 @@
 
 /*Normal Attack*/
 /* STRONG TYPE */
-normal_Attack :-
+normal :-
     player(_, PlayerType, _, _, _, NDamage, _),
     enemy(EnemyName, EnemyType, EnemyX, EnemyY, EnemyHP, EnemyNDamage, EnemySDamage),
     strong(PlayerType,EnemyType),
@@ -26,7 +26,7 @@ normal_Attack :-
     retract(enemy(EnemyName, EnemyType, EnemyX, EnemyY, EnemyHP, EnemyNDamage, EnemySDamage)),
     asserta(enemy(EnemyName, EnemyType, EnemyX, EnemyY, NewHP, EnemyNDamage, EnemySDamage)),
     print_Capture,!.
-normal_Attack :-
+normal :-
     player(_, PlayerType, _, _, _, NDamage, _),
     enemy(EnemyName, EnemyType, EnemyX, EnemyY, EnemyHP, EnemyNDamage, EnemySDamage),
     strong(PlayerType,EnemyType),
@@ -35,7 +35,7 @@ normal_Attack :-
     asserta(enemy(EnemyName, EnemyType, EnemyX, EnemyY, NewHP, EnemyNDamage, EnemySDamage)),!.
 
 /* WEAK TYPE */
-normal_Attack :-
+normal :-
     player(_, PlayerType, _, _, _, NDamage, _),
     enemy(EnemyName, EnemyType, EnemyX, EnemyY, EnemyHP, EnemyNDamage, EnemySDamage),
     strong(EnemyType,PlayerType),
@@ -47,7 +47,7 @@ normal_Attack :-
     retract(enemy(EnemyName, EnemyType, EnemyX, EnemyY, EnemyHP, EnemyNDamage, EnemySDamage)),
     asserta(enemy(EnemyName, EnemyType, EnemyX, EnemyY, NewHP, EnemyNDamage, EnemySDamage)),
     print_Capture,!.
-normal_Attack :-
+normal :-
     player(_, PlayerType, _, _, _, NDamage, _),
     enemy(EnemyName, EnemyType, EnemyX, EnemyY, EnemyHP, EnemyNDamage, EnemySDamage),
     strong(EnemyType,PlayerType),
@@ -56,7 +56,7 @@ normal_Attack :-
     asserta(enemy(EnemyName, EnemyType, EnemyX, EnemyY, NewHP, EnemyNDamage, EnemySDamage)),!.
 
 /* NORMAL TYPE */
-normal_Attack :-
+normal :-
     player(_, _, _, _, _, NDamage, _),
     enemy(EnemyName, EnemyType, EnemyX, EnemyY, EnemyHP, EnemyNDamage, EnemySDamage),
     NewHP1 is EnemyHP-NDamage,
@@ -67,7 +67,7 @@ normal_Attack :-
     retract(enemy(EnemyName, EnemyType, EnemyX, EnemyY, EnemyHP, EnemyNDamage, EnemySDamage)),
     asserta(enemy(EnemyName, EnemyType, EnemyX, EnemyY, NewHP, EnemyNDamage, EnemySDamage)),
     print_Capture,!.
-normal_Attack :-
+normal :-
     player(_, _, _, _, _, NDamage, _),
     enemy(EnemyName, EnemyType, EnemyX, EnemyY, EnemyHP, EnemyNDamage, EnemySDamage),
     NewHP is EnemyHP-NDamage,
@@ -76,8 +76,8 @@ normal_Attack :-
 
 /*Skill Attack*/
 /* Strong TYPE */
-special_Attack :-  skillStatusP(1),printSkillUsed,!.
-special_Attack :-
+skill :-  skillStatusP(1),printSkillUsed,!.
+skill :-
     skillStatusP(0),
     player(_, PlayerType, _, _, _, _, SDamage),
     enemy(EnemyName, EnemyType, EnemyX, EnemyY, EnemyHP, EnemyNDamage, EnemySDamage),
@@ -90,7 +90,7 @@ special_Attack :-
     retract(enemy(EnemyName, EnemyType, EnemyX, EnemyY, EnemyHP, EnemyNDamage, EnemySDamage)),
     asserta(enemy(EnemyName, EnemyType, EnemyX, EnemyY, NewHP, EnemyNDamage, EnemySDamage)),
     print_Capture,!.
-special_Attack :-
+skill :-
     skillStatusP(0),
     player(_, PlayerType, _, _, _, _, SDamage),
     enemy(EnemyName, EnemyType, EnemyX, EnemyY, EnemyHP, EnemyNDamage, EnemySDamage),
@@ -101,7 +101,7 @@ special_Attack :-
     retract(enemy(EnemyName, EnemyType, EnemyX, EnemyY, EnemyHP, EnemyNDamage, EnemySDamage)),
     asserta(enemy(EnemyName, EnemyType, EnemyX, EnemyY, NewHP, EnemyNDamage, EnemySDamage)),!.
 /* WEAK TYPE */
-special_Attack :-
+skill :-
     skillStatusP(0),
     player(_, PlayerType, _, _, _, _, SDamage),
     enemy(EnemyName, EnemyType, EnemyX, EnemyY, EnemyHP, EnemyNDamage, EnemySDamage),
@@ -114,7 +114,7 @@ special_Attack :-
     retract(enemy(EnemyName, EnemyType, EnemyX, EnemyY, EnemyHP, EnemyNDamage, EnemySDamage)),
     asserta(enemy(EnemyName, EnemyType, EnemyX, EnemyY, NewHP, EnemyNDamage, EnemySDamage)),
     print_Capture,!.
-special_Attack :-
+skill :-
     skillStatusP(0),
     player(_, PlayerType, _, _, _, _, SDamage),
     enemy(EnemyName, EnemyType, EnemyX, EnemyY, EnemyHP, EnemyNDamage, EnemySDamage),
@@ -125,7 +125,7 @@ special_Attack :-
     retract(enemy(EnemyName, EnemyType, EnemyX, EnemyY, EnemyHP, EnemyNDamage, EnemySDamage)),
     asserta(enemy(EnemyName, EnemyType, EnemyX, EnemyY, NewHP, EnemyNDamage, EnemySDamage)),!.
 /* NORMAL TYPE */
-special_Attack :-
+skill :-
     skillStatusP(0),
     player(_, _, _, _, _, _, SDamage),
     enemy(EnemyName, EnemyType, EnemyX, EnemyY, EnemyHP, EnemyNDamage, EnemySDamage),
@@ -137,7 +137,7 @@ special_Attack :-
     retract(enemy(EnemyName, EnemyType, EnemyX, EnemyY, EnemyHP, EnemyNDamage, EnemySDamage)),
     asserta(enemy(EnemyName, EnemyType, EnemyX, EnemyY, NewHP, EnemyNDamage, EnemySDamage)),
     print_Capture,!.
-special_Attack :-
+skill :-
     skillStatusP(0),
     player(_, _, _, _, _, _, SDamage),
     enemy(EnemyName, EnemyType, EnemyX, EnemyY, EnemyHP, EnemyNDamage, EnemySDamage),
@@ -320,7 +320,7 @@ attack_(PHP, EHP, menang):- EHP<1,
                             asserta(currHP(NewHP)),
                             !.
 attack_(_, _, State) :- 
-    write('Silahkan Masukkan normal_Attack atau special_Attack untuk menyerang lawan! '),nl,
+    write('Silahkan Masukkan "normal" atau "skill" untuk menyerang lawan! '),nl,
     write('input: '),nl,
     read(Input),
     call(Input),
@@ -329,7 +329,7 @@ attack_(_, _, State) :-
     enemystatus,nl,
     attackCondition(EHP),
     player(_, _, _, _, PHP, _, _),
-    status,nl,
+    playerstatus,nl,
     attack_(PHP,EHP,State).
 
 attackBattle:-
@@ -367,6 +367,9 @@ battle(_) :-
     write('Allies: '),
     read(Name),nl,
     call(select(Name)),
+    write('--------------------- BATTLE STATUS ---------------------'),nl,nl,
+    enemystatus,nl,nl,
+    playerstatus,nl,
     attackBattle.
 
 attack:-

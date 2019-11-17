@@ -9,9 +9,7 @@ border(X,11) :- X>(-1),X<12.
 activeArea(X,Y) :- X>(0),X<11,Y>(0),Y<11.
 
 /*Fakta*/
-healLoc(2,2).
-enemyLoc(2,4).
-
+healLoc(6,4).
 
 /* Inisialisasi awal */
 init :- asserta(playerLoc(1,1)),
@@ -55,8 +53,10 @@ collision(X,Y)  :-
     checkKoordinat(X,Y,Name,X1,Y1,ListEnemy),
     enemy_appear(ListOfEnemyAppear),
     check(ListOfEnemyAppear,Name),
-    assign_Enemy(X,Y,Name),
+    assign_Enemy(X,Y,Name),nl,
     print_FoundEnemy,nl,
+    enemystatus,nl,
+    write('Pilih bertarung atau lari ? (run / attack)'),nl,
     read(Input),call(Input),
     !.
 collision(_,_).
