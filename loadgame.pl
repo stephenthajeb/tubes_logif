@@ -1,13 +1,22 @@
-load_game :-
-	read(X),
-    open(X, read, Str),
-    file_read(Str,Saved),
-    close(Str).
+:- include('character.pl').
 
-file_read(Stream,[]) :-
-    at_end_of_stream(Stream).
+load :-
+	nl, write('Masukkan game yang ingin diload!'), nl,
+	write('>> '), read(File),
+	atom_concat(File, '.txt', Filetxt),
+	load_status(Filetxt).
 
-file_read(Stream,H|T]) :-
-    \+ at_end_of_stream(Saved),
-    read(Stream,H),
-    file_read(Stream,T).
+load_status(Filetxt):-
+	retractall(enemy(_,_,_,_,_,_,_)),
+	retractall(player(_,_,_,_,_,_,_)),
+	retractall(inventory(_)),
+	retractall(currHP(_)),
+	open(Filetxt, read, Stream),
+	repeat,
+		read(Stream, In),
+		asserta(In),
+	at_end_of_stream(Stream),
+	close(Stream),
+	nl, write('Game berhasil diload!'), nl, !.
+load_all_status(_):-
+	nl, write('Tidak ada game dengan nama itu!'), nl, fail.

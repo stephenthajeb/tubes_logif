@@ -1,0 +1,8 @@
+player(naruto,wind,4,2,350,30,190).
+inventory([naruto]).
+inventory([naruto]).
+inventory([naruto]).
+currHP([350]).
+currHP([350]).
+currHP([350]).
+currHP([350]).

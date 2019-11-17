@@ -1,3 +1,4 @@
+ 
 print_Title :-
     nl,
     write('========================================================='),nl,
@@ -118,6 +119,8 @@ print_Help :-
     write('a        : Barat'),nl,
     write('s        : Selatan'),nl,
     write('d        : Timur'),nl,
+    write('load     : Load game'), nl,
+    write('save     : Save game'), nl,
     write('battle   : Masuk '),nl,
     write('run      : Kabur'),nl,
     write('normal   : Menyerang musuh dengan normal attack'),nl,
@@ -227,4 +230,3 @@ print_InvalidCommand(Input):-
     print_Invalid,
     !.
 print_InvalidCommand(_).
-        

@@ -3,6 +3,8 @@
 :- include('character.pl').
 :- include('battle.pl').
 :- include('Generate.pl').
+:- include('savegame.pl').
+:- include('loadgame.pl').
 
 /*Untuk menunjukkan apakah pemain pernah menekan command [1]*/
 :-dynamic(startStatus/1).
@@ -20,7 +22,7 @@ start :-
         write('Your command: '),
         read(Input),
         print_InvalidCommand(Input),
-        (Input==w;Input==a;Input==s;Input==d;Input==status;Input==map;Input==help;Input==exit),
+        (Input==w;Input==a;Input==s;Input==d;Input==status;Input==map;Input==help;Input==exit;Input==save;Input==load),
         nl,
         call(Input),nl,
     (Input==exit; endGame).
