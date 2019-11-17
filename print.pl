@@ -219,7 +219,7 @@ print_InvalidCapture1(Input):-
 print_InvalidCapture1(_).
 
 print_InvalidAttack(Input):-
-    \+(Input==normal),\+(Input==skill),
+    \+(Input==normal),\+(Input==skill);skillStatusP(1),
     print_Invalid,
     !.
 print_InvalidAttack(_).
