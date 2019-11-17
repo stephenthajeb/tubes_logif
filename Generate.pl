@@ -98,15 +98,15 @@ checkKoordinatOnly(_,_,[],[]):-
     !,
     fail.
 checkKoordinatOnly(X,Y,ListX,ListY):-
-    ListX=[HeadX|TailX],
-    ListY=[HeadY|TailY],
+    ListX=[HeadX|_],
+    ListY=[HeadY|_],
     X==HeadX,
     Y==HeadY,
     !.
-checkKoordinatOnly(_,_,ListX,ListY):-
-    ListX=[HeadX|TailX],
-    ListY=[HeadY|TailY],
-    checkKoordinatOnly(_,_,TailX,TailY).
+checkKoordinatOnly(X,Y,ListX,ListY):-
+    ListX=[_|TailX],
+    ListY=[_|TailY],
+    checkKoordinatOnly(X,Y,TailX,TailY).
     
 checkHP([],[],_,_):-
     !,
@@ -433,7 +433,7 @@ generate_Akatsuki_Enemy:-
     asserta(enemyLocX(NewEnemyLocX)),
     retract(nbAkatsuki(Number_Akatsuki)),
     Number_Akatsuki1 is Number_Akatsuki+1,
-    asserta(nbAkatsuki(Number_Akatsuki)).
+    asserta(nbAkatsuki(Number_Akatsuki1)).
 
 generate_Akatsuki_Enemy.
 
@@ -507,6 +507,8 @@ abs(X, NewX) :-
     !.
 
 abs(X, X) :- X > 0.
+
+insert(OldList, NewHead , [NewHead|OldList]).
 
 /* Probabilitas run ketika enemy muncul, jika true maka player bisa kabur */
 runAwayNormalEnemyProbability:-
