@@ -3,7 +3,6 @@
 :-dynamic(inventory/1).
 :-dynamic(currHP/1).
 
-currHP([350,300,350,320,300,350]). 
 /* HP */
 hp(naruto, 350).
 hp(sakura, 300).
@@ -90,7 +89,10 @@ skillName(sasori, 'Puppet Technique').
 skillName(itachi, 'Amaterasu').
 
 /* INVENTORI */
-inventory([naruto,sakura,sasuke,lee,neji,choji]).
+inventory([naruto]).
+
+/* CURRENT HP */
+currHP([350]). 
 
 /* TYPE EFFECT */
 strong(dark, fire).
@@ -132,7 +134,7 @@ select(Name) :-
     asserta(inventory(NewFriends)).
 
 assign_Player(Name) :-
-    retract(skillStatusP(_)),
+    retractall(skillStatusP(_)),
     asserta(skillStatusP(0)),
     inventory(ListName),
     currHP(ListHP),
