@@ -4,7 +4,7 @@
 :-dynamic(currHP/1).
 
 /* HP */
-hp(naruto, 350).
+hp(naruto, 10000).
 hp(sakura, 300).
 hp(sasuke, 350).
 hp(lee, 320).
@@ -38,7 +38,7 @@ type(sasori, dark).
 type(itachi,dark).
 
 /* NORMAL DAMAGE */
-dmg(naruto, 30).
+dmg(naruto, 3000).
 dmg(sakura, 25).
 dmg(sasuke, 35).
 dmg(lee, 28).
