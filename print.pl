@@ -217,7 +217,7 @@ print_InvalidCapture1(Input):-
 print_InvalidCapture1(_).
 
 print_InvalidAttack(Input):-
-    \+(Input==normal_Attack),\+(Input==special_Attack),
+    \+(Input==normal),\+(Input==skill),
     print_Invalid,
     !.
 print_InvalidAttack(_).
