@@ -1,10 +1,5 @@
 :- include('character.pl').
 
-:-dynamic(player/7).
-:-dynamic(enemy/7).
-:-dynamic(inventory/1).
-:-dynamic(currHP/1).
-
 load :-
 	nl, write('Masukkan game yang ingin diload!'), nl,
 	write('>> '), read(File),

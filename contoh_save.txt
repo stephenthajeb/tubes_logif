@@ -1,4 +1,4 @@
-player(naruto,wind,3,3,350,30,190).
+player(naruto,wind,4,2,350,30,190).
 inventory([naruto]).
 inventory([naruto]).
 inventory([naruto]).
