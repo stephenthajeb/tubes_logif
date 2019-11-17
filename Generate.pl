@@ -214,7 +214,7 @@ generate_Akatsuki_Enemy:-
     enemy_appear(List_Of_Enemy_Appear),
     nbElmtList(List_Of_Enemy_Appear,Count),
     nbAkatsuki(Number_Akatsuki),
-    Count==4,
+    (Count==4;Count>4),
     Number_Akatsuki==0,
     enemyName(List_Of_Enemy),
     enemyLocY(OldY),
@@ -251,7 +251,7 @@ generate_Akatsuki_Enemy:-
     enemy_appear(List_Of_Enemy_Appear),
     nbElmtList(List_Of_Enemy_Appear,Count),
     nbAkatsuki(Number_Akatsuki),
-    Count==4,
+    (Count==4;Count>4),
     Number_Akatsuki==0,
     enemyName(List_Of_Enemy),
     enemyLocY(OldY),
@@ -288,7 +288,7 @@ generate_Akatsuki_Enemy:-
     enemy_appear(List_Of_Enemy_Appear),
     nbElmtList(List_Of_Enemy_Appear,Count),
     nbAkatsuki(Number_Akatsuki),
-    Count==4,
+    (Count==4;Count>4),
     Number_Akatsuki==0,
     enemyName(List_Of_Enemy),
     enemyLocY(OldY),
@@ -325,7 +325,7 @@ generate_Akatsuki_Enemy:-
     enemy_appear(List_Of_Enemy_Appear),
     nbElmtList(List_Of_Enemy_Appear,Count),
     nbAkatsuki(Number_Akatsuki),
-    Count==4,
+    (Count==4;Count>4),
     Number_Akatsuki==0,
     enemyName(List_Of_Enemy),
     enemyLocY(OldY),
@@ -524,6 +524,12 @@ cekJenis(akatsuki):-
     !.
 
 cekJenis(normal):- !.
+cekAkatsuki:-
+    cekJenis(akatsuki),!,
+    retractall(akatsuki_Appear(X)),
+    X1 is X+1,
+    asserta(akatsuki_Appear(X1)).
+cekAkatsuki.
 
 runAwayAkatsukiProbability:-
     random(0,101,Probability),
