@@ -4,7 +4,7 @@
 :-dynamic(currHP/1).
 
 /* HP */
-hp(naruto, 10000).
+hp(naruto, 350).
 hp(sakura, 300).
 hp(sasuke, 350).
 hp(lee, 320).
@@ -38,7 +38,7 @@ type(sasori, dark).
 type(itachi,dark).
 
 /* NORMAL DAMAGE */
-dmg(naruto, 3000).
+dmg(naruto, 30).
 dmg(sakura, 25).
 dmg(sasuke, 35).
 dmg(lee, 28).
@@ -92,7 +92,7 @@ skillName(itachi, 'Amaterasu').
 inventory([naruto]).
 
 /* CURRENT HP */
-currHP([350]). 
+currHP([10]). 
 
 /* TYPE EFFECT */
 strong(dark, fire).
@@ -154,7 +154,7 @@ yes:-
     inventory(ListInventory1),
     repeat,
         read(Masukan),
-        print_InvalidYes,(Masukan,ListInventory1),
+        print_InvalidYes(Masukan,ListInventory1),
     checkList(ListInventory1,Masukan),
     call(Masukan),
     !,nl,

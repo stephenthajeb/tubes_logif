@@ -75,8 +75,8 @@ normal :-
     asserta(enemy(EnemyName, EnemyType, EnemyX, EnemyY, NewHP, EnemyNDamage, EnemySDamage)),!.
 
 /*Skill Attack*/
-/* Strong TYPE */
 skill :-  skillStatusP(1),printSkillUsed,!.
+/* Strong TYPE */
 skill :-
     skillStatusP(0),
     player(_, PlayerType, _, _, _, _, SDamage),

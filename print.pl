@@ -174,7 +174,7 @@ print_Heal :-
     write('Mau heal teman-teman ? Jika mau ketik "heal."'),nl,!.
 print_Heal :-
     healStatus(1),
-    write('keluar'),
+    write('Keluar !!!!'),nl,
     write('Fasilitas ini hanya bisa digunakan sekali :('),nl,!.
 
 printSkillUsed :- write('Skill hanya bisa digunakan sekali cuy dalam battle ini'),nl.
