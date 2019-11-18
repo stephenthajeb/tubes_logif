@@ -425,7 +425,7 @@ generate_Akatsuki_Enemy:-
     write(' Akatsuki ketiga sudah ditemukan! pada koordinat '),
     write('('),
     print(LocX),
-    write(',Y)'),
+    write(',Y)'),nl,
     NewListOfEnemy=[Name_Enemy|List_Of_Enemy],
     NewEnemyLocY=[LocY|OldY],
     NewEnemyLocX=[LocX|OldX],

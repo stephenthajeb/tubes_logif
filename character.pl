@@ -156,7 +156,6 @@ yes:-
         read(Masukan),
         print_InvalidYes(Masukan,ListInventory1),
     checkList(ListInventory1,Masukan),
-    call(Masukan),
     !,nl,
     currHP(ListHP1),
     checkHP(ListInventory1,ListHP1,Masukan,HP),
