@@ -164,7 +164,6 @@ yes:-
     print(Masukan),
     write(' : Terimakasih teman sudah memberikan petualangan ini! '),nl,
     enemy(Nama,_,_,_,_,_,_),
-    select(Nama),
     hp(Nama, HP1),
     NewInventory = [Nama|ListInventory],
     NewHP = [HP1|ListHP],
