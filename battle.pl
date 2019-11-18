@@ -284,7 +284,7 @@ enemy_Attack(2):-
 
 
 /* Heal */
-heal :- write('a'),playerLoc(X1,Y1),write('b'),healLoc(X2,Y2),write('c'),X1\==X2,write('d'),Y1\==Y2,write('e'),printCommandInvalid,!.
+heal :- playerLoc(X1,Y1),healLoc(X2,Y2),X1\==X2,Y1\==Y2,printCommandInvalid,!.
 heal :- healStatus(0),
         player(Name, Type, X, Y, HP, NDamage, SDamage),
         hp(Name,NewHP),
