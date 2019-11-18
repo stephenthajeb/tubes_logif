@@ -171,7 +171,7 @@ printInvalidMove :- write('Invalid Move !! Kamu tidak boleh melewat border cuy')
 print_Heal :-
     healStatus(0),
     write('Akhirnya sampai di Medical Center'),nl,
-    write('Mau heal teman-teman ? Jika mau ketik "heal."'),nl,!.
+    write('Mau heal teman-teman ? Jika mau ketik heal.'),nl,!.
 print_Heal :-
     healStatus(1),
     write('Fasilitas ini hanya bisa digunakan sekali :('),nl,!.
