@@ -54,7 +54,7 @@ print_Lose :-
 /* Interactive Command */
 
 print_InventoryFull :-
-    write('Temanmu sudah terlalu banyak. Apakah ingin mengganti teman ? (swap/no)'),nl.
+    write('Temanmu sudah terlalu banyak. Apakah ingin mengganti teman ? (yes/no)'),nl.
 print_Capture :-
     write('Ayo kita cari Hinata dan bawa ia pulang ke Konoha!'), nl.
 print_NotCapture :-
@@ -119,6 +119,7 @@ print_Help :-
     write('a        : Barat'),nl,
     write('s        : Selatan'),nl,
     write('d        : Timur'),nl,
+    write('load     : Load game'), nl,
     write('save     : Save game'), nl,
     write('battle   : Masuk '),nl,
     write('run      : Kabur'),nl,
@@ -126,7 +127,6 @@ print_Help :-
     write('skill    : Menyerang musuh dengan skill attack'),nl,
     write('capture  : Menambah teman'),nl,
     write('swap     : Mengganti teman'),nl,
-    write('drop     : Melepas teman'),nl,
     write('status   : Status'),nl,
     write('map      : Perlihatkan peta'),nl,
     write('help     : Help'),nl,
@@ -171,7 +171,7 @@ printInvalidMove :- write('Invalid Move !! Kamu tidak boleh melewat border cuy')
 print_Heal :-
     healStatus(0),
     write('Akhirnya sampai di Medical Center'),nl,
-    write('Mau heal teman-teman ? Jika mau ketik heal.'),nl,!.
+    write('Mau heal teman-teman ? Jika mau ketik "heal."'),nl,!.
 print_Heal :-
     healStatus(1),
     write('Keluar !!!!'),nl,
@@ -185,17 +185,13 @@ printKO :- player(PlayerName, _,_,_,_,_,_),
            write('Aku terlalu lemah untuk menyelamatkan Hinata'),nl,
            write('Silahkan assign new player dari inventory'),nl.
 
-print_Inventory([],[]):- !.
-print_Inventory([H|T],[Head|Tail]):-
-    write('Name : '), write(H),nl,
-    type(H,Type),write('Type : '), write(Type),nl,
-    write('HP   : '), write(Head),nl,
-    dmg(H,NDamage),write('Dmg  : '), write(NDamage),nl,
-    skillName(H,SName),write('Skill: '), write(SName),skillDmg(H,SDamage), write(' / '), write(SDamage),nl,
-    print_Inventory(T,Tail).
-
+print_Inventory([]):- !.
+print_Inventory([H|T]):-
+    write('- '),
+    print(H),nl,
+    print_Inventory(T).
 print_Invalid:-
-    write('Masukan tidak Valid, Silahkan masukkan kembali! '),nl.
+    write(' Masukan tidak Valid, Silahkan masukkan kembali '),nl.
 
 print_Invalid_Collision(Input):-
     \+(Input==run),\+(Input==attack),
@@ -211,7 +207,7 @@ print_InvalidYes(Input,ListInventory):-
 print_InvalidYes(_,_).
 
 print_InvalidCapture(Input):-
-    \+(Input==swap),\+(Input==no),
+    \+(Input==yes),\+(Input==no),
     print_Invalid,
     !.
 
@@ -235,19 +231,10 @@ print_InvalidAttack(Input):-
 print_InvalidAttack(_).
 
 print_InvalidCommand(Input):-
-    \+(Input==w),\+(Input==a),\+(Input==s),\+(Input==d),\+(Input==status),\+(Input==map),\+(Input==help),\+(Input==exit), \+(Input==heal),\+(Input==drop),
+    \+(Input==w),\+(Input==a),\+(Input==s),\+(Input==d),\+(Input==status),\+(Input==map),\+(Input==help),\+(Input==exit), \+(Input==heal),
     print_Invalid,
     !.
 print_InvalidCommand(_).
 
-print_InvalidDropPlayer(Input,Inventory):-
-    check(Inventory,Input),
-    print_Invalid,
-    !.
-print_InvalidDropPlayer(_,_).
 
-print_InvalidDrop(Input):-
-    \+(Input==yes),\+(Input==no),
-    print_Invalid,
-    !.
-print_InvalidDrop(_).
+

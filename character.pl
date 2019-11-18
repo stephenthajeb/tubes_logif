@@ -38,12 +38,12 @@ type(sasori, dark).
 type(itachi,dark).
 
 /* NORMAL DAMAGE */
-dmg(naruto, 30).
+dmg(naruto, 30000).
 dmg(sakura, 25).
 dmg(sasuke, 35).
 dmg(lee, 28).
 dmg(neji, 32).
-dmg(choji, 25).
+dmg(choji, 50).
 dmg(shikamaru, 30).
 dmg(tenten, 32).
 dmg(kiba, 30).
