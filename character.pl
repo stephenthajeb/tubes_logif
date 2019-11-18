@@ -89,7 +89,7 @@ skillName(sasori, 'Puppet Technique').
 skillName(itachi, 'Amaterasu').
 
 /* INVENTORI */
-inventory([naruto,sasuke,sakura,choji,lee,tenten]).
+inventory([naruto]).
 
 /* CURRENT HP */
 currHP([350]). 
