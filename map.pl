@@ -9,7 +9,7 @@ border(X,11) :- X>(-1),X<12.
 activeArea(X,Y) :- X>(0),X<11,Y>(0),Y<11.
 
 /*Fakta*/
-healLoc(6,4).
+healLoc(5,5).
 
 /* Inisialisasi awal */
 init :- asserta(playerLoc(1,1)),
