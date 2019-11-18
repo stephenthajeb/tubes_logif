@@ -61,3 +61,11 @@ Pemain harus mengalahkan itachi untuk menyelamatkan hinata.
 
 Medical Station bisa digunakan untuk menyembuhkan semua teman, tetapi hanya
 bisa digunakan sekali selama permainan berlangsung.
+
+## PETUNJUK BERMAIN ##
+1. Buka main.pl dengan menggunakan GNU ProLog
+2. Ketik command "start." untuk memulai permainan
+3. Player pertama adalah Naruto dengan atribut seperti diatas
+4. Ikuti petunjuk permainan yang ada. Jangan menggunakan command lain yang tidak
+   disediakan dalam permainan agar tidak terjadi error
+5. Game berakhir jika ada pesan "YOU WIN" atau "YOU LOSE"
