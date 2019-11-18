@@ -89,7 +89,7 @@ skillName(sasori, 'Puppet Technique').
 skillName(itachi, 'Amaterasu').
 
 /* INVENTORI */
-inventory([naruto]).
+inventory([naruto,sasuke,sakura,choji,lee,tenten]).
 
 /* CURRENT HP */
 currHP([350]). 
@@ -158,7 +158,7 @@ yes:-
     checkList(ListInventory1,Masukan),
     !,nl,
     currHP(ListHP1),
-    checkHP(ListInventory1,ListHP1,Masukan,HP),
+    checkHP(ListInventory1,ListHP1,Masukan,HP1),
     call(select_Player(Masukan,ListInventory1,ListInventory)),
     call(select_Player(HP,ListHP1,ListHP)),
     print(Masukan),
