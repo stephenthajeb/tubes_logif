@@ -127,6 +127,7 @@ print_Help :-
     write('skill    : Menyerang musuh dengan skill attack'),nl,
     write('capture  : Menambah teman'),nl,
     write('swap     : Mengganti teman'),nl,
+    write('drop     : Melepas teman'),nl,
     write('status   : Status'),nl,
     write('map      : Perlihatkan peta'),nl,
     write('help     : Help'),nl,

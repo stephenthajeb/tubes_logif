@@ -14,10 +14,14 @@
 :-dynamic(akatsuki_Appear/1).
 
 /* Init Database */
-enemy_appear([naruto]).
-enemyName([naruto]).
-enemyLocX([1]).
-enemyLocY([1]).
+init_database :-
+    asserta(enemy_appear([naruto])),
+    asserta(enemyName([naruto])),
+    asserta(enemyLocX([1])),
+    asserta(enemyLocY([1])),
+    asserta(twoAkatsuki(30)),
+    asserta(nbAkatsuki(0)),
+    asserta(akatsuki_Appear(0)).
 /* Fakta untuk generate random Character */
 names(gaara,1).
 names(sakura,2).
@@ -33,12 +37,7 @@ names(deidara,11).
 names(tobi,12).
 names(sasori,13).
 names(itachi,14).
-/* Init Probabilitas kemunculan Akatsuki kedua */
-twoAkatsuki(30).
-/* Init jumlah Akatsuki yang sudah muncul */
-nbAkatsuki(0).
-/* Init jumlah Akatsuki yang sudah dikalahkan */
-akatsuki_Appear(0).
+
 /* Probabilitas kabur saat berhadapan dengan Normal Enemy */
 normalProbability(70).
 /* Probabilitas kabur saat berhadapan dengan Akatsuki */

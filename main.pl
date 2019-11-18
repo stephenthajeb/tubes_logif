@@ -14,6 +14,7 @@ start :-
     print_Story,
     help,
     init,
+    init_database,
     init_Player,
     enemyGenerator,
     map,
@@ -43,4 +44,8 @@ exit :-
     retractall(enemyName(_)),
     retractall(enemyLocX(_)),
     retractall(enemyLocY(_)),
+    retractall(enemy_appear(_)),
+    retractall(twoAkatsuki(_)),
+    retractall(nbAkatsuki(_)),
+    retractall(akatsuki_Appear(_)),
     print_Lose.
