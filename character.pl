@@ -149,7 +149,7 @@ select(Name) :-
     retract(inventory(Friends)),
     asserta(inventory(NewFriends)).
 
-yes:-
+swap:-
     write('Siapa yang ingin kamu ganti?'),nl,
     inventory(ListInventory1),
     repeat,
@@ -171,7 +171,6 @@ yes:-
     retractall(currHP(_)),
     asserta(inventory(NewInventory)),
     asserta(currHP(NewHP)).
-
 no:-
     player(Nama, _, _, _, _, _, _),
     print_NotCapture,
@@ -185,7 +184,7 @@ capture:-
     repeat,
         read(Input),
         print_InvalidCapture(Input),
-    (Input==yes;Input==no),
+    (Input==swap;Input==no),
     !,call(Input).
 
 capture:-
@@ -206,4 +205,34 @@ move_Player :-
     playerLoc(NewX, NewY),
     retract(player(Name, Type, X, Y, HP, NDamage, SDamage)),
     asserta(player(Name, Type, NewX, NewY, HP, NDamage, SDamage)).
+
+drop:-
+    write('Pilih teman yang ingin kamu lepas!'),nl,
+    inventory(ListInventory),currHP(ListHP),
+    print_Inventory(ListInventory,ListHP),
+    repeat,
+        write('Drop: '),
+        read(Input),
+        print_InvalidDropPlayer(Input,ListInventory),
+    (checkList(ListInventory,Input)),
+    write('Apakah kamu yakin dengan pilihanmu? (yes/no)'),nl,
+    repeat,
+        read(Masukan),
+        print_InvalidDrop(Masukan),
+    (Masukan==yes;Masukan==no),nl, 
+    call(dropHandle(Input,Masukan)).
+
+
+dropHandle(Input,yes):-
+    inventory(ListInventory),
+    call(select_Player(Input,ListInventory,NewInventory)),
+    print_NotCapture,
+    retractall(inventory(ListInventory)),
+    asserta(inventory(NewInventory)),
+    write('Anda sudah melepaskan ' ), print(Input), write(' Semoga pilihanmu tepat !'),nl,
+    !.
+
+dropHandle(_,no):-
+    write('Anda tidak jadi melepaskan pemain, Semoga pilihanmu Tepat !'),nl.
+    
 
