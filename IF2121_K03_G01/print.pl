@@ -11,19 +11,22 @@ print_Title :-
     write('==================HINATA THE LOST GIRL==================='),nl.
 
 print_Story :-
-    write('  100 tahun lalu di Desa Konoha, terjadi penyerangan yang dilakukan'),nl,sleep(1),
-    write('oleh Clan Akatsuki. Penyerangan tersebut menghancurkan Desa Konoha'),nl,sleep(1),
-    write('dan seisinya. Beberapa penduduk dapat kabur ke hutan, tapi tidak sedikit'),nl,sleep(1),
-    write('mereka yang terbunuh. Naruto yang saat itu masih kecil, berhasil lari ke hutan'),nl,sleep(1),
-    write('sendirian. Ia terpisah dari keluarga dan teman-temannya. Tetapi salah satu'),nl,sleep(1),
-    write('temannya, yaitu Hinata, berhasil tertangkap oleh Clan Akatsuki.'),nl,nl,
-    write('  Beberapa tahun berlalu, Naruto sudah menjadi ninja yang hebat. Ia bertekad'),nl,sleep(1),
-    write('untuk membawa pulang Hinata dari tangan Clan Akatsuki. Di tengah perjalanan'),nl,sleep(1),
-    write('Naruto bertemu dengan teman lamanya. Ia mengajak teman-temannya untuk menyelamatkan'),nl,sleep(1),
-    write('Hinata, namun mereka Naruto harus meyakinkan kekuatan Naruto dengan'),nl,sleep(1),
-    write('mengalahkan mereka terlebih dahulu.'),nl,sleep(1),
-    write('Berhasilkah Naruto membujuk teman-temannya untuk mengalahkan Akatsuki dan membawa Hinata pulang ?'),nl,sleep(1),
-    write('Let the game begin'),nl,nl.
+    write('100 tahun lalu di Desa Konoha, terjadi penyerangan yang dilakukan'),nl,
+    write('oleh Clan Akatsuki. Penyerangan tersebut menghancurkan Desa Konoha'),nl,
+    write('dan seisinya. Beberapa penduduk dapat kabur ke hutan, tapi tidak sedikit'),nl,
+    write('mereka yang terbunuh. Naruto yang saat itu masih kecil, berhasil lari ke hutan'),nl,
+    write('sendirian. Ia terpisah dari keluarga dan teman-temannya. Tetapi salah satu'),nl,
+    write('temannya, yaitu Hinata, berhasil tertangkap oleh Clan Akatsuki.'),nl,
+    nl,
+    write('Beberapa tahun berlalu, Naruto sudah menjadi ninja yang hebat. Ia bertekad'),nl,
+    write('untuk membawa pulang Hinata dari tangan Clan Akatsuki. Di tengah perjalanan'),nl,
+    write('Naruto bertemu dengan teman lamanya. Ia mengajak teman-temannya untuk menyelamatkan'),nl,
+    write('Hinata, namun mereka malah menantang Naruto bertarung.'),nl,
+    nl,
+    write('Mengapa teman-teman Naruto malah mengajak ia bertarung ?'),nl,
+    write('Berhasilkah Naruto menaklukan Akatsuki dan membawa Hinata pulang ?'),nl,
+    nl,
+    write('Let the game begin !'),nl, nl.
     
 print_Win :-
     write('Y   Y    OOOOO    U      U       W         W  II  NN    N'),nl,

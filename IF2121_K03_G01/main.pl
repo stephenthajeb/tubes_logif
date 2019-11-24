@@ -10,8 +10,8 @@
 :-dynamic(startStatus/1).
 
 start :-    
-    print_Title,sleep(0.5),
-    print_Story,sleep(1),
+    print_Title,
+    print_Story,
     help,
     init,
     init_database,
