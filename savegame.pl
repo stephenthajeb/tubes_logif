@@ -1,3 +1,5 @@
+:- include('character.pl').
+
 save:-
 	nl, write('Ingin simpan dengan nama?'), nl,
 	write('>> '), read(File),
@@ -14,13 +16,18 @@ save_status(Stream) :-
 	save_currHP(Stream).
 save_status(Stream) :-
 	save_enemy(Stream).
+save_status(Stream) :-
+	save_playerloc(Stream).
 save_status(_) :- !.
 
 save_player(Stream) :-
 	player(Name, Type, X, Y, HP, NDamage, SDamage),
 	write(Stream, player(Name, Type, X, Y, HP, NDamage, SDamage)), write(Stream, '.'), nl(Stream),
 	fail.
-
+save_playerloc(Stream) :-
+	playerLoc(X,Y),
+	write(Stream, playerLoc(X,Y)), write(Stream, '.'), nl(Stream),
+	fail.
 save_enemy(Stream) :-
  	enemy(Name, Type, X, Y, HP, NDamage, SDamage),
 	write(Stream, enemy(Name, Type, X, Y, HP, NDamage, SDamage)), write(Stream, '.'), nl(Stream),
